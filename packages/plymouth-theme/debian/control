@@ -1,0 +1,14 @@
+Source: dot-os-plymouth-theme
+Section: x11
+Priority: optional
+Maintainer: DOT OS project <maintainers@dot-os.invalid>
+Build-Depends: debhelper-compat (= 13), python3, python3-fonttools, librsvg2-bin
+Standards-Version: 4.7.2
+Rules-Requires-Root: no
+
+Package: dot-os-plymouth-theme
+Architecture: all
+Depends: ${misc:Depends}, plymouth
+Description: boot splash for DOT OS
+ A Plymouth script theme: the DOT OS wordmark over a 20-segment progress
+ bar, and a password field for unlocking an encrypted disk.

@@ -30,11 +30,14 @@ jobs:
           - kvantum-theme
           - cursor-theme
           - icon-theme
+          - grub-theme
+          - plymouth-theme
+          - sddm-theme
     steps:
       - uses: actions/checkout@v4
 
       - name: Install build tooling
-        run: sudo apt-get update && sudo apt-get install -y devscripts debhelper build-essential librsvg2-bin x11-apps
+        run: sudo apt-get update && sudo apt-get install -y devscripts debhelper build-essential librsvg2-bin x11-apps python3-fonttools grub-common
 
       - name: Generated theme files are up to date
         run: python3 tools/generate.py --check

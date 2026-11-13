@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+#DEBHELPER#
+if [ "$1" = configure ]; then
+	update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth \
+		/usr/share/plymouth/themes/dot-os/dot-os.plymouth 150
+	# Debian's plymouth has no plymouth-set-default-theme; plymouthd.conf wins
+	# over the alternative, so set it there too.
+	mkdir -p /etc/plymouth
+	if [ -f /etc/plymouth/plymouthd.conf ] && grep -q '^\[Daemon\]' /etc/plymouth/plymouthd.conf; then
+		sed -i '/^\[Daemon\]/,/^\[/{s/^Theme=.*/Theme=dot-os/}' /etc/plymouth/plymouthd.conf
+		grep -q '^Theme=' /etc/plymouth/plymouthd.conf || sed -i '/^\[Daemon\]/a Theme=dot-os' /etc/plymouth/plymouthd.conf
+	else
+		printf '[Daemon]\nTheme=dot-os\n' >> /etc/plymouth/plymouthd.conf
+	fi
+	if [ -x /usr/sbin/update-grub ] && [ -e /boot/grub/grub.cfg ]; then
+		update-grub || true
+	fi
+fi

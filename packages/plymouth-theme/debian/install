@@ -1,0 +1,2 @@
+build/dot-os usr/share/plymouth/themes
+files/dot-os-plymouth.cfg etc/default/grub.d

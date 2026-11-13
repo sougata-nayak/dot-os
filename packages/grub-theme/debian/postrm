@@ -1,0 +1,6 @@
+#!/bin/sh
+set -e
+#DEBHELPER#
+if [ "$1" = remove ] && [ -x /usr/sbin/update-grub ] && [ -e /boot/grub/grub.cfg ]; then
+	update-grub || true
+fi

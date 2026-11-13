@@ -31,6 +31,13 @@ Install first: `sudo apt install ./out/debs/*.deb qt6-style-kvantum`
 | Terminal | `kwriteconfig6 --file konsolerc --group "Desktop Entry" --key DefaultProfile DotOSDark.profile`, then open a new Konsole |
 | GTK | `qdbus6 org.kde.GtkConfig /GtkConfig org.kde.GtkConfig.setGtkTheme DotOS-Dark` |
 | libadwaita | `mkdir -p ~/.config/gtk-4.0 && ln -sf /usr/share/dot-os/gtk-4.0/dark.css ~/.config/gtk-4.0/gtk.css` |
+| GRUB | Installing `dot-os-grub-theme` runs `update-grub`; reboot to see it. |
+| Boot splash | Installing `dot-os-plymouth-theme` sets it and rebuilds the initramfs; reboot to see it. |
+| Login screen | Installing `dot-os-sddm-theme` sets it; log out to see it. Preview without logging out: `sddm-greeter-qt6 --test-mode --theme /usr/share/sddm/themes/dot-os` |
+
+The boot splash only appears with `splash` on the kernel command line. On a
+machine or VM with a serial console it also needs `plymouth.ignore-serial-consoles`,
+which the package adds through `/etc/default/grub.d/`.
 
 ## Checklist for every build
 

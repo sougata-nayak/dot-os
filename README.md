@@ -10,8 +10,8 @@ DOT OS is a Debian 13 "trixie" spin for arm64. It is three things in one repo:
 2. **A live-build recipe** — assembles Debian, Plasma, the theme packages and the Calamares installer into a bootable ISO.
 3. **A design system** — the tokens and component designs every package is generated from.
 
-> Status: early. The plain ISO boots and the first seven theme packages build.
-> Boot and login themes, the Plasma global theme and installer branding are next.
+> Status: early. The ISO boots with the DOT OS boot menu, splash and login screen,
+> and installs with Calamares. The Plasma global theme and installer branding are next.
 > See [docs/STATUS.md](docs/STATUS.md).
 
 ## Layout
@@ -61,7 +61,9 @@ and the UTM settings.
 | `dot-os-kvantum-theme` | Qt widget theme | builds, first pass |
 | `dot-os-cursor-theme` | cursors, dark and light | builds |
 | `dot-os-icon-theme` | about 580 icons, dark and light | builds |
-| `dot-os-sddm-theme`, `-plymouth-theme`, `-grub-theme` | login and boot | not started |
+| `dot-os-grub-theme` | bootloader menu | builds, tested on live ISO and installed system |
+| `dot-os-plymouth-theme` | boot splash | builds, tested on live ISO and installed system |
+| `dot-os-sddm-theme` | login screen | builds, tested on installed system |
 | `dot-os-plasma-lookandfeel` | global theme | not started |
 | `dot-os-desktop` | meta-package | not started |
 

@@ -17,8 +17,9 @@ docker run --rm --platform linux/arm64 \
 		rm -f /etc/apt/apt.conf.d/docker-clean
 		apt-get update -qq
 		apt-get install -y -qq --no-install-recommends \
-			build-essential debhelper devscripts librsvg2-bin x11-apps lintian >/dev/null
-		mkdir /work && cp -a /src/packages /work/packages
+			build-essential debhelper devscripts librsvg2-bin x11-apps lintian \
+			python3 python3-fonttools grub-common >/dev/null
+		mkdir /work && cp -a /src/packages /src/tools /src/design-system /work/
 		cd /work/packages
 		wanted="$*"
 		for dir in */; do
@@ -28,7 +29,7 @@ docker run --rm --platform linux/arm64 \
 			echo "=== $dir"
 			(cd "$dir" && dpkg-buildpackage -us -uc -b >/tmp/build.log 2>&1) || { cat /tmp/build.log; exit 1; }
 		done
-		rm -f /out/*.deb
+		for deb in ./*.deb; do rm -f /out/"$(dpkg-deb -f "$deb" Package)"_*.deb; done
 		cp ./*.deb /out/
 		for deb in /out/*.deb; do
 			printf "%s  %s files\n" "$(basename "$deb")" "$(dpkg-deb -c "$deb" | grep -vc "/$")"

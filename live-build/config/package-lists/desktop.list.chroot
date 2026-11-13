@@ -21,3 +21,5 @@ efibootmgr
 # VM guests (UTM / QEMU)
 spice-vdagent
 qemu-guest-agent
+qt6-style-kvantum
+plymouth

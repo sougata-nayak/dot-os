@@ -26,12 +26,26 @@ docker run --rm --privileged --platform linux/arm64 \
 			live-build debootstrap squashfs-tools xorriso mtools dosfstools \
 			grub-efi-arm64-bin grub-common ca-certificates cpio rsync >/dev/null
 		mkdir -p /build/lb && cd /build/lb
-		if [ "$LB_CLEAN" = 1 ] && [ -d auto ]; then lb clean --purge || true; fi
+		# Always start the chroot fresh so new or changed packages are installed;
+		# LB_CLEAN=1 also drops the package cache.
+		if [ -d auto ]; then
+			if [ "$LB_CLEAN" = 1 ]; then lb clean --purge || true; else lb clean || true; fi
+		fi
 		rsync -a --delete --exclude chroot --exclude cache --exclude binary \
 			--exclude ".build" --exclude "*.iso" /src/live-build/ ./
-		if [ -d /src/out/debs ]; then
+		rm -rf config/packages.chroot config/bootloaders/grub-pc/dot-os
+		if ls /src/out/debs/*.deb >/dev/null 2>&1; then
 			mkdir -p config/packages.chroot
-			cp /src/out/debs/*.deb config/packages.chroot/ 2>/dev/null || true
+			cp /src/out/debs/*.deb config/packages.chroot/
+			# The live boot menu reads its theme from the ISO, not the chroot.
+			theme_deb=$(ls /src/out/debs/dot-os-grub-theme_*.deb 2>/dev/null | head -1)
+			if [ -n "$theme_deb" ]; then
+				mkdir -p /tmp/grub-theme
+				dpkg-deb -x "$theme_deb" /tmp/grub-theme
+				cp -a /tmp/grub-theme/boot/grub/themes/dot-os config/bootloaders/grub-pc/dot-os
+			fi
+		else
+			echo "No packages in out/debs: building a plain, unthemed image." >&2
 		fi
 		chmod +x auto/*
 		lb config

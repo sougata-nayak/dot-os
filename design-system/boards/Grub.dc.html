@@ -22,18 +22,15 @@ body{margin:0}
 <div class="nil-label">GRUB 2.12 &nbsp; arm64 &nbsp; UEFI</div>
 </div>
 
-<div role="listbox" aria-label="Boot entries" style="display: flex; flex-direction: column; gap: 16px; font-family: var(--font-mono); font-size: 16px; letter-spacing: .04em; text-transform: uppercase">
-<div role="option" aria-selected="true" style="color: var(--text-display)">[ DOT OS ]</div>
-<div role="option" aria-selected="false" style="padding-left: 2ch; color: var(--text-secondary)">Advanced options for DOT OS</div>
-<div role="option" aria-selected="false" style="padding-left: 2ch; color: var(--text-secondary)">DOT OS — recovery mode</div>
-<div role="option" aria-selected="false" style="padding-left: 2ch; color: var(--text-secondary)">UEFI firmware settings</div>
+<div role="listbox" aria-label="Boot entries" style="display: flex; flex-direction: column; gap: 8px; width: 560px; margin-left: -4px; font-family: var(--font-mono); font-size: 16px">
+<div role="option" aria-selected="true" style="display: flex; align-items: center; height: 40px; padding: 0 12px; border-radius: var(--radius-technical); background: var(--text-display); color: var(--black)">DOT OS — live session</div>
+<div role="option" aria-selected="false" style="display: flex; align-items: center; height: 40px; padding: 0 12px; color: var(--text-secondary)">DOT OS — live session, safe graphics</div>
+<div role="option" aria-selected="false" style="display: flex; align-items: center; height: 40px; padding: 0 12px; color: var(--text-secondary)">DOT OS — live session, boot messages</div>
+<div role="option" aria-selected="false" style="display: flex; align-items: center; height: 40px; padding: 0 12px; color: var(--text-secondary)">UEFI firmware settings</div>
 </div>
 
 <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 32px">
-<div class="nil-meter" style="width: 320px">
-<div class="nil-meter__head"><span class="nil-label">Booting in</span><span class="nil-caption">4 s</span></div>
-<div class="nil-seg nil-seg--compact"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i></div>
-</div>
+<div style="display: flex; align-items: baseline; gap: 16px"><span class="nil-label">Booting in</span><span class="nil-caption">4 s</span></div>
 <div style="display: flex; gap: 24px">
 <span class="nil-label">Up / down — select</span><span class="nil-label">Enter — boot</span><span class="nil-label">E — edit</span><span class="nil-label">C — console</span>
 </div>

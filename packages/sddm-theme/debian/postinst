@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+#DEBHELPER#
+# Package builds clamp file times to the changelog date, so Qt's QML disk
+# cache can keep serving an older Main.qml after an upgrade. Drop it.
+if [ "$1" = configure ]; then
+	rm -rf /var/lib/sddm/.cache/sddm-greeter*/qmlcache 2>/dev/null || true
+fi

@@ -38,5 +38,5 @@ live-build/chroot*
 
 # build output
 out/
-packages/cursor-theme/build/
+packages/*/build/
 __pycache__/

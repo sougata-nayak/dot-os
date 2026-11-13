@@ -1,0 +1,2 @@
+build/dot-os usr/share/sddm/themes
+files/10-dot-os.conf etc/sddm.conf.d

@@ -1,0 +1,14 @@
+Source: dot-os-grub-theme
+Section: x11
+Priority: optional
+Maintainer: DOT OS project <maintainers@dot-os.invalid>
+Build-Depends: debhelper-compat (= 13), python3, grub-common, python3-fonttools, librsvg2-bin
+Standards-Version: 4.7.2
+Rules-Requires-Root: no
+
+Package: dot-os-grub-theme
+Architecture: all
+Depends: ${misc:Depends}, grub-common
+Description: bootloader menu theme for DOT OS
+ A GRUB theme in the DOT OS style: wordmark, an inverted selection bar
+ and a segmented countdown on black. Sets itself as the GRUB theme.

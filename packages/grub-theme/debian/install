@@ -1,0 +1,2 @@
+build/dot-os boot/grub/themes
+files/dot-os.cfg etc/default/grub.d

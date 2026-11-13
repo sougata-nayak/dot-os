@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+#DEBHELPER#
+if [ "$1" = remove ]; then
+	update-alternatives --remove default.plymouth /usr/share/plymouth/themes/dot-os/dot-os.plymouth
+	if [ -f /etc/plymouth/plymouthd.conf ]; then
+		sed -i '/^Theme=dot-os$/d' /etc/plymouth/plymouthd.conf
+	fi
+fi
