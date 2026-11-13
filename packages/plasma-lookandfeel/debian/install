@@ -23,4 +23,5 @@ files/xdg/kcminputrc etc/xdg
 files/xdg/Kvantum/kvantum.kvconfig etc/xdg/Kvantum
 files/gtk-settings.ini usr/share/dot-os
 files/session-setup.sh usr/share/dot-os
+files/display-defaults.py usr/share/dot-os
 files/dot-os-session-setup.desktop etc/xdg/autostart

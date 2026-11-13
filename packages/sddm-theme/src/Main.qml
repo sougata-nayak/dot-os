@@ -43,8 +43,9 @@ Rectangle {
     // SDDM starts before any session, so it often gets no scale factor even on
     // a high-density panel. When the greeter is unscaled and the panel is
     // large, everything below is laid out at half size and drawn at 2x.
-    readonly property int k: Screen.devicePixelRatio < 1.5
-        && (width >= 2880 || height >= 1700 || (width >= 2560 && height >= 1600)) ? 2 : 1
+    readonly property real k: Screen.devicePixelRatio >= 1.5 ? 1
+        : (width >= 3800 || height >= 2100) ? 2.5
+        : (width >= 2880 || height >= 1700 || (width >= 2560 && height >= 1600)) ? 2 : 1
 
     Item {
     id: ui

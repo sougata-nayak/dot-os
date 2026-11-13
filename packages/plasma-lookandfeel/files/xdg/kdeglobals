@@ -13,7 +13,7 @@ smallestReadableFont=Space Grotesk,9,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
 fixed=Space Mono,11,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
 XftAntialias=true
 XftHintStyle=hintslight
-XftSubPixel=rgb
+XftSubPixel=none
 
 [Icons]
 Theme=dot-os

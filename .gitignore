@@ -12,6 +12,9 @@ debian/files
 debian/tmp/
 obj-*/
 
+.github/
+docs/screenshots/
+
 # live-build
 # lb config writes these; package lists, hooks and includes are source
 live-build/config/binary

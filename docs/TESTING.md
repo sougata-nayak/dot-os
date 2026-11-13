@@ -14,7 +14,7 @@ scripts/run-vm.sh
 1. Create a new VM → Virtualize → Linux. Leave "Use Apple Virtualization" off so the VM uses QEMU with UEFI.
 2. Boot ISO image: `out/dot-os-arm64.hybrid.iso`.
 3. Memory 4096 MB or more, 4 cores, 20 GB disk or more.
-4. Display: `virtio-gpu-pci`. Network: Shared.
+4. Display: `virtio-gpu-pci`. Network: Shared. Untick "Resize display to window size automatically" so the guest keeps 3840x2160; DOT OS sets that mode at 250% at first login.
 5. Start, pick "Live system (arm64)" in GRUB.
 
 ## Apply each package in a Debian 13 + Plasma session

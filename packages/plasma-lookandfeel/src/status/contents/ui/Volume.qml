@@ -14,7 +14,8 @@ Item {
     MouseArea {
         anchors.fill: parent
         anchors.margins: -6
-        onClicked: if (vol.sink) vol.sink.muted = !vol.sink.muted
+        // Clicks go to the bar item (opens the control center); the wheel sets volume.
+        acceptedButtons: Qt.NoButton
         onWheel: wheel => {
             if (!vol.sink) return;
             var step = PulseAudio.NormalVolume / 20;

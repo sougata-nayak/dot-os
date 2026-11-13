@@ -26,7 +26,7 @@ fi
 exec qemu-system-aarch64 -machine virt -accel hvf -cpu host -smp 4 -m 4096 \
 	-drive if=pflash,format=raw,readonly=on,file="$FW/edk2-aarch64-code.fd" \
 	-drive if=pflash,format=raw,file="$VM/vars.fd" \
-	-device virtio-gpu-pci,xres=1280,yres=800 \
+	-device virtio-gpu-pci,xres=${XRES:-3840},yres=${YRES:-2160} \
 	-device qemu-xhci -device usb-kbd -device usb-tablet \
 	-drive file="$ISO",media=cdrom,if=none,id=cd,readonly=on -device usb-storage,drive=cd,bootindex=1 \
 	-drive file="$VM/disk.qcow2",if=virtio,format=qcow2 \

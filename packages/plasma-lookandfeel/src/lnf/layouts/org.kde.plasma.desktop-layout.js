@@ -92,7 +92,12 @@ for (var j = 0; j < desktopsArray.length; j++) {
                     "Applet-" + systemWidget.id + ":48,192,288,464,0;";
         desk.currentConfigGroup = [];
         desk.writeConfig("ItemGeometriesHorizontal", saved);
+        // Also the logical size of the DOT OS default display (3840x2160 at
+        // 250%), which the first login switches to after this script runs.
         var g = screenGeometry(desk.screen);
-        desk.writeConfig("ItemGeometries-" + Math.round(g.width) + "x" + Math.round(g.height), saved);
+        var sizes = [Math.round(g.width) + "x" + Math.round(g.height), "1536x864"];
+        for (var s = 0; s < sizes.length; s++) {
+            desk.writeConfig("ItemGeometries-" + sizes[s], saved);
+        }
     });
 }

@@ -71,6 +71,18 @@ Last updated 13 November 2026.
 - Top bar: `NET`, `VOL` and `BAT` readings instead of tray icons; the tray keeps everything one click away under its arrow. Scroll on `VOL` to change volume, click to mute.
 - Lock screen and volume OSD: DOT OS versions, as on the Lock and Switcher boards.
 
+## Readability and control center pass
+
+- **Text was rendering in Space Grotesk Light.** The variable font's default instance is Light (300) and fontconfig handed it to the whole interface; Doto's default was Black. `fonts-dot-os` now ships static Light/Regular/Medium/Bold cuts, so every toolkit gets the weight it asks for.
+- **Anti-aliasing is greyscale with slight hinting** (fontconfig, KDE and GTK settings): no colour fringes on black, and right for high-density panels.
+- **Control center** from the Quick settings board opens from the NET/VOL/BAT readout: Wi-Fi, Bluetooth, Night light and Do not disturb tiles (on inverts), brightness, volume and battery meters you can click or drag, and Settings, Lock and Power. Screenshot 23.
+
+## Default display
+
+- **3840x2160 at 250%** is set at a user's first login on any screen that offers that mode (`/usr/share/dot-os/display-defaults.py`). Screens without it keep the mode and scale KWin picks, so a 1080p panel is never set to 250%. Users can change it in System Settings afterwards; the default is not reapplied.
+- The login screen scales itself to 250% on 4K panels, and desktop widget positions are saved for the 4K logical size so they don't move when the mode changes. Screenshots 24-26.
+- `scripts/run-vm.sh` now starts the VM with a 3840x2160 display. In UTM, set the display to 3840x2160 (see TESTING.md).
+
 ## Next
 
 1. Phase 4: `dot-os-desktop` meta-package and a signed APT repository.

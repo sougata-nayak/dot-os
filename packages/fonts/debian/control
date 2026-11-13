@@ -2,7 +2,7 @@ Source: fonts-dot-os
 Section: fonts
 Priority: optional
 Maintainer: DOT OS project <maintainers@dot-os.invalid>
-Build-Depends: debhelper-compat (= 13)
+Build-Depends: debhelper-compat (= 13), python3, python3-fonttools
 Standards-Version: 4.7.2
 Rules-Requires-Root: no
 
