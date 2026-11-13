@@ -1,0 +1,18 @@
+Source: dot-os-plasma-lookandfeel
+Section: x11
+Priority: optional
+Maintainer: DOT OS project <maintainers@dot-os.invalid>
+Build-Depends: debhelper-compat (= 13), python3
+Standards-Version: 4.7.2
+Rules-Requires-Root: no
+
+Package: dot-os-plasma-lookandfeel
+Architecture: all
+Depends: ${misc:Depends}, plasma-workspace (>= 4:6.3), kwin-wayland | kwin-x11,
+ qt6-style-kvantum, fonts-dot-os, dot-os-color-schemes, dot-os-icon-theme,
+ dot-os-cursor-theme, dot-os-kvantum-theme, dot-os-gtk-theme, dot-os-konsole-profile
+Recommends: dot-os-sddm-theme, dot-os-plymouth-theme, dot-os-grub-theme
+Description: DOT OS global theme for KDE Plasma
+ The DOT OS desktop: a top bar and floating dock, flat panels and popups,
+ window decorations, the dot grid wallpaper, lock screen, session splash and
+ power screen. Installs system defaults so new users start in DOT OS.

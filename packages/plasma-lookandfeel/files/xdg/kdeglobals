@@ -1,0 +1,22 @@
+# DOT OS system defaults. A user's own ~/.config/kdeglobals overrides these.
+[KDE]
+LookAndFeelPackage=org.dotos.desktop
+widgetStyle=kvantum
+AnimationDurationFactor=0.5
+
+[General]
+ColorScheme=DotOSDark
+font=Space Grotesk,11,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+menuFont=Space Grotesk,11,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+toolBarFont=Space Grotesk,11,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+smallestReadableFont=Space Grotesk,9,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+fixed=Space Mono,11,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+XftAntialias=true
+XftHintStyle=hintslight
+XftSubPixel=rgb
+
+[Icons]
+Theme=dot-os
+
+[WM]
+activeFont=Space Mono,9,-1,5,400,0,0,0,0,0,0,0,0,0,0,1

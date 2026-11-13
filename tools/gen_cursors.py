@@ -1,9 +1,11 @@
 """Cursor theme sources: one SVG per cursor (and per frame for the busy ones),
 plus the xcursorgen configs and alias list. packages/cursor-theme/build.sh
 rasterises them at package build time (rsvg-convert + xcursorgen)."""
+import json
+
 from tokens import CAP, THEMES, write
 
-SIZES = (24, 32, 48)
+SIZES = (24, 32, 36, 48, 64, 72, 96)
 ARROW = "M5 3v16l4.5-4 3 6.5 2.5-1.2-3-6.3H18z"
 DOUBLE = "M2 12l5-4.5V11h10V7.5l5 4.5-5 4.5V13H7v3.5z"
 HAND = ("M9 11V4.5a1.5 1.5 0 0 1 3 0V10l5.2 1a2 2 0 0 1 1.6 2.2l-.6 5A3 3 0 0 1 15.2 21H11"
@@ -103,6 +105,16 @@ def run(tokens):
                     delay = " 100" if len(bodies) > 1 else ""
                     lines.append("%d %d %d png/%d/%s%s.png%s" % (size, hx, hy, size, cursor, suffix, delay))
             made.append(write(base + "config/%s.cursor" % cursor, "\n".join(lines) + "\n"))
+            # Vector cursors for KWin on Wayland: sharp at any display scale.
+            meta = []
+            for i in range(len(bodies)):
+                suffix = "-%02d" % i if len(bodies) > 1 else ""
+                entry = {"filename": "%s%s.svg" % (cursor, suffix), "hotspot_x": HOT[cursor][0],
+                         "hotspot_y": HOT[cursor][1], "nominal_size": 24}
+                if len(bodies) > 1:
+                    entry["delay"] = 100
+                meta.append(entry)
+            made.append(write(base + "scalable/%s.json" % cursor, json.dumps(meta, indent=1) + "\n"))
         made.append(write(base + "aliases", "".join(
             "%s %s\n" % (alias, cursor) for cursor, names in ALIASES.items() for alias in names)))
         made.append(write(base + "index.theme",

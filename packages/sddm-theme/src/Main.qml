@@ -29,16 +29,29 @@ Rectangle {
     property bool busy: false
 
     // ---- Dot grid: 1px dots at 16px, the only texture ----
-    Canvas {
+    // A vector tile, so it stays sharp on high-density displays.
+    Image {
         anchors.fill: parent
-        onPaint: {
-            var ctx = getContext("2d");
-            ctx.fillStyle = root.cBorderVisible;
-            for (var y = 8; y < height; y += 16)
-                for (var x = 8; x < width; x += 16)
-                    ctx.fillRect(x - 1, y - 1, 2, 2);
-        }
+        fillMode: Image.Tile
+        horizontalAlignment: Image.AlignLeft
+        verticalAlignment: Image.AlignTop
+        sourceSize: Qt.size(16 * root.k, 16 * root.k)
+        source: "dot.svg"
+        smooth: false
     }
+
+    // SDDM starts before any session, so it often gets no scale factor even on
+    // a high-density panel. When the greeter is unscaled and the panel is
+    // large, everything below is laid out at half size and drawn at 2x.
+    readonly property int k: Screen.devicePixelRatio < 1.5
+        && (width >= 2880 || height >= 1700 || (width >= 2560 && height >= 1600)) ? 2 : 1
+
+    Item {
+    id: ui
+    width: root.width / root.k
+    height: root.height / root.k
+    scale: root.k
+    transformOrigin: Item.TopLeft
 
     // ---- Helpers ----
     component Label: Text {
@@ -333,5 +346,6 @@ Rectangle {
             }
         }
         MouseArea { id: cyMouse; anchors.fill: parent; anchors.margins: -8; hoverEnabled: true; onClicked: cy.clicked() }
+    }
     }
 }

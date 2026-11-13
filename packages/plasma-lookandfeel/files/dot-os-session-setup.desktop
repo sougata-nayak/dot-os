@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=DOT OS session setup
+Exec=/bin/sh /usr/share/dot-os/session-setup.sh
+OnlyShowIn=KDE;
+NoDisplay=true
+X-KDE-autostart-phase=1

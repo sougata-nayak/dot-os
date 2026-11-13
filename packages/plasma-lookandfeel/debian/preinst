@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+# Plasma 6 keeps the lock screen and the on-screen display in the desktop
+# shell package, not the global theme, so DOT OS ships its own two files in
+# their place. Plasma's originals are kept beside them as *.plasma and come
+# back when this package is removed (see postrm).
+D=/usr/share/plasma/shells/org.kde.plasma.desktop/contents
+if [ "$1" = install ] || [ "$1" = upgrade ]; then
+	for f in lockscreen/LockScreen.qml osd/Osd.qml; do
+		dpkg-divert --package dot-os-plasma-lookandfeel --add --rename --divert "$D/$f.plasma" "$D/$f" >/dev/null
+	done
+fi
+#DEBHELPER#

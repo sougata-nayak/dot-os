@@ -6,32 +6,40 @@
 Window.SetBackgroundTopColor(0, 0, 0);
 Window.SetBackgroundBottomColor(0, 0, 0);
 
-PAD = 32;
-NSEG = 20;
-SEGW = 14;
-GAP = 2;
-BARW = NSEG * SEGW + (NSEG - 1) * GAP;
-
 X0 = Window.GetX();
 Y0 = Window.GetY();
 W = Window.GetWidth();
 H = Window.GetHeight();
 
+# High-density panels get the double-size assets and double spacing.
+K = 1;
+DIR = "";
+if (W >= 2880 || H >= 1700 || (W >= 2560 && H >= 1600)) {
+    K = 2;
+    DIR = "2x/";
+}
+
+PAD = 32 * K;
+NSEG = 20;
+SEGW = 14 * K;
+GAP = 2 * K;
+BARW = NSEG * SEGW + (NSEG - 1) * GAP;
+
 mode = Plymouth.GetMode();
 if (mode == "shutdown")
-    label_image = Image("label-stopping.png");
+    label_image = Image(DIR + "label-stopping.png");
 else if (mode == "reboot")
-    label_image = Image("label-restarting.png");
+    label_image = Image(DIR + "label-restarting.png");
 else if (mode == "updates" || mode == "system-upgrade" || mode == "firmware-upgrade")
-    label_image = Image("label-updating.png");
+    label_image = Image(DIR + "label-updating.png");
 else
-    label_image = Image("label-starting.png");
+    label_image = Image(DIR + "label-starting.png");
 
 # Bottom up: label row, 8px, bar, 32px, wordmark.
 label_y = Y0 + H - PAD - label_image.GetHeight();
-bar_y = label_y - 8 - 16;
-wordmark = Image("wordmark.png");
-wordmark_y = bar_y - 32 - wordmark.GetHeight();
+bar_y = label_y - 8 * K - 16 * K;
+wordmark = Image(DIR + "wordmark.png");
+wordmark_y = bar_y - 32 * K - wordmark.GetHeight();
 
 wordmark_sprite = Sprite(wordmark);
 wordmark_sprite.SetPosition(X0 + PAD, wordmark_y, 1);
@@ -39,21 +47,21 @@ wordmark_sprite.SetPosition(X0 + PAD, wordmark_y, 1);
 label_sprite = Sprite(label_image);
 label_sprite.SetPosition(X0 + PAD, label_y, 1);
 
-footer = Image("footer.png");
+footer = Image(DIR + "footer.png");
 footer_sprite = Sprite(footer);
 footer_sprite.SetPosition(X0 + W - PAD - footer.GetWidth(), Y0 + H - PAD - footer.GetHeight(), 1);
 
-seg_on = Image("seg-on.png");
-seg_off = Image("seg-off.png");
-seg_live = Image("seg-live.png");
+seg_on = Image(DIR + "seg-on.png");
+seg_off = Image(DIR + "seg-off.png");
+seg_live = Image(DIR + "seg-live.png");
 for (i = 0; i < NSEG; i++) {
     segs[i] = Sprite(seg_off);
     segs[i].SetPosition(X0 + PAD + i * (SEGW + GAP), bar_y, 1);
 }
 
 for (d = 0; d < 10; d++)
-    digit[d] = Image("digit-" + d + ".png");
-pct = Image("digit-pct.png");
+    digit[d] = Image(DIR + "digit-" + d + ".png");
+pct = Image(DIR + "digit-pct.png");
 DW = digit[0].GetWidth();
 pct_sprite = Sprite(pct);
 pct_sprite.SetPosition(X0 + PAD + BARW - pct.GetWidth(), label_y, 1);
@@ -111,20 +119,20 @@ fun refresh() {
 Plymouth.SetRefreshFunction(refresh);
 
 # Disk unlock: the Input component, above the wordmark.
-prompt_y = wordmark_y - 48 - 40;
-password_label = Sprite(Image("label-password.png"));
+prompt_y = wordmark_y - 88 * K;
+password_label = Sprite(Image(DIR + "label-password.png"));
 password_label.SetPosition(X0 + PAD, prompt_y, 2);
 password_label.SetOpacity(0);
-underline = Sprite(Image("underline.png"));
-underline.SetPosition(X0 + PAD, prompt_y + 40, 2);
+underline = Sprite(Image(DIR + "underline.png"));
+underline.SetPosition(X0 + PAD, prompt_y + 40 * K, 2);
 underline.SetOpacity(0);
-caret = Sprite(Image("caret.png"));
+caret = Sprite(Image(DIR + "caret.png"));
 caret.SetOpacity(0);
-bullet_image = Image("bullet.png");
+bullet_image = Image(DIR + "bullet.png");
 MAXB = 28;
 for (i = 0; i < MAXB; i++) {
     bullets[i] = Sprite(bullet_image);
-    bullets[i].SetPosition(X0 + PAD + i * bullet_image.GetWidth(), prompt_y + 18, 2);
+    bullets[i].SetPosition(X0 + PAD + i * bullet_image.GetWidth(), prompt_y + 18 * K, 2);
     bullets[i].SetOpacity(0);
 }
 
@@ -141,7 +149,7 @@ fun display_password(prompt, count) {
     shown = count;
     if (shown > MAXB) shown = MAXB;
     for (i = 0; i < MAXB; i++) bullets[i].SetOpacity(i < shown);
-    caret.SetPosition(X0 + PAD + shown * bullet_image.GetWidth() + 2, prompt_y + 17, 2);
+    caret.SetPosition(X0 + PAD + shown * bullet_image.GetWidth() + 2 * K, prompt_y + 17 * K, 2);
     caret.SetOpacity(1);
 }
 Plymouth.SetDisplayNormalFunction(display_normal);

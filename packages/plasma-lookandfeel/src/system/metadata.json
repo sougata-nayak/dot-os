@@ -1,0 +1,14 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [{ "Name": "DOT OS project" }],
+        "Category": "System Information",
+        "Description": "CPU and memory cards for the desktop.",
+        "Icon": "cpu",
+        "Id": "org.dotos.system",
+        "License": "MIT",
+        "Name": "DOT OS system",
+        "Version": "@version@"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
+}

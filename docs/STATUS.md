@@ -17,6 +17,8 @@ Last updated 13 November 2026.
 | GRUB theme (Phase 2) | wordmark, inverted selection, countdown | Live ISO menu and installed system, after a Calamares install and reboot. Screenshots 09, 12. |
 | Plymouth splash (Phase 2) | wordmark, 20 segments with a red leading segment, percentage, disk-unlock prompt | Live ISO and installed system, real boots. Screenshot 10. The unlock prompt is not tested (no encrypted disk). |
 | SDDM greeter (Phase 2) | clock with red colon, user and password, session, layout, power | Installed system: wrong password shows the error state, right password logs in. Screenshots 08, 11. |
+| Plasma global theme (Phase 3) | defaults for new users, top bar and dock, panel and popup theme, window decoration, dot grid wallpaper, session splash, power screen | Installed system in QEMU, as brand-new users: first login gives the full desktop with no manual steps. Screenshots 13-15, 20-22. |
+| High-density displays | vector cursors, 2x/3x icon folders, 2x boot splash, self-scaling login screen, vector wallpaper | 2560x1600 display at 2x scale: desktop, splash and login. Screenshots 16-18. |
 | Calamares install | erase disk, ext4, UEFI | Ran end to end in QEMU; the installed system boots with all three boot themes. |
 
 ## Not checked yet
@@ -36,7 +38,13 @@ Last updated 13 November 2026.
 - The splitter between a sidebar and a view draws wider than the 1px hairline in the design.
 - Icons outside the mapped set fall back to Breeze.
 - libadwaita apps need `/usr/share/dot-os/gtk-4.0/dark.css` linked to `~/.config/gtk-4.0/gtk.css`; the global theme package will do this.
-- The panel, window decorations, lock screen and splash are still Breeze. They belong to `plasma-lookandfeel` (Phase 3).
+- **Lock screen and volume OSD replace Plasma's own files.** In Plasma 6.3 both live in the desktop shell package, so the package diverts those two files (`dpkg-divert`) and restores them on removal. If the DOT OS lock screen ever fails to load, kscreenlocker falls back to its built-in screen, so nobody is locked out (tested).
+- **Windows have square corners.** KWin's SVG decoration engine squeezes corner artwork to the 1px border, so the 12px radius on the Windows board is not possible; the frame is a 1px outline with a 40px title bar.
+- **Window titles are not uppercase** (KWin's decoration engine has no text-case option).
+- **The dock marks apps with a short bar, not a dot** (Plasma's task frames are stretched pieces). Red still means the focused app.
+- **The launcher's account picture** is the system default (a Debian logo from desktop-base) until Phase 5 sets a DOT OS default.
+- **KDE's Welcome Center** opens at first login; Phase 5 decides whether DOT OS replaces or disables it.
+- **The launcher and KRunner** are stock layouts in DOT OS colours; the selected KRunner row has no red edge.
 
 ## Phase 2 findings
 
@@ -48,8 +56,23 @@ Last updated 13 November 2026.
 - **Installed GRUB entries say "Debian GNU/Linux".** Renaming them means changing `GRUB_DISTRIBUTOR`, which also renames the EFI boot directory. That needs to be done together with the installer's `efiBootloaderId` in Phase 5.
 - **Debian's plymouth has no `plymouth-set-default-theme`**; the package writes `/etc/plymouth/plymouthd.conf` directly.
 
+## Phase 3 findings
+
+- **A new panel takes its minimum height from the theme's default panel artwork.** With the dock's 30px pill corners as the default, the top bar came out 60px tall. The pill is now only the bottom-edge variant.
+- **Plasma's GTK bridge defaults to Breeze.** A one-time login step sets the DOT OS GTK theme.
+- **At 2x, small icons were looked up as 48px** and got the thin large-icon cut. The icon theme now declares 2x and 3x folders.
+- **SDDM gets no scale factor before a session starts**, so the login theme scales itself on large panels.
+- **Not checked:** the light global theme (`org.dotos.desktop.light` is built but untested), fractional scales, multi-monitor, the X11 session, the session splash on screen.
+
+## Refinement pass
+
+- Calendar: custom month grid; today is a red disc, as on the Panels board.
+- Desktop: dot-matrix clock with a red colon, CPU and memory cards, placed as on the Main board and kept across logins.
+- Top bar: `NET`, `VOL` and `BAT` readings instead of tray icons; the tray keeps everything one click away under its arrow. Scroll on `VOL` to change volume, click to mute.
+- Lock screen and volume OSD: DOT OS versions, as on the Lock and Switcher boards.
+
 ## Next
 
-1. Phase 3: Plasma global theme — panel layout, Aurorae window decoration, lock screen, session splash, wallpapers, defaults for every package above.
-3. Run a full Calamares install in the VM and compare the installed system with the live session.
-4. `dot-os-desktop` meta-package and a signed APT repository.
+1. Phase 4: `dot-os-desktop` meta-package and a signed APT repository.
+2. Phase 5: Calamares branding, "DOT OS" boot entries, live session matching the installed system.
+3. Phase 6: CI release on tag.

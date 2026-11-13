@@ -247,6 +247,7 @@ def inner(lucide_name):
 # Contexts drawn large (file views, launchers) get a second, lighter cut so
 # the stroke stays near 1.5-2px on screen instead of scaling up with the icon.
 LARGE = ("apps", "places", "devices", "mimetypes", "categories")
+SCALES = (2, 3)
 
 
 def render(lucide_name, colour, stroke="1.5"):
@@ -278,6 +279,10 @@ def vendor():
 
 def index(theme):
     dirs = ["%s/scalable" % ctx for ctx in MAP] + ["%s/large" % ctx for ctx in LARGE]
+    # @2 and @3 are symlinks to the same folders, declared with Scale= so a 24px
+    # icon on a 2x display keeps the 24px cut instead of being looked up as 48px.
+    for scale in SCALES:
+        dirs += ["%s/scalable@%d" % (ctx, scale) for ctx in MAP] + ["%s/large@%d" % (ctx, scale) for ctx in LARGE]
     out = ["[Icon Theme]", "Name=DOT OS" + ("" if theme == "dark" else " Light"),
            "Comment=Monoline icons at a 1.5px stroke, drawn from Lucide",
            "Inherits=breeze-dark,breeze,hicolor" if theme == "dark" else "Inherits=breeze,hicolor",
@@ -292,6 +297,14 @@ def index(theme):
     for ctx in LARGE:
         out += ["[%s/large]" % ctx, "Size=64", "MinSize=33", "MaxSize=512", "Type=Scalable",
                 "Context=" + CONTEXT[ctx], ""]
+    for scale in SCALES:
+        for ctx in MAP:
+            small_max = 32 if ctx in LARGE else 512
+            out += ["[%s/scalable@%d]" % (ctx, scale), "Size=24", "Scale=%d" % scale, "MinSize=8",
+                    "MaxSize=%d" % small_max, "Type=Scalable", "Context=" + CONTEXT[ctx], ""]
+        for ctx in LARGE:
+            out += ["[%s/large@%d]" % (ctx, scale), "Size=64", "Scale=%d" % scale, "MinSize=33", "MaxSize=512",
+                    "Type=Scalable", "Context=" + CONTEXT[ctx], ""]
     return "\n".join(out)
 
 
@@ -308,5 +321,10 @@ def run(tokens):
                 made.append(write(base + "%s/scalable/%s.svg" % (ctx, icon), render(lucide, colour)))
                 if ctx in LARGE:
                     made.append(write(base + "%s/large/%s.svg" % (ctx, icon), render(lucide, colour, "0.75")))
+        for scale in SCALES:
+            for ctx in MAP:
+                os.symlink("scalable", os.path.join(ROOT, base, ctx, "scalable@%d" % scale))
+                if ctx in LARGE:
+                    os.symlink("large", os.path.join(ROOT, base, ctx, "large@%d" % scale))
         made.append(write(base + "index.theme", index(theme)))
     return made

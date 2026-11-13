@@ -1,0 +1,14 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [{ "Name": "DOT OS project" }],
+        "Category": "Date and Time",
+        "Description": "Date and 24-hour time as panel text; opens a month calendar.",
+        "Icon": "clock",
+        "Id": "org.dotos.clock",
+        "License": "MIT",
+        "Name": "DOT OS clock",
+        "Version": "@version@"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
+}

@@ -22,22 +22,24 @@ def main():
     t = b.T
     p = lambda name: os.path.join(OUT, name)  # noqa: E731
 
-    b.text(p("wordmark.png"), "DOT OS", b.DOTO, 72, "text-display", -0.03, axes=b.DOTO_AXES, height=72)
-    for name, s in (("starting", "Starting"), ("stopping", "Shutting down"), ("restarting", "Restarting"),
-                    ("updating", "Updating"), ("password", "Password")):
-        b.label(p("label-%s.png" % name), s)
-    b.label(p("footer.png"), "arm64   built on Debian 13")
-    # Percentage: Space Mono 12 in text-display; every digit is the same width.
-    for d in "0123456789%":
-        b.text(p("digit-%s.png" % ("pct" if d == "%" else d)), d, b.MONO, 12, "text-display")
-    # Segments, 14 x 16 with 2px gaps; the leading lit segment is the live marker.
-    b.rect(p("seg-on.png"), 14, 16, "text-display")
-    b.rect(p("seg-off.png"), 14, 16, "border-visible")
-    b.rect(p("seg-live.png"), 14, 16, "accent")
-    # Disk-unlock prompt, the Input component at boot.
-    b.svg(p("bullet.png"), 10, 16, '<circle cx="5" cy="9" r="3" fill="%s"/>' % t["text-primary"])
-    b.rect(p("underline.png"), 280, 1, "text-display")
-    b.rect(p("caret.png"), 2, 18, "accent")
+    # Every asset at 1x and, under 2x/, at double size for high-density panels.
+    for k, sub in ((1, ""), (2, "2x/")):
+        os.makedirs(os.path.join(OUT, sub), exist_ok=True)
+        q = lambda name: os.path.join(OUT, sub + name)  # noqa: E731
+        b.text(q("wordmark.png"), "DOT OS", b.DOTO, 72 * k, "text-display", -0.03, axes=b.DOTO_AXES, height=72 * k)
+        for name, s in (("starting", "Starting"), ("stopping", "Shutting down"), ("restarting", "Restarting"),
+                        ("updating", "Updating"), ("password", "Password")):
+            b.text(q("label-%s.png" % name), s, b.MONO, 11 * k, "text-secondary", 0.08, True)
+        b.text(q("footer.png"), "arm64   built on Debian 13", b.MONO, 11 * k, "text-secondary", 0.08, True)
+        for d in "0123456789%":
+            b.text(q("digit-%s.png" % ("pct" if d == "%" else d)), d, b.MONO, 12 * k, "text-display")
+        b.rect(q("seg-on.png"), 14 * k, 16 * k, "text-display")
+        b.rect(q("seg-off.png"), 14 * k, 16 * k, "border-visible")
+        b.rect(q("seg-live.png"), 14 * k, 16 * k, "accent")
+        b.svg(q("bullet.png"), 10 * k, 16 * k, '<circle cx="%d" cy="%d" r="%d" fill="%s"/>'
+              % (5 * k, 9 * k, 3 * k, t["text-primary"]))
+        b.rect(q("underline.png"), 280 * k, k, "text-display")
+        b.rect(q("caret.png"), 2 * k, 18 * k, "accent")
 
     with open(p("dot-os.plymouth"), "w") as fh:
         fh.write("""[Plymouth Theme]

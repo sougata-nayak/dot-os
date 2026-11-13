@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+#DEBHELPER#
+D=/usr/share/plasma/shells/org.kde.plasma.desktop/contents
+if [ "$1" = remove ] || [ "$1" = abort-install ] || [ "$1" = disappear ]; then
+	for f in lockscreen/LockScreen.qml osd/Osd.qml; do
+		dpkg-divert --package dot-os-plasma-lookandfeel --remove --rename --divert "$D/$f.plasma" "$D/$f" >/dev/null || true
+	done
+fi

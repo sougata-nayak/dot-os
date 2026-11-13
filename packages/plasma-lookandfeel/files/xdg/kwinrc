@@ -1,0 +1,22 @@
+# DOT OS: no blur, no translucency, no shadows; windows fade, nothing slides or scales.
+[Plugins]
+blurEnabled=false
+contrastEnabled=false
+translucencyEnabled=false
+scaleEnabled=false
+squashEnabled=false
+slideEnabled=false
+magiclampEnabled=false
+fadeEnabled=true
+fadedesktopEnabled=true
+
+[Desktops]
+Number=5
+Rows=1
+
+[org.kde.kdecoration2]
+library=org.kde.kwin.aurorae
+theme=__aurorae__svg__DotOS-Dark
+ButtonsOnLeft=
+ButtonsOnRight=IAX
+BorderSize=Normal

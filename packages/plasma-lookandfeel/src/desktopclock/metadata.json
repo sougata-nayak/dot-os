@@ -1,0 +1,14 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [{ "Name": "DOT OS project" }],
+        "Category": "Date and Time",
+        "Description": "The large dot-matrix clock for the desktop.",
+        "Icon": "clock",
+        "Id": "org.dotos.desktopclock",
+        "License": "MIT",
+        "Name": "DOT OS desktop clock",
+        "Version": "@version@"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
+}

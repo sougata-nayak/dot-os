@@ -1,0 +1,14 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [{ "Name": "DOT OS project" }],
+        "Category": "System Information",
+        "Description": "Network, volume and battery as text for the top bar.",
+        "Icon": "network-wired",
+        "Id": "org.dotos.status",
+        "License": "MIT",
+        "Name": "DOT OS status",
+        "Version": "@version@"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
+}

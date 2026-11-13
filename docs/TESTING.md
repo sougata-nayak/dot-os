@@ -35,6 +35,11 @@ Install first: `sudo apt install ./out/debs/*.deb qt6-style-kvantum`
 | Boot splash | Installing `dot-os-plymouth-theme` sets it and rebuilds the initramfs; reboot to see it. |
 | Login screen | Installing `dot-os-sddm-theme` sets it; log out to see it. Preview without logging out: `sddm-greeter-qt6 --test-mode --theme /usr/share/sddm/themes/dot-os` |
 
+| Whole desktop | Install `dot-os-plasma-lookandfeel`. New users get it at first login. For an existing user: `plasma-apply-lookandfeel -a org.dotos.desktop --resetLayout` |
+
+To test as a new user without reinstalling: `sudo useradd -m test1 && sudo passwd test1`, then log in as them.
+To test high density: in a VM with a 2560x1600 display, `kscreen-doctor output.1.scale.2`.
+
 The boot splash only appears with `splash` on the kernel command line. On a
 machine or VM with a serial console it also needs `plymouth.ignore-serial-consoles`,
 which the package adds through `/etc/default/grub.d/`.

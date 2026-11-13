@@ -1,0 +1,12 @@
+{
+    "KPackageStructure": "Plasma/Wallpaper",
+    "KPlugin": {
+        "Authors": [{ "Name": "DOT OS project" }],
+        "Description": "Solid ground with the DOT OS dot grid, sharp at any display scale.",
+        "Id": "org.dotos.dotgrid",
+        "License": "MIT",
+        "Name": "DOT OS dot grid",
+        "Version": "@version@"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
+}

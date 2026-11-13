@@ -1,0 +1,14 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [{ "Name": "DOT OS project" }],
+        "Category": "Windows and Tasks",
+        "Description": "Workspace numbers as text, the current one in brackets, and the focused app's name.",
+        "Icon": "view-list-details",
+        "Id": "org.dotos.workspaces",
+        "License": "MIT",
+        "Name": "DOT OS workspaces",
+        "Version": "@version@"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
+}

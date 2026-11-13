@@ -33,6 +33,7 @@ jobs:
           - grub-theme
           - plymouth-theme
           - sddm-theme
+          - plasma-lookandfeel
     steps:
       - uses: actions/checkout@v4
 

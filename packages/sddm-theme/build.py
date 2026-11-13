@@ -29,6 +29,9 @@ def main():
     qml = re.sub(r"@([a-z-]+)@", fill, qml.replace("@TOKENS@", "TOKENS"))
     with open(os.path.join(OUT, "Main.qml"), "w") as fh:
         fh.write(qml)
+    with open(os.path.join(OUT, "dot.svg"), "w") as fh:
+        fh.write('<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">'
+                 '<circle cx="8" cy="8" r="1" fill="%s"/></svg>\n' % b.T["border-visible"])
     with open(os.path.join(OUT, "metadata.desktop"), "w") as fh:
         fh.write("""[SddmGreeterTheme]
 Name=DOT OS
