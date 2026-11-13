@@ -1,0 +1,152 @@
+/* DOT OS — canvas kit.
+   1. The tokens of tokens.json as CSS variables (dark first; .dot-light overrides).
+   2. Parts this canvas adds on top of the design system's components/bundle.css (nil-*):
+      everything here is dot-* and uses tokens only. */
+
+:root, .dot-dark {
+  --black: #000000; --surface: #111111; --surface-raised: #1A1A1A;
+  --border: #222222; --border-visible: #333333;
+  --text-disabled: #666666; --text-secondary: #999999; --text-primary: #E8E8E8; --text-display: #FFFFFF;
+  --accent: #D71921; --accent-subtle: rgba(215,25,33,0.15);
+  --success: #4A9E5C; --warning: #D4A843; --error: #D71921; --info: #999999; --interactive: #5B9BF6;
+  --ansi-red: #D71921; --ansi-green: #4A9E5C; --ansi-yellow: #D4A843; --ansi-blue: #5B9BF6; --ansi-magenta: #B07CC6; --ansi-cyan: #5FB3B3;
+  --font-display: "Doto", "Space Mono", monospace;
+  --font-sans: "Space Grotesk", "DM Sans", system-ui, sans-serif;
+  --font-mono: "Space Mono", "JetBrains Mono", "SF Mono", monospace;
+  --space-2xs: 2px; --space-xs: 4px; --space-sm: 8px; --space-md: 16px; --space-lg: 24px;
+  --space-xl: 32px; --space-2xl: 48px; --space-3xl: 64px; --space-4xl: 96px;
+  --radius-technical: 4px; --radius-compact: 8px; --radius-card: 12px; --radius-widget: 16px; --radius-pill: 999px;
+  --bar-height: 32px; --titlebar-height: 40px; --control-min: 44px; --icon: 24px; --dot-pitch: 16px;
+}
+.dot-light {
+  --black: #F5F5F5; --surface: #FFFFFF; --surface-raised: #F0F0F0;
+  --border: #E8E8E8; --border-visible: #CCCCCC;
+  --text-disabled: #999999; --text-secondary: #666666; --text-primary: #1A1A1A; --text-display: #000000;
+  --info: #666666; --interactive: #007AFF;
+  --ansi-green: #2F7A40; --ansi-yellow: #8A6A12; --ansi-blue: #0062CC; --ansi-magenta: #8A4FA3; --ansi-cyan: #27706F;
+}
+
+/* ---- Frames ---- */
+.dot-screen { position: relative; overflow: hidden; background-color: var(--black); }
+.dot-sheet { background-color: var(--black); padding: var(--space-2xl); }
+.dot-backdrop { position: absolute; inset: 0; background: var(--black); opacity: .8; }
+
+/* ---- Type ---- */
+.dot-heading { margin: 0; font-size: 24px; line-height: 1.2; letter-spacing: -.01em; font-weight: 500; color: var(--text-display); }
+.dot-sub { margin: 0; font-size: 18px; line-height: 1.3; font-weight: 400; color: var(--text-primary); }
+.dot-body-sm { margin: 0; font-size: 14px; line-height: 1.5; letter-spacing: .01em; color: var(--text-secondary); }
+.dot-dot { display: inline-block; width: 6px; height: 6px; flex: none; border-radius: 50%; background: var(--accent); }
+
+/* ---- Icons: 24px box, 1.5px monoline ---- */
+.dot-ico { width: var(--icon); height: var(--icon); flex: none; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.dot-ico--sm { width: 16px; height: 16px; }
+.dot-iconbtn { display: grid; place-items: center; width: var(--control-min); height: var(--control-min); padding: 0; flex: none; border: 1px solid transparent; border-radius: 50%; background: transparent; color: var(--text-secondary); cursor: pointer; transition: color 200ms cubic-bezier(.25,.1,.25,1), border-color 200ms cubic-bezier(.25,.1,.25,1); }
+.dot-iconbtn:hover { color: var(--text-display); border-color: var(--border-visible); }
+.dot-iconbtn:disabled { color: var(--text-disabled); cursor: default; }
+
+/* ---- State samples for spec sheets ---- */
+.nil-btn--secondary.is-hover { border-color: var(--text-primary); }
+.nil-btn--primary.is-hover { opacity: .85; }
+.nil-btn--ghost.is-hover { color: var(--text-display); }
+.is-focus { outline: 2px solid var(--text-display); outline-offset: 2px; }
+.nil-input.is-focus { outline: 0; border-bottom-color: var(--text-display); }
+.nil-btn.is-pressed { opacity: .7; }
+
+/* ---- Checkbox and radio: the mark is a filled block, not a tick ---- */
+.dot-check, .dot-radio { -webkit-appearance: none; appearance: none; margin: 0; width: 18px; height: 18px; flex: none; border: 1px solid var(--text-secondary); background: transparent; cursor: pointer; transition: background 200ms cubic-bezier(.25,.1,.25,1), border-color 200ms cubic-bezier(.25,.1,.25,1); }
+.dot-check { border-radius: var(--radius-technical); }
+.dot-radio { border-radius: 50%; }
+.dot-check:checked, .dot-radio:checked { border-color: var(--text-display); background: var(--text-display); box-shadow: inset 0 0 0 3px var(--black); }
+.dot-check:disabled, .dot-radio:disabled { opacity: .4; cursor: default; }
+.dot-opt { display: flex; align-items: center; gap: 12px; min-height: var(--control-min); font-size: 14px; color: var(--text-primary); cursor: pointer; }
+
+/* ---- Slider (continuous values in Qt and GTK apps) ---- */
+.dot-slider { position: relative; height: 24px; }
+.dot-slider::before { content: ""; position: absolute; left: 0; right: 0; top: 11px; height: 2px; background: var(--border-visible); }
+.dot-slider i { position: absolute; left: 0; top: 11px; height: 2px; background: var(--text-display); }
+.dot-slider input { -webkit-appearance: none; appearance: none; position: absolute; inset: 0; width: 100%; height: 24px; margin: 0; background: transparent; cursor: pointer; }
+.dot-slider input::-webkit-slider-runnable-track { height: 24px; background: transparent; }
+.dot-slider input::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; margin-top: 4px; border: 0; border-radius: 50%; background: var(--text-display); }
+.dot-slider input::-moz-range-track { height: 24px; background: transparent; }
+.dot-slider input::-moz-range-thumb { width: 16px; height: 16px; border: 0; border-radius: 50%; background: var(--text-display); }
+
+/* ---- Select and spin box ---- */
+.dot-select { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); width: 100%; min-height: var(--control-min); padding: 0 12px 0 var(--space-md); border: 1px solid var(--border-visible); border-radius: var(--radius-compact); background: transparent; color: var(--text-primary); font-family: var(--font-mono); font-size: 14px; text-align: left; cursor: pointer; transition: border-color 200ms cubic-bezier(.25,.1,.25,1); }
+.dot-select:hover, .dot-select[aria-expanded="true"] { border-color: var(--text-primary); }
+.dot-select svg { color: var(--text-secondary); }
+.dot-spin { display: inline-flex; align-items: stretch; height: var(--control-min); border: 1px solid var(--border-visible); border-radius: var(--radius-compact); }
+.dot-spin button { width: 44px; padding: 0; border: 0; background: transparent; color: var(--text-secondary); font-family: var(--font-mono); font-size: 16px; cursor: pointer; }
+.dot-spin button:hover { color: var(--text-display); }
+.dot-spin output { display: grid; place-items: center; min-width: 72px; border-left: 1px solid var(--border); border-right: 1px solid var(--border); font-family: var(--font-mono); font-size: 14px; color: var(--text-primary); }
+
+/* ---- Tabs ---- */
+.dot-tabs { display: flex; gap: var(--space-lg); border-bottom: 1px solid var(--border); }
+.dot-tabs button { height: var(--control-min); margin-bottom: -1px; padding: 0; border: 0; border-bottom: 2px solid transparent; background: transparent; font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--text-secondary); cursor: pointer; transition: color 200ms cubic-bezier(.25,.1,.25,1); }
+.dot-tabs button:hover { color: var(--text-primary); }
+.dot-tabs button[aria-selected="true"] { color: var(--text-display); border-bottom-color: var(--text-display); }
+
+/* ---- Menu: the current item inverts ---- */
+.dot-menu { width: 248px; padding: var(--space-xs); background: var(--surface-raised); border: 1px solid var(--border-visible); border-radius: var(--radius-compact); font-size: 14px; color: var(--text-primary); }
+.dot-menu__item { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); width: 100%; height: 36px; padding: 0 12px; border: 0; border-radius: var(--radius-technical); background: transparent; color: inherit; font-family: var(--font-sans); font-size: 14px; text-align: left; cursor: pointer; }
+.dot-menu__item[aria-current="true"] { background: var(--text-display); color: var(--black); }
+.dot-menu__item[aria-current="true"] .nil-label { color: var(--black); }
+.dot-menu__item:disabled { color: var(--text-disabled); cursor: default; }
+.dot-menu__item:disabled .nil-label { color: var(--text-disabled); }
+.dot-menu__sep { height: 1px; margin: var(--space-xs) 0; background: var(--border-visible); }
+.dot-menubar { display: flex; height: var(--bar-height); padding: 0 var(--space-sm); border-bottom: 1px solid var(--border); }
+.dot-menubar button { padding: 0 12px; border: 0; background: transparent; font-family: var(--font-sans); font-size: 14px; color: var(--text-secondary); cursor: pointer; }
+.dot-menubar button[aria-expanded="true"] { background: var(--text-display); color: var(--black); }
+
+/* ---- Tooltip, popover, OSD ---- */
+.dot-tip { display: inline-block; padding: var(--space-xs) var(--space-sm); background: var(--surface-raised); border: 1px solid var(--border-visible); border-radius: var(--radius-technical); font-family: var(--font-mono); font-size: 12px; letter-spacing: .04em; color: var(--text-primary); }
+.dot-pop { padding: var(--space-md); background: var(--surface); border: 1px solid var(--border-visible); border-radius: var(--radius-widget); }
+.dot-osd { display: flex; align-items: center; gap: var(--space-md); width: 336px; height: var(--control-min); padding: 0 var(--space-lg); background: var(--surface); border: 1px solid var(--border-visible); border-radius: var(--radius-pill); }
+.dot-osd .nil-seg { flex: 1; }
+
+/* ---- Calendar ---- */
+.dot-cal { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); row-gap: 2px; font-family: var(--font-mono); font-size: 13px; }
+.dot-cal span { display: grid; place-items: center; justify-self: center; width: 36px; height: 36px; border-radius: 50%; color: var(--text-primary); }
+.dot-cal .h { height: 24px; font-size: 11px; letter-spacing: .08em; color: var(--text-secondary); }
+.dot-cal .o { color: var(--text-disabled); }
+.dot-cal .t { background: var(--text-display); color: var(--black); }
+
+/* ---- Sidebar navigation: the current row is surface-raised ---- */
+.dot-nav { display: flex; flex-direction: column; gap: 2px; margin: 0; padding: 0; list-style: none; }
+.dot-nav a { display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 36px; padding: 0 12px; border-radius: var(--radius-compact); font-size: 14px; color: var(--text-secondary); text-decoration: none; transition: color 200ms cubic-bezier(.25,.1,.25,1); }
+.dot-nav a:hover { color: var(--text-display); }
+.dot-nav a[aria-current="page"] { background: var(--surface-raised); color: var(--text-display); }
+
+/* ---- Table ---- */
+.dot-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.dot-table th { height: 32px; padding: 0 var(--space-md); border-bottom: 1px solid var(--border); text-align: left; font-family: var(--font-mono); font-weight: 400; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--text-secondary); }
+.dot-table td { height: 40px; padding: 0 var(--space-md); border-bottom: 1px solid var(--border); color: var(--text-primary); }
+.dot-table .n { text-align: right; font-family: var(--font-mono); font-size: 13px; color: var(--text-secondary); }
+.dot-table tr[aria-selected="true"] td { background: var(--surface-raised); color: var(--text-display); }
+
+/* ---- Scrollbar: a square 4px thumb, no track ---- */
+.dot-scroll { position: relative; width: 12px; flex: none; }
+.dot-scroll i { position: absolute; left: 4px; width: 4px; background: var(--border-visible); }
+.dot-scroll i.is-hover { background: var(--text-secondary); }
+
+/* ---- Spec sheet helpers ---- */
+.dot-cell { display: grid; place-items: center; border: 1px solid var(--border); border-radius: var(--radius-card); }
+.dot-swatch { width: 24px; height: 24px; flex: none; border: 1px solid var(--border-visible); border-radius: var(--radius-technical); }
+.dot-cur { fill: var(--text-display); stroke: var(--black); stroke-width: 1; stroke-linejoin: round; }
+
+/* ---- Live markers: accent marks the one live point of a part ----
+   Caret, clock colon, today, current workspace, leading segment of a running
+   progress bar, unread count. Never text, never a fill larger than 36px.
+   Errors keep their own form: accent plus bracket text. */
+:root, .dot-dark, .dot-light { --on-accent: #FFFFFF; }
+.dot-live { color: var(--accent); }
+.nil input, .nil textarea { caret-color: var(--accent); }
+.nil-term__cursor { background: var(--accent); }
+.nil-bar .nil-ws span[aria-current="true"] b { font-weight: 400; color: var(--accent); }
+.dot-cal .t { background: var(--accent); color: var(--on-accent); }
+.nil-seg.dot-seg--live i.on:has(+ i:not(.on)), .nil-seg.dot-seg--live i.on:last-child { background: var(--accent); }
+.dot-unread { display: inline-flex; align-items: center; gap: 6px; }
+.dot-unread::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.dot-caret { display: inline-block; width: 2px; height: 1.1em; margin-left: 2px; vertical-align: -0.15em; background: var(--accent); }
+
+/* ---- Light theme: empty segments need more than border on the off-white ground ---- */
+.dot-light .nil-seg i:not(.on) { background: var(--border-visible); }

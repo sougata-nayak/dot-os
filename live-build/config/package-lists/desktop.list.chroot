@@ -1,0 +1,23 @@
+# Live system plumbing
+live-boot
+live-config
+live-config-systemd
+
+# Desktop
+kde-plasma-desktop
+sddm
+network-manager
+plasma-nm
+sudo
+locales
+curl
+
+# Installer
+calamares
+calamares-settings-debian
+grub-efi-arm64
+efibootmgr
+
+# VM guests (UTM / QEMU)
+spice-vdagent
+qemu-guest-agent

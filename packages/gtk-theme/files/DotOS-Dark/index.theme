@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=DotOS-Dark
+Comment=DOT OS Dark
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=DotOS-Dark
+IconTheme=dot-os
+CursorTheme=DotOS-Cursors
+ButtonLayout=:minimize,maximize,close

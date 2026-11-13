@@ -1,0 +1,55 @@
+name: Build ISO
+
+# Only runs on a tag push (e.g. v0.1.0) -- building the full live ISO is
+# slow and only worth doing for an actual release. Publishes the ISO +
+# checksum to a GitHub Release, and (eventually) updates the GitHub Pages
+# APT repo. See docs/PLAN.md's "Repository & open-source setup" section.
+
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  build-iso:
+    # Native arm64 runner -- live-build cannot cross-build, and QEMU
+    # emulation here would make this job take hours instead of minutes.
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install live-build tooling
+        run: sudo apt-get update && sudo apt-get install -y live-build
+
+      - name: Build theme packages and stage a local APT repo
+        run: |
+          echo "TODO: build packages/*, then reprepro/aptly them into a
+          local repo that live-build/config/archives can point at. This
+          step is intentionally not fleshed out yet -- see docs/PLAN.md
+          Roadmap Phase 2/3. Do not let this placeholder silently pass CI
+          once the ISO build step below is real; wire this before relying
+          on this workflow."
+
+      - name: lb config
+        working-directory: live-build
+        run: ./auto/config
+
+      - name: lb build
+        working-directory: live-build
+        run: sudo lb build
+
+      - name: Checksum
+        working-directory: live-build
+        run: sha256sum *.iso > SHA256SUMS
+
+      - name: Publish to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            live-build/*.iso
+            live-build/SHA256SUMS
+
+      - name: Update GitHub Pages APT repo
+        run: |
+          echo "TODO: publish the reprepro/aptly repo tree built above to
+          the gh-pages branch / Pages site. See docs/PLAN.md's hosting
+          decision (GitHub Releases + GitHub Pages)."

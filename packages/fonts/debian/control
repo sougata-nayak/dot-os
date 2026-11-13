@@ -1,0 +1,14 @@
+Source: fonts-dot-os
+Section: fonts
+Priority: optional
+Maintainer: DOT OS project <maintainers@dot-os.invalid>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.7.2
+Rules-Requires-Root: no
+
+Package: fonts-dot-os
+Architecture: all
+Depends: ${misc:Depends}, fontconfig
+Description: DOT OS typefaces: Doto, Space Grotesk, Space Mono
+ The three SIL Open Font License families the DOT OS interface is set in,
+ with a fontconfig file that makes them the default sans and monospace.

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>System Settings</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/dotos/components/bundle.css">
+<link rel="stylesheet" href="dot.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@400..900&amp;family=Space+Grotesk:wght@300..700&amp;family=Space+Mono:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="nil dot-screen {{theme}}" style="width: 1280px; height: 800px; display: flex; flex-direction: column">
+
+<div class="nil-bar" role="toolbar" aria-label="Top bar" style="flex: none">
+<div class="nil-bar__group"><div class="nil-ws" aria-label="Workspaces"><span class="is-occupied">1</span><span class="is-occupied">2</span><span aria-current="true"><b>[</b> 3 <b>]</b></span><span>4</span><span>5</span></div><span>Settings</span></div>
+<div class="nil-bar__clock">Thu 12 Nov&nbsp;&nbsp;09:41</div>
+<div class="nil-bar__group"><span>Net <b>5G</b></span><span>Vol <b>62</b></span><span>Bat <b>84%</b></span></div>
+</div>
+
+<div style="flex-grow: 1; min-height: 0; padding: 16px; display: flex">
+<div class="nil-window" style="flex-grow: 1; display: flex; flex-direction: column; background: var(--black)">
+<div class="nil-window__bar" style="flex: none; background: var(--surface)"><span class="nil-window__title">Settings — Display</span><div class="nil-window__controls"><button aria-label="Minimise"></button><button aria-label="Maximise"></button><button class="close" aria-label="Close"></button></div></div>
+
+<div style="flex-grow: 1; min-height: 0; display: flex">
+
+<nav aria-label="Settings sections" style="width: 240px; flex: none; box-sizing: border-box; padding: 24px 16px; border-right: 1px solid var(--border); display: flex; flex-direction: column; gap: 24px">
+<label class="nil-field" style="padding: 0 12px"><span class="nil-label">Search</span><input class="nil-input" aria-label="Search settings" placeholder="Type to search"></label>
+<ul class="dot-nav">
+<li><a href="#">Network<span class="nil-label">5G</span></a></li>
+<li><a href="#">Bluetooth<span class="nil-label">Off</span></a></li>
+<li><a href="#" aria-current="page">Display</a></li>
+<li><a href="#">Sound</a></li>
+<li><a href="#">Power</a></li>
+<li><a href="#">Appearance</a></li>
+<li><a href="#">Notifications</a></li>
+<li><a href="#">Keyboard</a></li>
+<li><a href="#">Users</a></li>
+<li><a href="#">Storage</a></li>
+<li><a href="#">Updates<span class="nil-label dot-unread">12</span></a></li>
+<li><a href="#">About</a></li>
+</ul>
+</nav>
+
+<div style="flex-grow: 1; padding: 32px 48px; display: flex; gap: 64px">
+
+<div style="flex-grow: 1; display: flex; flex-direction: column">
+<h1 class="dot-heading" style="margin-bottom: 24px">Display &amp; brightness</h1>
+
+<div style="display: flex; align-items: center; justify-content: space-between; min-height: 64px; border-bottom: 1px solid var(--border)">
+<span>Appearance</span>
+<div class="nil-segmented" role="group" aria-label="Appearance"><button aria-pressed="true">Dark</button><button aria-pressed="false">Light</button><button aria-pressed="false">Auto</button></div>
+</div>
+
+<div class="nil-meter" style="padding: 16px 0; border-bottom: 1px solid var(--border)">
+<div class="nil-meter__head"><span>Brightness</span><span class="nil-caption">70%</span></div>
+<div class="nil-seg"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+</div>
+
+<div style="display: flex; align-items: center; justify-content: space-between; min-height: 64px; border-bottom: 1px solid var(--border)">
+<span>Night light</span>
+<button class="nil-toggle" role="switch" aria-checked="true" aria-label="Night light"></button>
+</div>
+
+<div style="display: flex; align-items: center; justify-content: space-between; min-height: 64px; padding-left: 24px; border-bottom: 1px solid var(--border)">
+<span style="color: var(--text-secondary)">Schedule</span>
+<span class="nil-row__value">22:00 – 06:00</span>
+</div>
+
+<div style="display: flex; align-items: center; justify-content: space-between; min-height: 64px; border-bottom: 1px solid var(--border)">
+<span>Resolution</span>
+<div style="width: 200px"><button class="dot-select" aria-haspopup="listbox" aria-expanded="false"><span>1920 × 1200</span><svg class="dot-ico dot-ico--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button></div>
+</div>
+
+<div style="display: flex; align-items: center; justify-content: space-between; min-height: 64px; border-bottom: 1px solid var(--border)">
+<span>Scale</span>
+<div class="dot-spin" role="group" aria-label="Display scale"><button aria-label="Decrease">−</button><output>125%</output><button aria-label="Increase">+</button></div>
+</div>
+
+<div style="display: flex; align-items: center; justify-content: space-between; min-height: 64px">
+<span>Refresh rate</span>
+<span class="nil-row__value">60<span class="nil-unit">HZ</span></span>
+</div>
+
+<div class="nil-status" style="margin-top: 16px">[Saved] 09:41:02</div>
+</div>
+
+<aside style="width: 240px; flex: none">
+<div class="nil-label" style="margin-bottom: 4px">Built-in display</div>
+<ul class="nil-list">
+<li class="nil-row"><span class="nil-label">Output</span><span class="nil-row__value">Virtual-1</span></li>
+<li class="nil-row"><span class="nil-label">Driver</span><span class="nil-row__value">virtio-gpu</span></li>
+<li class="nil-row"><span class="nil-label">Native</span><span class="nil-row__value">1920 × 1200</span></li>
+<li class="nil-row"><span class="nil-label">Session</span><span class="nil-row__value">Wayland</span></li>
+</ul>
+</aside>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["dark","light"],"default":"dark"},"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+renderVals() {
+return { theme: this.props.theme === 'light' ? 'dot-light' : 'dot-dark' };
+}
+}
+</script>
+</body>
+</html>

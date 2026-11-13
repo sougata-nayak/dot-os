@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lock screen</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/dotos/components/bundle.css">
+<link rel="stylesheet" href="dot.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@400..900&amp;family=Space+Grotesk:wght@300..700&amp;family=Space+Mono:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="nil dot-screen nil-dot-grid {{theme}}" style="width: 1280px; height: 800px; box-sizing: border-box; padding: 32px; display: flex; flex-direction: column; justify-content: space-between">
+
+<div>
+<div class="nil-display" style="font-size: 144px">09<span class="dot-live">:</span>41</div>
+<div class="nil-label" style="margin-top: 8px">Thursday 12 November</div>
+</div>
+
+<div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 32px">
+<label class="nil-field {{fieldClass}}" style="width: 280px">
+<span class="nil-label">Password — sougata</span>
+<input class="nil-input" type="password" value="password" autocomplete="current-password">
+<span class="nil-field__msg" style="min-height: 17px">{{msg}}</span>
+</label>
+<div class="nil-label">Bat 84% &nbsp; Net 5G</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["dark","light"],"default":"dark"},"state":{"editor":"enum","options":["error","idle"],"default":"error"},"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+renderVals() {
+const error = (this.props.state ?? 'error') === 'error';
+return {
+theme: this.props.theme === 'light' ? 'dot-light' : 'dot-dark',
+fieldClass: error ? 'nil-field--error' : '',
+msg: error ? '[Error: wrong password]' : ''
+};
+}
+}
+</script>
+</body>
+</html>

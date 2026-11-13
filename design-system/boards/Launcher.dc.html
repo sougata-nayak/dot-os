@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Launcher</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/dotos/components/bundle.css">
+<link rel="stylesheet" href="dot.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@400..900&amp;family=Space+Grotesk:wght@300..700&amp;family=Space+Mono:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="nil dot-screen {{theme}}" style="width: 1280px; height: 800px; display: flex; flex-direction: column">
+
+<div class="nil-bar" role="toolbar" aria-label="Top bar" style="flex: none">
+<div class="nil-bar__group"><div class="nil-ws" aria-label="Workspaces"><span aria-current="true"><b>[</b> 1 <b>]</b></span><span class="is-occupied">2</span><span class="is-occupied">3</span><span>4</span><span>5</span></div><span>Terminal</span></div>
+<div class="nil-bar__clock">Thu 12 Nov&nbsp;&nbsp;09:41</div>
+<div class="nil-bar__group"><span>Net <b>5G</b></span><span>Vol <b>62</b></span><span>Bat <b>84%</b></span></div>
+</div>
+
+<div class="nil-dot-grid" style="position: relative; flex-grow: 1">
+<div class="nil-window" style="position: absolute; left: 560px; top: 240px; width: 656px">
+<div class="nil-window__bar"><span class="nil-window__title">Terminal — ~/dot-os</span><div class="nil-window__controls"><button aria-label="Minimise"></button><button aria-label="Maximise"></button><button class="close" aria-label="Close"></button></div></div>
+<div class="nil-term" style="height: 328px; white-space: normal"><div><span class="p">sougata@dot ~/dot-os &gt;</span> <span class="nil-term__cursor"></span></div></div>
+</div>
+</div>
+
+<div class="dot-backdrop"></div>
+
+<div class="nil-launcher" role="dialog" aria-label="Launcher" style="position: absolute; left: 400px; top: 176px">
+<label class="nil-launcher__prompt"><span aria-hidden="true">&gt;</span><input value="term" aria-label="Search apps and commands"></label>
+<div role="listbox" aria-label="Results">
+<div class="nil-launcher__item" role="option" aria-selected="true"><span>Terminal</span><span class="nil-label">App</span></div>
+<div class="nil-launcher__item" role="option" aria-selected="false"><span>Terminate session</span><span class="nil-label">Command</span></div>
+<div class="nil-launcher__item" role="option" aria-selected="false"><span>Terminal profile</span><span class="nil-label">Setting</span></div>
+<div class="nil-launcher__item" role="option" aria-selected="false"><span>Terms of use.pdf</span><span class="nil-label">File</span></div>
+</div>
+<div style="display: flex; gap: 24px; padding: 12px 16px; border-top: 1px solid var(--border)">
+<span class="nil-label">Enter — open</span><span class="nil-label">Tab — complete</span><span class="nil-label">Esc — close</span>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["dark","light"],"default":"dark"},"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+renderVals() {
+return { theme: this.props.theme === 'light' ? 'dot-light' : 'dot-dark' };
+}
+}
+</script>
+</body>
+</html>

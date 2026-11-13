@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sound theme</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/dotos/components/bundle.css">
+<link rel="stylesheet" href="dot.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@400..900&amp;family=Space+Grotesk:wght@300..700&amp;family=Space+Mono:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="nil dot-sheet {{theme}}" style="width: 1280px; height: 800px; box-sizing: border-box; display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: 64px">
+<div style="display: flex; flex-direction: column; gap: 32px">
+<div>
+<div class="nil-label" style="margin-bottom: 12px">One voice — a click and a tick</div>
+<div class="dot-cell" style="width: 320px; height: 160px; background: var(--surface)">
+<svg viewBox="0 0 280 96" width="280" height="96" role="img" aria-label="Waveform: a short click followed by a quieter tick">
+<path d="M0 48H60M61 48V8M63 48V84M65 48V22M67 48V70M69 48V36M71 48V58M73 48V44M75 48H170M171 48V26M173 48V68M175 48V38M177 48V56M179 48V45M181 48H280" style="fill: none; stroke: var(--text-display); stroke-width: 1.5"></path>
+</svg>
+</div>
+</div>
+<ul class="nil-list">
+<li class="nil-row"><span class="nil-label">Click</span><span class="nil-row__value">2.4 kHz, 6 ms decay</span></li><li class="nil-row"><span class="nil-label">Tick</span><span class="nil-row__value">1.2 kHz, 20 ms decay</span></li><li class="nil-row"><span class="nil-label">Reverb, tails</span><span class="nil-row__value">none</span></li><li class="nil-row"><span class="nil-label">Longest sound</span><span class="nil-row__value">400 ms</span></li><li class="nil-row"><span class="nil-label">Peak level</span><span class="nil-row__value">-12 dBFS</span></li><li class="nil-row"><span class="nil-label">Format</span><span class="nil-row__value">Ogg Vorbis, 48 kHz mono</span></li><li class="nil-row"><span class="nil-label">Default</span><span class="nil-row__value">on, 60% volume</span></li>
+</ul>
+</div>
+<div>
+<table class="dot-table">
+<thead><tr><th>Event</th><th>File — freedesktop sound name</th><th>Pattern</th><th style="text-align: right">Length</th></tr></thead>
+<tbody><tr><td>Log in</td><td class="n" style="text-align: left">desktop-login.oga</td><td>2 ticks, rising</td><td class="n">180 ms</td></tr><tr><td>Log out</td><td class="n" style="text-align: left">desktop-logout.oga</td><td>2 ticks, falling</td><td class="n">180 ms</td></tr><tr><td>Notification</td><td class="n" style="text-align: left">message-new-instant.oga</td><td>1 soft tick</td><td class="n">60 ms</td></tr><tr><td>Critical alert</td><td class="n" style="text-align: left">dialog-error.oga</td><td>3 fast ticks</td><td class="n">240 ms</td></tr><tr><td>Warning</td><td class="n" style="text-align: left">dialog-warning.oga</td><td>2 ticks, even</td><td class="n">160 ms</td></tr><tr><td>Question</td><td class="n" style="text-align: left">dialog-question.oga</td><td>1 tick, higher</td><td class="n">60 ms</td></tr><tr><td>Volume step</td><td class="n" style="text-align: left">audio-volume-change.oga</td><td>1 click at new level</td><td class="n">30 ms</td></tr><tr><td>Device in</td><td class="n" style="text-align: left">device-added.oga</td><td>click, then tick</td><td class="n">120 ms</td></tr><tr><td>Device out</td><td class="n" style="text-align: left">device-removed.oga</td><td>tick, then click</td><td class="n">120 ms</td></tr><tr><td>Battery low</td><td class="n" style="text-align: left">battery-low.oga</td><td>2 slow ticks</td><td class="n">400 ms</td></tr><tr><td>Trash emptied</td><td class="n" style="text-align: left">trash-empty.oga</td><td>1 dry click</td><td class="n">40 ms</td></tr><tr><td>Screenshot</td><td class="n" style="text-align: left">screen-capture.oga</td><td>shutter click</td><td class="n">50 ms</td></tr><tr><td>Task complete</td><td class="n" style="text-align: left">complete.oga</td><td>1 tick, lower</td><td class="n">80 ms</td></tr><tr><td>Bell</td><td class="n" style="text-align: left">bell.oga</td><td>1 click</td><td class="n">30 ms</td></tr></tbody>
+</table>
+<p class="nil-label" style="margin-top: 16px">No start-up chime. Typing, scrolling and window moves stay silent.</p>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["dark","light"],"default":"dark"},"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+renderVals() {
+return { theme: this.props.theme === 'light' ? 'dot-light' : 'dot-dark' };
+}
+}
+</script>
+</body>
+</html>

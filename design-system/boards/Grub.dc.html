@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>GRUB boot menu</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/dotos/components/bundle.css">
+<link rel="stylesheet" href="dot.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@400..900&amp;family=Space+Grotesk:wght@300..700&amp;family=Space+Mono:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="nil dot-screen {{theme}}" style="width: 1280px; height: 800px; box-sizing: border-box; padding: 32px; display: flex; flex-direction: column; justify-content: space-between">
+
+<div style="display: flex; align-items: flex-start; justify-content: space-between">
+<div class="nil-display" style="font-size: 36px; line-height: 1.1; letter-spacing: -.02em">DOT OS</div>
+<div class="nil-label">GRUB 2.12 &nbsp; arm64 &nbsp; UEFI</div>
+</div>
+
+<div role="listbox" aria-label="Boot entries" style="display: flex; flex-direction: column; gap: 16px; font-family: var(--font-mono); font-size: 16px; letter-spacing: .04em; text-transform: uppercase">
+<div role="option" aria-selected="true" style="color: var(--text-display)">[ DOT OS ]</div>
+<div role="option" aria-selected="false" style="padding-left: 2ch; color: var(--text-secondary)">Advanced options for DOT OS</div>
+<div role="option" aria-selected="false" style="padding-left: 2ch; color: var(--text-secondary)">DOT OS — recovery mode</div>
+<div role="option" aria-selected="false" style="padding-left: 2ch; color: var(--text-secondary)">UEFI firmware settings</div>
+</div>
+
+<div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 32px">
+<div class="nil-meter" style="width: 320px">
+<div class="nil-meter__head"><span class="nil-label">Booting in</span><span class="nil-caption">4 s</span></div>
+<div class="nil-seg nil-seg--compact"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i></div>
+</div>
+<div style="display: flex; gap: 24px">
+<span class="nil-label">Up / down — select</span><span class="nil-label">Enter — boot</span><span class="nil-label">E — edit</span><span class="nil-label">C — console</span>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["dark","light"],"default":"dark"},"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+renderVals() {
+return { theme: this.props.theme === 'light' ? 'dot-light' : 'dot-dark' };
+}
+}
+</script>
+</body>
+</html>

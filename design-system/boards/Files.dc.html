@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Files</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/dotos/components/bundle.css">
+<link rel="stylesheet" href="dot.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@400..900&amp;family=Space+Grotesk:wght@300..700&amp;family=Space+Mono:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="nil dot-screen {{theme}}" style="width: 1280px; height: 800px; display: flex; flex-direction: column">
+
+<div class="nil-bar" role="toolbar" aria-label="Top bar" style="flex: none">
+<div class="nil-bar__group"><div class="nil-ws" aria-label="Workspaces"><span aria-current="true"><b>[</b> 1 <b>]</b></span><span class="is-occupied">2</span><span class="is-occupied">3</span><span>4</span><span>5</span></div><span>Files</span></div>
+<div class="nil-bar__clock">Thu 12 Nov&nbsp;&nbsp;09:41</div>
+<div class="nil-bar__group"><span>Net <b>5G</b></span><span>Vol <b>62</b></span><span>Bat <b>84%</b></span></div>
+</div>
+
+<div style="flex-grow: 1; min-height: 0; padding: 16px; display: flex">
+<div class="nil-window" style="flex-grow: 1; display: flex; flex-direction: column; background: var(--black)">
+<div class="nil-window__bar" style="flex: none; background: var(--surface)"><span class="nil-window__title">Files — dot-os</span><div class="nil-window__controls"><button aria-label="Minimise"></button><button aria-label="Maximise"></button><button class="close" aria-label="Close"></button></div></div>
+
+<div style="flex: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 56px; padding: 0 16px 0 8px; background: var(--surface); border-bottom: 1px solid var(--border)">
+<div style="display: flex; align-items: center; gap: 4px">
+<button class="dot-iconbtn" aria-label="Back"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></button>
+<button class="dot-iconbtn" aria-label="Forward" disabled="disabled"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></button>
+<button class="dot-iconbtn" aria-label="Up"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 15l6-6 6 6"></path></svg></button>
+<div class="nil-label" style="margin-left: 12px">Home / Projects / <span style="color: var(--text-display)">dot-os</span></div>
+</div>
+<div style="display: flex; align-items: center; gap: 8px">
+<div class="nil-segmented" role="group" aria-label="View"><button aria-pressed="true">List</button><button aria-pressed="false">Grid</button></div>
+<button class="dot-iconbtn" aria-label="Search"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><path d="M20 20l-4.5-4.5"></path></svg></button>
+</div>
+</div>
+
+<div style="flex-grow: 1; min-height: 0; display: flex">
+
+<nav aria-label="Places" style="width: 224px; flex: none; box-sizing: border-box; padding: 24px 16px; border-right: 1px solid var(--border); display: flex; flex-direction: column; gap: 24px">
+<div>
+<div class="nil-label" style="margin: 0 12px 8px">Places</div>
+<ul class="dot-nav">
+<li><a href="#">Home</a></li>
+<li><a href="#">Documents</a></li>
+<li><a href="#">Downloads<span class="nil-label">7</span></a></li>
+<li><a href="#" aria-current="page">Projects</a></li>
+<li><a href="#">Trash</a></li>
+</ul>
+</div>
+<div style="padding: 0 12px; display: flex; flex-direction: column; gap: 16px">
+<div class="nil-label">Devices</div>
+<div class="nil-meter"><div class="nil-meter__head"><span style="font-size: 14px">Root</span><span class="nil-caption">85%</span></div><div class="nil-seg nil-seg--warn nil-seg--compact"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div></div>
+<div class="nil-meter"><div class="nil-meter__head"><span style="font-size: 14px">DOTOS_LIVE</span><span class="nil-caption">15%</span></div><div class="nil-seg nil-seg--compact"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+</div>
+</nav>
+
+<div style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column">
+<div style="flex-grow: 1; min-height: 0; display: flex">
+<div style="flex-grow: 1">
+<table class="dot-table">
+<thead><tr><th scope="col">Name</th><th scope="col">Kind</th><th scope="col" class="n">Size</th><th scope="col" class="n">Modified</th></tr></thead>
+<tbody>
+<tr><td>design-system</td><td class="nil-label">Folder</td><td class="n">61 items</td><td class="n">12 Nov 15:22</td></tr>
+<tr><td>packages</td><td class="nil-label">Folder</td><td class="n">10 items</td><td class="n">12 Nov 15:22</td></tr>
+<tr><td>live-build</td><td class="nil-label">Folder</td><td class="n">24 items</td><td class="n">11 Nov 18:04</td></tr>
+<tr><td>installer</td><td class="nil-label">Folder</td><td class="n">8 items</td><td class="n">11 Nov 17:40</td></tr>
+<tr><td>docs</td><td class="nil-label">Folder</td><td class="n">3 items</td><td class="n">10 Nov 09:12</td></tr>
+<tr aria-selected="true"><td>dot-os-0.1.0-arm64.iso</td><td class="nil-label">Disk image</td><td class="n">2.4 GB</td><td class="n">12 Nov 09:38</td></tr>
+<tr><td>SHA256SUMS</td><td class="nil-label">Text</td><td class="n">1 KB</td><td class="n">12 Nov 09:38</td></tr>
+<tr><td>DOT OS — Build Plan.md</td><td class="nil-label">Markdown</td><td class="n">16 KB</td><td class="n">12 Nov 15:24</td></tr>
+<tr><td>LICENSE</td><td class="nil-label">Text</td><td class="n">1 KB</td><td class="n">10 Nov 09:12</td></tr>
+<tr><td>README.md</td><td class="nil-label">Markdown</td><td class="n">4 KB</td><td class="n">10 Nov 09:12</td></tr>
+</tbody>
+</table>
+</div>
+<div class="dot-scroll"><i style="top: 40px; height: 120px"></i></div>
+</div>
+<div style="flex: none; display: flex; align-items: center; justify-content: space-between; height: 32px; padding: 0 16px; border-top: 1px solid var(--border)">
+<span class="nil-label">10 items &nbsp; 1 selected, 2.4 GB</span>
+<span class="nil-label">9.6 GB free</span>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["dark","light"],"default":"dark"},"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+renderVals() {
+return { theme: this.props.theme === 'light' ? 'dot-light' : 'dot-dark' };
+}
+}
+</script>
+</body>
+</html>

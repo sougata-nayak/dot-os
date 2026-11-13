@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Window decorations</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/dotos/components/bundle.css">
+<link rel="stylesheet" href="dot.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@400..900&amp;family=Space+Grotesk:wght@300..700&amp;family=Space+Mono:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="nil dot-sheet {{theme}}" style="width: 1280px; height: 800px; box-sizing: border-box; display: grid; grid-template-columns: 640px minmax(0, 1fr); gap: 48px">
+
+<div style="display: flex; flex-direction: column; gap: 32px">
+
+<div>
+<div class="nil-label" style="margin-bottom: 12px">Active</div>
+<div class="nil-window">
+<div class="nil-window__bar"><span class="nil-window__title">Files — dot-os</span><div class="nil-window__controls"><button aria-label="Minimise"></button><button aria-label="Maximise"></button><button class="close" aria-label="Close"></button></div></div>
+<div class="nil-window__body">
+<ul class="nil-list">
+<li class="nil-row"><span>design-system</span><span class="nil-row__value">61</span></li>
+<li class="nil-row"><span>packages</span><span class="nil-row__value">10</span></li>
+<li class="nil-row"><span>live-build</span><span class="nil-row__value">24</span></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div>
+<div class="nil-label" style="margin-bottom: 12px">Inactive</div>
+<div class="nil-window nil-window--inactive">
+<div class="nil-window__bar"><span class="nil-window__title">Notes — build log</span><div class="nil-window__controls"><button aria-label="Minimise"></button><button aria-label="Maximise"></button><button class="close" aria-label="Close"></button></div></div>
+<div class="nil-window__body"><span class="nil-status">[ Inactive ]</span></div>
+</div>
+</div>
+
+<div>
+<div class="nil-label" style="margin-bottom: 12px">Dialog — close only, primary action on the right</div>
+<div class="nil-window" role="dialog" aria-label="Save changes" style="width: 420px">
+<div class="nil-window__bar"><span class="nil-window__title">Notes</span><div class="nil-window__controls"><button class="close" aria-label="Close"></button></div></div>
+<div class="nil-window__body">
+<h2 class="dot-sub">Save changes to build-log.md?</h2>
+<p class="dot-body-sm" style="margin-top: 8px">Edits since 09:12 are not saved.</p>
+<div style="display: flex; justify-content: flex-end; gap: 8px; margin-top: 24px">
+<button class="nil-btn nil-btn--ghost">Discard</button>
+<button class="nil-btn nil-btn--secondary">Cancel</button>
+<button class="nil-btn nil-btn--primary">Save</button>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 32px">
+
+<div>
+<div class="nil-label" style="margin-bottom: 12px">Controls — 12 px mark in a 24 px target, shown at 2×</div>
+<div style="display: grid; grid-template-columns: 120px repeat(4, minmax(0, 1fr)); align-items: center; row-gap: 20px">
+<span></span><span class="nil-label">Rest</span><span class="nil-label">Hover</span><span class="nil-label">Pressed</span><span class="nil-label">Inactive</span>
+
+<span class="nil-label">Minimise</span>
+<span style="width: 24px; height: 24px; box-sizing: border-box; border-radius: 50%; border: 2px solid var(--text-secondary)"></span>
+<span style="width: 24px; height: 24px; box-sizing: border-box; border-radius: 50%; border: 2px solid var(--text-display)"></span>
+<span style="width: 24px; height: 24px; box-sizing: border-box; border-radius: 50%; border: 2px solid var(--text-secondary); background: var(--text-secondary)"></span>
+<span style="width: 24px; height: 24px; box-sizing: border-box; border-radius: 50%; border: 2px solid var(--border-visible)"></span>
+
+<span class="nil-label">Maximise</span>
+<span style="width: 24px; height: 24px; box-sizing: border-box; border-radius: 50%; border: 2px solid var(--text-secondary)"></span>
+<span style="width: 24px; height: 24px; box-sizing: border-box; border-radius: 50%; border: 2px solid var(--text-display)"></span>
+<span style="width: 24px; height: 24px; box-sizing: border-box; border-radius: 50%; border: 2px solid var(--text-secondary); background: var(--text-secondary)"></span>
+<span style="width: 24px; height: 24px; box-sizing: border-box; border-radius: 50%; border: 2px solid var(--border-visible)"></span>
+
+<span class="nil-label">Close</span>
+<span style="width: 24px; height: 24px; border-radius: 50%; background: var(--text-display)"></span>
+<span style="width: 24px; height: 24px; border-radius: 50%; background: var(--accent)"></span>
+<span style="width: 24px; height: 24px; border-radius: 50%; background: var(--accent); opacity: .7"></span>
+<span style="width: 24px; height: 24px; box-sizing: border-box; border-radius: 50%; border: 2px solid var(--border-visible)"></span>
+</div>
+</div>
+
+<div>
+<div class="nil-label" style="margin-bottom: 4px">Decoration metrics</div>
+<ul class="nil-list">
+<li class="nil-row"><span class="nil-label">Title bar height</span><span class="nil-row__value">40<span class="nil-unit">PX</span></span></li>
+<li class="nil-row"><span class="nil-label">Outline, active</span><span class="nil-row__value">1 px border-visible</span></li>
+<li class="nil-row"><span class="nil-label">Outline, inactive</span><span class="nil-row__value">1 px border</span></li>
+<li class="nil-row"><span class="nil-label">Corner radius</span><span class="nil-row__value">12<span class="nil-unit">PX</span></span></li>
+<li class="nil-row"><span class="nil-label">Title</span><span class="nil-row__value">Space Mono 11 px caps, left</span></li>
+<li class="nil-row"><span class="nil-label">Control order</span><span class="nil-row__value">min, max, close — right</span></li>
+<li class="nil-row"><span class="nil-label">Shadow, blur</span><span class="nil-row__value">none</span></li>
+<li class="nil-row"><span class="nil-label">Maximised</span><span class="nil-row__value">radius 0, no outline</span></li>
+<li class="nil-row"><span class="nil-label">Tiling gap</span><span class="nil-row__value">8<span class="nil-unit">PX</span></span></li>
+</ul>
+</div>
+
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["dark","light"],"default":"dark"},"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+renderVals() {
+return { theme: this.props.theme === 'light' ? 'dot-light' : 'dot-dark' };
+}
+}
+</script>
+</body>
+</html>

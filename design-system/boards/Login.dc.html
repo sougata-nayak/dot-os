@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SDDM login greeter</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/dotos/components/bundle.css">
+<link rel="stylesheet" href="dot.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@400..900&amp;family=Space+Grotesk:wght@300..700&amp;family=Space+Mono:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="nil dot-screen nil-dot-grid {{theme}}" style="width: 1280px; height: 800px; box-sizing: border-box; padding: 32px; display: flex; flex-direction: column; justify-content: space-between">
+
+<div style="display: flex; align-items: flex-start; justify-content: space-between">
+<div>
+<div class="nil-display" style="font-size: 96px">09<span class="dot-live">:</span>41</div>
+<div class="nil-label" style="margin-top: 8px">Thursday 12 November</div>
+</div>
+<div class="nil-label">dot &nbsp; DOT OS 0.1.0</div>
+</div>
+
+<div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 32px">
+
+<div style="display: flex; flex-direction: column; gap: 24px; width: 280px">
+<label class="nil-field"><span class="nil-label">User</span><input class="nil-input" value="sougata" autocomplete="username"></label>
+<label class="nil-field"><span class="nil-label">Password</span><input class="nil-input is-focus" type="password" value="password" autocomplete="current-password"></label>
+<div style="display: flex; align-items: center; gap: 16px">
+<button class="nil-btn nil-btn--primary">Log in</button>
+<button class="nil-btn nil-btn--ghost">Other user</button>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: flex-end; gap: 16px">
+<div style="display: flex; gap: 24px">
+<span class="nil-label">Session <b style="font-weight: 400; color: var(--text-primary)">Plasma (Wayland)</b></span>
+<span class="nil-label">Layout <b style="font-weight: 400; color: var(--text-primary)">US</b></span>
+</div>
+<div style="display: flex; gap: 8px; margin-right: -8px">
+<button class="nil-btn nil-btn--ghost">Sleep</button>
+<button class="nil-btn nil-btn--ghost">Restart</button>
+<button class="nil-btn nil-btn--ghost">Shut down</button>
+</div>
+<div class="nil-label">Bat 84% &nbsp; Net 5G</div>
+</div>
+
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["dark","light"],"default":"dark"},"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+renderVals() {
+return { theme: this.props.theme === 'light' ? 'dot-light' : 'dot-dark' };
+}
+}
+</script>
+</body>
+</html>

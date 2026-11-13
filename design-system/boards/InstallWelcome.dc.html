@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Installer, welcome</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/dotos/components/bundle.css">
+<link rel="stylesheet" href="dot.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@400..900&amp;family=Space+Grotesk:wght@300..700&amp;family=Space+Mono:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="nil dot-screen {{theme}}" style="width: 1280px; height: 800px; display: flex; flex-direction: column">
+
+<div class="nil-bar" role="toolbar" aria-label="Top bar" style="flex: none">
+<div class="nil-bar__group"><div class="nil-ws" aria-label="Workspaces"><span aria-current="true"><b>[</b> 1 <b>]</b></span><span>2</span><span>3</span><span>4</span><span>5</span></div><span>Installer</span></div>
+<div class="nil-bar__clock">Thu 12 Nov&nbsp;&nbsp;09:41</div>
+<div class="nil-bar__group"><span>Live session</span><span>Net <b>5G</b></span><span>Bat <b>84%</b></span></div>
+</div>
+
+<div style="flex-grow: 1; min-height: 0; padding: 16px; display: flex">
+<div class="nil-window" style="flex-grow: 1; display: flex; flex-direction: column">
+<div class="nil-window__bar" style="flex: none"><span class="nil-window__title">Install DOT OS</span><div class="nil-window__controls"><button aria-label="Minimise"></button><button aria-label="Maximise"></button><button class="close" aria-label="Close"></button></div></div>
+
+<div style="flex-grow: 1; min-height: 0; display: flex">
+
+<nav aria-label="Install steps" style="width: 224px; flex: none; box-sizing: border-box; padding: 32px 24px; border-right: 1px solid var(--border); display: flex; flex-direction: column; justify-content: space-between">
+<ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 16px; font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase">
+<li aria-current="step" style="color: var(--text-display)">[ Welcome ]</li>
+<li style="padding-left: 2ch; color: var(--text-disabled)">Location</li>
+<li style="padding-left: 2ch; color: var(--text-disabled)">Keyboard</li>
+<li style="padding-left: 2ch; color: var(--text-disabled)">Disk</li>
+<li style="padding-left: 2ch; color: var(--text-disabled)">User</li>
+<li style="padding-left: 2ch; color: var(--text-disabled)">Summary</li>
+<li style="padding-left: 2ch; color: var(--text-disabled)">Install</li>
+<li style="padding-left: 2ch; color: var(--text-disabled)">Finish</li>
+</ol>
+<div class="nil-label" style="line-height: 1.8">Step 1 / 8<br>v0.1.0 arm64</div>
+</nav>
+
+<div style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column">
+
+<div style="flex-grow: 1; padding: 32px 48px; display: flex; gap: 64px">
+<div style="width: 440px; flex: none; display: flex; flex-direction: column; justify-content: space-between">
+<div>
+<div class="nil-label">Welcome</div>
+<div class="nil-display" style="margin-top: 16px; font-size: 96px">DOT OS</div>
+<p class="dot-sub" style="margin-top: 24px">A quiet desktop, built on Debian and KDE Plasma.</p>
+<p class="dot-body-sm" style="margin-top: 8px">Installing takes about 10 minutes. You can keep using this live session while it runs.</p>
+</div>
+<div class="nil-field">
+<span class="nil-label">Language</span>
+<button class="dot-select" aria-haspopup="listbox" aria-expanded="false" aria-label="Language"><span>English (United Kingdom)</span><svg class="dot-ico dot-ico--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+</div>
+</div>
+<div style="flex-grow: 1; min-width: 0">
+<div class="nil-label" style="margin-bottom: 4px">This computer</div>
+<ul class="nil-list">
+<li class="nil-row"><span class="nil-label">Disk space</span><span class="nil-row__value"><span class="nil-status is-good">[ OK ]</span>&nbsp; 64 GB, needs 12</span></li>
+<li class="nil-row"><span class="nil-label">Memory</span><span class="nil-row__value"><span class="nil-status is-good">[ OK ]</span>&nbsp; 8 GB, needs 2</span></li>
+<li class="nil-row"><span class="nil-label">Firmware</span><span class="nil-row__value"><span class="nil-status is-good">[ OK ]</span>&nbsp; UEFI, arm64</span></li>
+<li class="nil-row"><span class="nil-label">Network</span><span class="nil-row__value"><span class="nil-status is-good">[ OK ]</span>&nbsp; connected</span></li>
+<li class="nil-row"><span class="nil-label">Power</span><span class="nil-row__value"><span class="nil-status is-warn">[ WARN ]</span>&nbsp; on battery, 84%</span></li>
+</ul>
+<p class="dot-body-sm" style="margin-top: 24px; max-width: 400px">Plug in before you continue. The install stops safely if the battery drops below 10%.</p>
+</div>
+</div>
+
+<div style="flex: none; display: flex; align-items: center; justify-content: space-between; padding: 16px 24px 16px 16px; border-top: 1px solid var(--border)">
+<div style="display: flex; gap: 8px"><button class="nil-btn nil-btn--ghost">Quit</button><button class="nil-btn nil-btn--ghost">Release notes</button></div>
+<div style="display: flex; gap: 8px">
+<button class="nil-btn nil-btn--secondary" disabled="disabled">Back</button>
+<button class="nil-btn nil-btn--primary">Next</button>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["dark","light"],"default":"dark"},"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+renderVals() {
+return { theme: this.props.theme === 'light' ? 'dot-light' : 'dot-dark' };
+}
+}
+</script>
+</body>
+</html>

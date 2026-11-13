@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Plymouth boot splash</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/dotos/components/bundle.css">
+<link rel="stylesheet" href="dot.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@400..900&amp;family=Space+Grotesk:wght@300..700&amp;family=Space+Mono:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="nil dot-screen {{theme}}" style="width: 1280px; height: 800px; box-sizing: border-box; padding: 32px; display: flex; flex-direction: column; justify-content: space-between">
+
+<div class="nil-caption" style="display: flex; flex-direction: column; gap: 4px">
+<div>[ OK ] Mounted /boot/efi.</div>
+<div>[ OK ] Started udev Kernel Device Manager.</div>
+<div>[ OK ] Reached target Local File Systems.</div>
+<div>[ OK ] Started Network Manager.</div>
+<div style="color: var(--text-primary)">[    ] Starting Simple Desktop Display Manager...</div>
+</div>
+
+<div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 32px">
+<div class="nil-display" style="font-size: 72px">DOT OS</div>
+<div class="nil-meter" style="width: 320px">
+<div class="nil-seg nil-seg--hero dot-seg--live"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<div class="nil-meter__head"><span class="nil-label">Starting</span><span class="nil-caption" style="color: var(--text-display)">65%</span></div>
+</div>
+</div>
+<div class="nil-label">Kernel 6.12 &nbsp; arm64 &nbsp; built on Debian 13</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["dark","light"],"default":"dark"},"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+renderVals() {
+return { theme: this.props.theme === 'light' ? 'dot-light' : 'dot-dark' };
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Widget kit</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/dotos/components/bundle.css">
+<link rel="stylesheet" href="dot.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@400..900&amp;family=Space+Grotesk:wght@300..700&amp;family=Space+Mono:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="nil dot-sheet {{theme}}" style="width: 1280px; height: 1000px; box-sizing: border-box; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px">
+
+<div style="display: flex; flex-direction: column; gap: 32px">
+
+<div>
+<div class="nil-label" style="margin-bottom: 12px">Buttons</div>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<button class="nil-btn nil-btn--primary">Install</button>
+<button class="nil-btn nil-btn--secondary">Details</button>
+<button class="nil-btn nil-btn--ghost">Cancel</button>
+<button class="nil-btn nil-btn--destructive">Erase disk</button>
+<button class="nil-btn nil-btn--secondary" disabled="disabled">Unavailable</button>
+</div>
+</div>
+
+<div>
+<div class="nil-label" style="margin-bottom: 12px">Button states — hover, focus, pressed</div>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<button class="nil-btn nil-btn--secondary is-hover">Hover</button>
+<button class="nil-btn nil-btn--secondary is-focus">Focus</button>
+<button class="nil-btn nil-btn--secondary is-pressed">Pressed</button>
+</div>
+</div>
+
+<div>
+<div class="nil-label" style="margin-bottom: 16px">Text fields — rest, focus, error</div>
+<div style="display: flex; flex-direction: column; gap: 24px">
+<label class="nil-field"><span class="nil-label">Hostname</span><input class="nil-input" value="dot-workstation"><span class="nil-field__msg">[Saved]</span></label>
+<label class="nil-field"><span class="nil-label">Full name</span><input class="nil-input is-focus" value="Sougata"><span class="nil-field__msg">&nbsp;</span></label>
+<label class="nil-field nil-field--error"><span class="nil-label">Swap size</span><input class="nil-input" value="512 TB"><span class="nil-field__msg">[Error: exceeds disk]</span></label>
+</div>
+</div>
+
+<div>
+<label class="nil-field"><span class="nil-label">Multi-line — boxed, radius-compact</span>
+<textarea rows="3" style="box-sizing: border-box; width: 100%; padding: 12px; border: 1px solid var(--border-visible); border-radius: 8px; background: transparent; color: var(--text-primary); font-family: var(--font-mono); font-size: 14px; line-height: 1.5; resize: none">quiet splash
+plymouth.theme=dot-os</textarea>
+</label>
+</div>
+
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 32px">
+
+<div>
+<div class="nil-label" style="margin-bottom: 12px">Toggles</div>
+<div style="display: flex; align-items: center; justify-content: space-between; min-height: 44px"><span>Night light</span><button class="nil-toggle" role="switch" aria-checked="true" aria-label="Night light"></button></div>
+<div style="display: flex; align-items: center; justify-content: space-between; min-height: 44px"><span>Tap to click</span><button class="nil-toggle" role="switch" aria-checked="false" aria-label="Tap to click"></button></div>
+</div>
+
+<div>
+<div class="nil-label" style="margin-bottom: 12px">Checkboxes</div>
+<label class="dot-opt"><input class="dot-check" type="checkbox" checked="checked">Encrypt the disk</label>
+<label class="dot-opt"><input class="dot-check" type="checkbox">Install third-party codecs</label>
+<label class="dot-opt" style="color: var(--text-disabled)"><input class="dot-check" type="checkbox" disabled="disabled">Use LVM</label>
+</div>
+
+<div>
+<div class="nil-label" style="margin-bottom: 12px">Radio buttons</div>
+<label class="dot-opt"><input class="dot-radio" type="radio" name="disk" checked="checked">Erase disk and install</label>
+<label class="dot-opt"><input class="dot-radio" type="radio" name="disk">Manual partitioning</label>
+</div>
+
+<div>
+<div class="nil-label" style="margin-bottom: 12px">Segmented control</div>
+<div class="nil-segmented" role="group" aria-label="Appearance"><button aria-pressed="true">Dark</button><button aria-pressed="false">Light</button><button aria-pressed="false">Auto</button></div>
+</div>
+
+<div>
+<div class="nil-meter__head" style="margin-bottom: 8px"><span class="nil-label">Slider — pointer speed</span><span class="nil-caption">62</span></div>
+<div class="dot-slider"><i style="width: 62%"></i><input type="range" min="0" max="100" value="62" aria-label="Pointer speed"></div>
+</div>
+
+<div>
+<div class="nil-label" style="margin-bottom: 12px">Select and spin box</div>
+<div style="display: flex; flex-direction: column; align-items: flex-start; gap: 16px">
+<button class="dot-select" aria-haspopup="listbox" aria-expanded="false"><span>1920 × 1200</span><svg class="dot-ico dot-ico--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+<div class="dot-spin" role="group" aria-label="Display scale"><button aria-label="Decrease">−</button><output>125%</output><button aria-label="Increase">+</button></div>
+</div>
+</div>
+
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 32px">
+
+<div>
+<div class="nil-label" style="margin-bottom: 4px">Tabs</div>
+<div class="dot-tabs" role="tablist"><button role="tab" aria-selected="true">General</button><button role="tab" aria-selected="false">Display</button><button role="tab" aria-selected="false">Keys</button></div>
+</div>
+
+<div>
+<div class="nil-label" style="margin-bottom: 16px">Progress and meters</div>
+<div style="display: flex; flex-direction: column; gap: 24px">
+<div class="nil-meter"><div class="nil-meter__head"><span class="nil-label">Installing</span><span class="nil-caption">65%</span></div><div class="nil-seg nil-seg--hero"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+<div class="nil-meter"><div class="nil-meter__head"><span class="nil-label">Memory</span><span class="nil-caption">3.1 / 8 GB</span></div><div class="nil-seg"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+<div class="nil-meter"><div class="nil-meter__head"><span class="nil-label">Disk /</span><span class="nil-caption">85% — nearly full</span></div><div class="nil-seg nil-seg--warn"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div></div>
+<div class="nil-meter"><div class="nil-meter__head"><span class="nil-label">Temp</span><span class="nil-caption">96 °C — over limit</span></div><div class="nil-seg nil-seg--bad nil-seg--compact"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div></div>
+</div>
+</div>
+
+<div>
+<div class="nil-label" style="margin-bottom: 12px">Tags</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px"><span class="nil-tag nil-tag--active">Installed</span><span class="nil-tag">Flatpak</span><span class="nil-tag nil-tag--technical">arm64</span><span class="nil-tag nil-tag--technical">v0.1.0</span></div>
+</div>
+
+<div>
+<div class="nil-label" style="margin-bottom: 4px">List rows</div>
+<ul class="nil-list">
+<li class="nil-row"><span class="nil-label">Kernel</span><span class="nil-row__value">6.12.4-arm64</span></li>
+<li class="nil-row"><span class="nil-label">Uptime</span><span class="nil-row__value">4d 02:17</span></li>
+<li class="nil-row nil-row--sub"><span class="nil-label">/home</span><span class="nil-row__value">212<span class="nil-unit">GB</span></span></li>
+</ul>
+</div>
+
+<div>
+<div class="nil-label" style="margin-bottom: 12px">Scrollbar — 4 px square thumb, no track, brightens on hover</div>
+<div style="display: flex; gap: 16px">
+<div style="flex-grow: 1; display: flex; height: 96px; border: 1px solid var(--border); border-radius: 8px">
+<div style="flex-grow: 1; padding: 12px"><span class="nil-status">[ Rest ]</span></div>
+<div class="dot-scroll"><i style="top: 8px; height: 36px"></i></div>
+</div>
+<div style="flex-grow: 1; display: flex; height: 96px; border: 1px solid var(--border); border-radius: 8px">
+<div style="flex-grow: 1; padding: 12px"><span class="nil-status">[ Hover ]</span></div>
+<div class="dot-scroll"><i class="is-hover" style="top: 32px; height: 36px"></i></div>
+</div>
+</div>
+</div>
+
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["dark","light"],"default":"dark"},"$preview":{"width":1280,"height":1000}}'>
+class Component extends DCLogic {
+renderVals() {
+return { theme: this.props.theme === 'light' ? 'dot-light' : 'dot-dark' };
+}
+}
+</script>
+</body>
+</html>

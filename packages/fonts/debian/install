@@ -1,0 +1,4 @@
+files/doto/*.ttf usr/share/fonts/truetype/dot-os
+files/space-grotesk/*.ttf usr/share/fonts/truetype/dot-os
+files/space-mono/*.ttf usr/share/fonts/truetype/dot-os
+files/60-dot-os.conf usr/share/fontconfig/conf.avail

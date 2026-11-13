@@ -1,0 +1,42 @@
+# build artifacts
+*.deb
+*.changes
+*.buildinfo
+*.udeb
+*.ddeb
+debian/.debhelper/
+debian/*.debhelper
+debian/*.debhelper.log
+debian/*.substvars
+debian/files
+debian/tmp/
+obj-*/
+
+# live-build
+# lb config writes these; package lists, hooks and includes are source
+live-build/config/binary
+live-build/config/bootstrap
+live-build/config/chroot
+live-build/config/common
+live-build/config/source
+live-build/config/packages.chroot/
+live-build/build.log
+live-build/cache/
+live-build/chroot/
+live-build/.build/
+live-build/*.iso
+live-build/*.img
+live-build/*.contents
+live-build/*.files
+live-build/*.packages
+live-build/binary*
+live-build/chroot*
+
+# misc
+.DS_Store
+*.log
+
+# build output
+out/
+packages/cursor-theme/build/
+__pycache__/

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Icon theme</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/dotos/components/bundle.css">
+<link rel="stylesheet" href="dot.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@400..900&amp;family=Space+Grotesk:wght@300..700&amp;family=Space+Mono:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="nil dot-sheet {{theme}}" style="width: 1280px; height: 800px; box-sizing: border-box; display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: 64px">
+
+<div style="display: flex; flex-direction: column; gap: 32px">
+<div>
+<div class="nil-label" style="margin-bottom: 12px">Construction — 24 px box, 20 px live area</div>
+<div class="dot-cell" style="width: 320px; height: 280px">
+<svg viewBox="0 0 24 24" width="240" height="240" role="img" aria-label="Folder icon on its construction grid">
+<rect x="0.05" y="0.05" width="23.9" height="23.9" style="fill: none; stroke: var(--border-visible); stroke-width: 0.1"></rect>
+<rect x="2" y="2" width="20" height="20" style="fill: none; stroke: var(--text-secondary); stroke-width: 0.1; stroke-dasharray: 0.4 0.4"></rect>
+<path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" style="fill: none; stroke: var(--text-display); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round"></path>
+</svg>
+</div>
+</div>
+<div style="display: flex; align-items: center; gap: 16px">
+<span style="display: grid; place-items: center; width: 44px; height: 44px; box-sizing: border-box; border: 1px solid var(--border-visible); border-radius: 50%; color: var(--text-display)"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"></path></svg></span>
+<span class="nil-label">In the dock — 44 px outline circle</span>
+</div>
+<ul class="nil-list">
+<li class="nil-row"><span class="nil-label">Stroke</span><span class="nil-row__value">1.5 px, no fill</span></li>
+<li class="nil-row"><span class="nil-label">Caps, joins</span><span class="nil-row__value">round</span></li>
+<li class="nil-row"><span class="nil-label">Colour</span><span class="nil-row__value">inherits text</span></li>
+<li class="nil-row"><span class="nil-label">Source</span><span class="nil-row__value">Lucide 0.460, ISC</span></li>
+<li class="nil-row"><span class="nil-label">Sizes</span><span class="nil-row__value">16, 24, 48 — scalable SVG</span></li>
+</ul>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); row-gap: 20px; align-content: start; justify-items: center; color: var(--text-primary)">
+
+<div class="nil-label" style="grid-column: 1 / -1; justify-self: start">Apps</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><polyline points="4 17 10 11 4 5"></polyline> <line x1="12" x2="20" y1="19" y2="19"></line></svg><span class="nil-label">Terminal</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"></path></svg><span class="nil-label">Files</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle> <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path> <path d="M2 12h20"></path></svg><span class="nil-label">Browser</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"></rect> <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg><span class="nil-label">Mail</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path> <path d="M14 2v4a2 2 0 0 0 2 2h4"></path> <path d="M10 9H8"></path> <path d="M16 13H8"></path> <path d="M16 17H8"></path></svg><span class="nil-label">Editor</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13"></path> <circle cx="6" cy="18" r="3"></circle> <circle cx="18" cy="16" r="3"></circle></svg><span class="nil-label">Music</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"></path> <path d="M12 22V12"></path> <path d="m3.3 7 7.703 4.734a2 2 0 0 0 1.994 0L20.7 7"></path> <path d="m7.5 4.27 9 5.15"></path></svg><span class="nil-label">Software</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path> <circle cx="12" cy="12" r="3"></circle></svg><span class="nil-label">Settings</span></div>
+
+<div class="nil-label" style="grid-column: 1 / -1; justify-self: start; margin-top: 12px">Places</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path> <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg><span class="nil-label">Home</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path> <path d="M14 2v4a2 2 0 0 0 2 2h4"></path></svg><span class="nil-label">Documents</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path> <polyline points="7 10 12 15 17 10"></polyline> <line x1="12" x2="12" y1="15" y2="3"></line></svg><span class="nil-label">Downloads</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect> <circle cx="9" cy="9" r="2"></circle> <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path></svg><span class="nil-label">Pictures</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"></rect> <path d="M7 3v18"></path> <path d="M3 7.5h4"></path> <path d="M3 12h18"></path> <path d="M3 16.5h4"></path> <path d="M17 3v18"></path> <path d="M17 7.5h4"></path> <path d="M17 16.5h4"></path></svg><span class="nil-label">Videos</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"></rect> <line x1="8" x2="16" y1="21" y2="21"></line> <line x1="12" x2="12" y1="17" y2="21"></line></svg><span class="nil-label">Desktop</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="16" y="16" width="6" height="6" rx="1"></rect> <rect x="2" y="16" width="6" height="6" rx="1"></rect> <rect x="9" y="2" width="6" height="6" rx="1"></rect> <path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"></path> <path d="M12 12V8"></path></svg><span class="nil-label">Network</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18"></path> <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path> <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path> <line x1="10" x2="10" y1="11" y2="17"></line> <line x1="14" x2="14" y1="11" y2="17"></line></svg><span class="nil-label">Trash</span></div>
+
+<div class="nil-label" style="grid-column: 1 / -1; justify-self: start; margin-top: 12px">Status</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h.01"></path> <path d="M2 8.82a15 15 0 0 1 20 0"></path> <path d="M5 12.859a10 10 0 0 1 14 0"></path> <path d="M8.5 16.429a5 5 0 0 1 7 0"></path></svg><span class="nil-label">Wi-Fi</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7 10 10-5 5V2l5 5L7 17"></path></svg><span class="nil-label">Bluetooth</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"></path> <path d="M16 9a5 5 0 0 1 0 6"></path> <path d="M19.364 18.364a9 9 0 0 0 0-12.728"></path></svg><span class="nil-label">Volume</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><rect width="16" height="10" x="2" y="7" rx="2" ry="2"></rect> <line x1="22" x2="22" y1="11" y2="13"></line> <line x1="6" x2="6" y1="11" y2="13"></line> <line x1="10" x2="10" y1="11" y2="13"></line></svg><span class="nil-label">Battery</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path> <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg><span class="nil-label">Alerts</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect> <path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg><span class="nil-label">Lock</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg><span class="nil-label">Night</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path> <path d="M12 9v4"></path> <path d="M12 17h.01"></path></svg><span class="nil-label">Warning</span></div>
+
+<div class="nil-label" style="grid-column: 1 / -1; justify-self: start; margin-top: 12px">Actions</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle> <path d="m21 21-4.3-4.3"></path></svg><span class="nil-label">Search</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"></path> <path d="M12 5v14"></path></svg><span class="nil-label">Add</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18"></path> <path d="m6 6 12 12"></path></svg><span class="nil-label">Close</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg><span class="nil-label">Confirm</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span class="nil-label">Back</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path> <path d="M21 3v5h-5"></path> <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path> <path d="M8 16H3v5"></path></svg><span class="nil-label">Refresh</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v10"></path> <path d="M18.4 6.6a9 9 0 1 1-12.77.04"></path></svg><span class="nil-label">Power</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path> <polyline points="16 17 21 12 16 7"></polyline> <line x1="21" x2="9" y1="12" y2="12"></line></svg><span class="nil-label">Log out</span></div>
+
+<div class="nil-label" style="grid-column: 1 / -1; justify-self: start; margin-top: 12px">Devices</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"></line> <path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path> <line x1="6" x2="6.01" y1="16" y2="16"></line> <line x1="10" x2="10.01" y1="16" y2="16"></line></svg><span class="nil-label">Drive</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="7" r="1"></circle> <circle cx="4" cy="20" r="1"></circle> <path d="M4.7 19.3 19 5"></path> <path d="m21 3-3 1 2 2Z"></path> <path d="M9.26 7.68 5 12l2 5"></path> <path d="m10 14 5 2 3.5-3.5"></path> <path d="m18 12 1-1 1 1-1 1Z"></path></svg><span class="nil-label">USB</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 8h.01"></path> <path d="M12 12h.01"></path> <path d="M14 8h.01"></path> <path d="M16 12h.01"></path> <path d="M18 8h.01"></path> <path d="M6 8h.01"></path> <path d="M7 16h10"></path> <path d="M8 12h.01"></path> <rect width="20" height="16" x="2" y="4" rx="2"></rect></svg><span class="nil-label">Keyboard</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="7"></rect> <path d="M12 6v4"></path></svg><span class="nil-label">Mouse</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path> <path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"></path> <rect x="6" y="14" width="12" height="8" rx="1"></rect></svg><span class="nil-label">Printer</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path> <circle cx="12" cy="13" r="3"></circle></svg><span class="nil-label">Camera</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path> <circle cx="12" cy="7" r="4"></circle></svg><span class="nil-label">User</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle> <path d="M12 16v-4"></path> <path d="M12 8h.01"></path></svg><span class="nil-label">About</span></div>
+
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["dark","light"],"default":"dark"},"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+renderVals() {
+return { theme: this.props.theme === 'light' ? 'dot-light' : 'dot-dark' };
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Task switcher and on-screen display</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/dotos/components/bundle.css">
+<link rel="stylesheet" href="dot.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@400..900&amp;family=Space+Grotesk:wght@300..700&amp;family=Space+Mono:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="nil dot-screen {{theme}}" style="width: 1280px; height: 800px; display: flex; flex-direction: column">
+
+<div class="nil-bar" role="toolbar" aria-label="Top bar" style="flex: none">
+<div class="nil-bar__group"><div class="nil-ws" aria-label="Workspaces"><span aria-current="true"><b>[</b> 1 <b>]</b></span><span class="is-occupied">2</span><span class="is-occupied">3</span><span>4</span><span>5</span></div><span>Files</span></div>
+<div class="nil-bar__clock">Thu 12 Nov&nbsp;&nbsp;09:41</div>
+<div class="nil-bar__group"><span>Net <b>5G</b></span><span>Vol <b>62</b></span><span>Bat <b>84%</b></span></div>
+</div>
+
+<div class="nil-dot-grid" style="position: relative; flex-grow: 1">
+<div class="dot-backdrop"></div>
+
+<div class="dot-pop" role="dialog" aria-label="Task switcher" style="position: absolute; left: 168px; top: 200px; width: 944px; box-sizing: border-box; padding: 24px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px">
+
+<div style="display: flex; flex-direction: column; gap: 12px">
+<div style="height: 132px; border: 1px solid var(--border-visible); border-radius: 12px; background: var(--black); overflow: hidden">
+<div style="height: 16px; background: var(--surface); border-bottom: 1px solid var(--border)"></div>
+<div style="margin: 12px; height: 2px; width: 64%; background: var(--border-visible)"></div>
+<div style="margin: 12px; height: 2px; width: 40%; background: var(--border-visible)"></div>
+<div style="margin: 12px; height: 2px; width: 52%; background: var(--border-visible)"></div>
+</div>
+<div style="display: flex; justify-content: space-between"><span class="nil-label">Terminal</span><span class="nil-label">WS 1</span></div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 12px">
+<div style="height: 132px; border: 1px solid var(--text-display); border-radius: 12px; background: var(--surface); overflow: hidden; outline: 2px solid var(--text-display); outline-offset: 2px">
+<div style="height: 16px; border-bottom: 1px solid var(--border)"></div>
+<div style="display: flex; height: 115px">
+<div style="width: 56px; border-right: 1px solid var(--border)"></div>
+<div style="flex-grow: 1">
+<div style="margin: 12px; height: 2px; background: var(--border-visible)"></div>
+<div style="margin: 12px; height: 2px; background: var(--text-secondary)"></div>
+<div style="margin: 12px; height: 2px; background: var(--border-visible)"></div>
+<div style="margin: 12px; height: 2px; background: var(--border-visible)"></div>
+</div>
+</div>
+</div>
+<div style="display: flex; justify-content: space-between"><span class="nil-label" style="color: var(--text-display)">Files — dot-os</span><span class="nil-label">WS 1</span></div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 12px">
+<div style="height: 132px; border: 1px solid var(--border-visible); border-radius: 12px; background: var(--surface); overflow: hidden">
+<div style="height: 16px; border-bottom: 1px solid var(--border)"></div>
+<div style="margin: 16px 12px 12px; height: 6px; width: 48%; background: var(--text-secondary)"></div>
+<div style="margin: 12px; height: 2px; width: 80%; background: var(--border-visible)"></div>
+<div style="margin: 12px; height: 2px; width: 72%; background: var(--border-visible)"></div>
+<div style="margin: 12px; height: 2px; width: 76%; background: var(--border-visible)"></div>
+</div>
+<div style="display: flex; justify-content: space-between"><span class="nil-label">Browser</span><span class="nil-label">WS 2</span></div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 12px">
+<div style="height: 132px; border: 1px solid var(--border-visible); border-radius: 12px; background: var(--surface); overflow: hidden">
+<div style="height: 16px; border-bottom: 1px solid var(--border)"></div>
+<div style="display: flex; height: 115px">
+<div style="width: 48px; border-right: 1px solid var(--border)"></div>
+<div style="flex-grow: 1">
+<div style="margin: 14px 12px; height: 6px; width: 56%; background: var(--text-secondary)"></div>
+<div style="margin: 12px; height: 2px; background: var(--border-visible)"></div>
+<div style="margin: 12px; height: 2px; background: var(--border-visible)"></div>
+</div>
+</div>
+</div>
+<div style="display: flex; justify-content: space-between"><span class="nil-label">Settings</span><span class="nil-label">WS 3</span></div>
+</div>
+
+</div>
+<div style="display: flex; gap: 24px; padding-top: 16px; border-top: 1px solid var(--border)">
+<span class="nil-label">Alt + Tab — next</span><span class="nil-label">Shift — back</span><span class="nil-label">Release — switch</span>
+</div>
+</div>
+
+<div class="dot-osd" role="status" aria-label="Volume 62" style="position: absolute; left: 472px; bottom: 96px; box-sizing: border-box">
+<span class="nil-label">Vol</span>
+<div class="nil-seg nil-seg--compact"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<span class="nil-caption" style="color: var(--text-display)">62</span>
+</div>
+<div class="nil-label" style="position: absolute; left: 472px; bottom: 64px; width: 336px; text-align: center">OSD — volume, brightness, layout. Fades after 1.5 s</div>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["dark","light"],"default":"dark"},"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+renderVals() {
+return { theme: this.props.theme === 'light' ? 'dot-light' : 'dot-dark' };
+}
+}
+</script>
+</body>
+</html>

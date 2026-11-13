@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>DOT OS desktop</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/dotos/components/bundle.css">
+<link rel="stylesheet" href="dot.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@400..900&amp;family=Space+Grotesk:wght@300..700&amp;family=Space+Mono:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="nil dot-screen {{theme}}" style="width: 1280px; height: 800px; display: flex; flex-direction: column">
+
+<div class="nil-bar" role="toolbar" aria-label="Top bar" style="flex: none">
+<div class="nil-bar__group"><div class="nil-ws" aria-label="Workspaces"><span aria-current="true"><b>[</b> 1 <b>]</b></span><span class="is-occupied">2</span><span class="is-occupied">3</span><span>4</span><span>5</span></div><span>Terminal</span></div>
+<div class="nil-bar__clock">Thu 12 Nov&nbsp;&nbsp;09:41</div>
+<div class="nil-bar__group"><span>Net <b>5G</b></span><span>Vol <b>62</b></span><span>Bat <b>84%</b></span></div>
+</div>
+
+<div class="nil-dot-grid" style="position: relative; flex-grow: 1">
+
+<div style="position: absolute; left: 48px; top: 48px">
+<div class="nil-display" style="font-size: 96px">09<span class="dot-live">:</span>41</div>
+<div class="nil-label" style="margin-top: 8px">Thursday 12 November</div>
+</div>
+
+<div class="nil-widget" style="position: absolute; left: 48px; top: 208px">
+<div class="nil-label">CPU</div>
+<div class="nil-data nil-widget__hero">38<span class="nil-unit">%</span></div>
+<div class="nil-seg"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<ul class="nil-list" style="margin-top: 16px">
+<li class="nil-row"><span class="nil-label">Load</span><span class="nil-row__value">1.42</span></li>
+<li class="nil-row"><span class="nil-label">Temp</span><span class="nil-row__value is-good">54<span class="nil-unit">°C</span></span></li>
+</ul>
+</div>
+
+<div class="nil-widget" style="position: absolute; left: 48px; top: 512px">
+<div class="nil-label">Memory</div>
+<div class="nil-data nil-widget__hero">3.1<span class="nil-unit">/ 8 GB</span></div>
+<div class="nil-seg" role="img" aria-label="Memory 39 percent"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+</div>
+
+<div class="nil-window nil-window--inactive" style="position: absolute; left: 400px; top: 64px; width: 420px">
+<div class="nil-window__bar"><span class="nil-window__title">Files — dot-os</span><div class="nil-window__controls"><button aria-label="Minimise"></button><button aria-label="Maximise"></button><button class="close" aria-label="Close"></button></div></div>
+<div class="nil-window__body">
+<ul class="nil-list">
+<li class="nil-row"><span>design-system</span><span class="nil-row__value">61</span></li>
+<li class="nil-row"><span>packages</span><span class="nil-row__value">10</span></li>
+<li class="nil-row"><span>live-build</span><span class="nil-row__value">24</span></li>
+<li class="nil-row"><span>installer</span><span class="nil-row__value">8</span></li>
+</ul>
+</div>
+</div>
+
+<div class="nil-window" style="position: absolute; left: 560px; top: 240px; width: 656px">
+<div class="nil-window__bar"><span class="nil-window__title">Terminal — ~/dot-os</span><div class="nil-window__controls"><button aria-label="Minimise"></button><button aria-label="Maximise"></button><button class="close" aria-label="Close"></button></div></div>
+<div class="nil-term" style="height: 328px; white-space: normal">
+<div><span class="p">sougata@dot ~/dot-os &gt;</span> sudo lb build</div>
+<div><span class="g">[ OK ]</span> Bootstrap trixie arm64</div>
+<div><span class="g">[ OK ]</span> Install dot-os-desktop 0.1.0</div>
+<div><span class="g">[ OK ]</span> Configure sddm, plymouth, grub-efi-arm64</div>
+<div><span class="g">[ OK ]</span> Brand calamares</div>
+<div><span class="y">[LOADING...]</span> Build filesystem.squashfs 65%</div>
+<div><span class="c">## 1.9 GB written, 00:03:12 elapsed</span></div>
+<div><span class="nil-term__cursor"></span></div>
+</div>
+</div>
+
+<nav class="nil-dock" aria-label="Dock" style="position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%)">
+<button class="nil-dock__app" aria-label="Launcher"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="1.5"></circle><circle cx="12" cy="6" r="1.5"></circle><circle cx="18" cy="6" r="1.5"></circle><circle cx="6" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="18" cy="12" r="1.5"></circle><circle cx="6" cy="18" r="1.5"></circle><circle cx="12" cy="18" r="1.5"></circle><circle cx="18" cy="18" r="1.5"></circle></svg></button>
+<button class="nil-dock__app is-running is-focused" aria-label="Terminal, focused"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8l4 4-4 4"></path><path d="M12 16h7"></path></svg></button>
+<button class="nil-dock__app is-running" aria-label="Files, running"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h6l2 2h10v10H3z"></path></svg></button>
+<button class="nil-dock__app" aria-label="Browser"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3c3 3 3 15 0 18c-3-3-3-15 0-18"></path></svg></button>
+<button class="nil-dock__app" aria-label="Mail"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v12H3z"></path><path d="M3 7l9 6 9-6"></path></svg></button>
+<button class="nil-dock__app" aria-label="Text editor"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"></path><path d="M15 3v4h4"></path><path d="M9 12h7M9 16h7"></path></svg></button>
+<button class="nil-dock__app" aria-label="Software"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"></path><path d="M4 7.5l8 4.5 8-4.5"></path><path d="M12 12v9"></path></svg></button>
+<button class="nil-dock__app" aria-label="Settings"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"></path></svg></button>
+</nav>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["dark","light"],"default":"dark"},"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+renderVals() {
+return { theme: this.props.theme === 'light' ? 'dot-light' : 'dot-dark' };
+}
+}
+</script>
+</body>
+</html>

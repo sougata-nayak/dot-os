@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Menus, popups and dialogs</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/dotos/components/bundle.css">
+<link rel="stylesheet" href="dot.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@400..900&amp;family=Space+Grotesk:wght@300..700&amp;family=Space+Mono:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="nil dot-sheet {{theme}}" style="width: 1280px; height: 800px; box-sizing: border-box; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px">
+
+<div style="display: flex; flex-direction: column; gap: 32px">
+<div>
+<div class="nil-label" style="margin-bottom: 12px">Context menu — current item inverts</div>
+<div class="dot-menu" role="menu" aria-label="File actions">
+<button class="dot-menu__item" role="menuitem" aria-current="true"><span>Open</span><span class="nil-label">Enter</span></button>
+<button class="dot-menu__item" role="menuitem"><span>Open with</span><svg class="dot-ico dot-ico--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></button>
+<div class="dot-menu__sep" role="separator"></div>
+<button class="dot-menu__item" role="menuitem"><span>Cut</span><span class="nil-label">Ctrl X</span></button>
+<button class="dot-menu__item" role="menuitem"><span>Copy</span><span class="nil-label">Ctrl C</span></button>
+<button class="dot-menu__item" role="menuitem" disabled="disabled"><span>Paste</span><span class="nil-label">Ctrl V</span></button>
+<div class="dot-menu__sep" role="separator"></div>
+<button class="dot-menu__item" role="menuitem"><span>Rename</span><span class="nil-label">F2</span></button>
+<button class="dot-menu__item" role="menuitem"><span>Move to trash</span><span class="nil-label">Del</span></button>
+</div>
+</div>
+<div>
+<div class="nil-label" style="margin-bottom: 4px">Menu metrics</div>
+<ul class="nil-list">
+<li class="nil-row"><span class="nil-label">Ground</span><span class="nil-row__value">surface-raised</span></li>
+<li class="nil-row"><span class="nil-label">Outline, radius</span><span class="nil-row__value">border-visible, 8 px</span></li>
+<li class="nil-row"><span class="nil-label">Item</span><span class="nil-row__value">36 px, radius 4 px</span></li>
+<li class="nil-row"><span class="nil-label">Shortcut</span><span class="nil-row__value">label, right</span></li>
+</ul>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 32px">
+<div>
+<div class="nil-label" style="margin-bottom: 12px">Menu bar</div>
+<div style="position: relative">
+<div class="nil-window" style="height: 272px; background: var(--black)">
+<div class="nil-window__bar" style="background: var(--surface)"><span class="nil-window__title">Editor — grub.cfg</span><div class="nil-window__controls"><button aria-label="Minimise"></button><button aria-label="Maximise"></button><button class="close" aria-label="Close"></button></div></div>
+<div class="dot-menubar" role="menubar" style="background: var(--surface)"><button role="menuitem" aria-haspopup="menu" aria-expanded="true">File</button><button role="menuitem">Edit</button><button role="menuitem">View</button><button role="menuitem">Help</button></div>
+</div>
+<div class="dot-menu" role="menu" aria-label="File" style="position: absolute; left: 8px; top: 76px">
+<button class="dot-menu__item" role="menuitem" aria-current="true"><span>New window</span><span class="nil-label">Ctrl N</span></button>
+<button class="dot-menu__item" role="menuitem"><span>Open</span><span class="nil-label">Ctrl O</span></button>
+<button class="dot-menu__item" role="menuitem"><span>Save</span><span class="nil-label">Ctrl S</span></button>
+<div class="dot-menu__sep" role="separator"></div>
+<button class="dot-menu__item" role="menuitem"><span>Quit</span><span class="nil-label">Ctrl Q</span></button>
+</div>
+</div>
+</div>
+<div>
+<div class="nil-label" style="margin-bottom: 12px">Select, open</div>
+<button class="dot-select" aria-haspopup="listbox" aria-expanded="true"><span>1920 × 1200</span><svg class="dot-ico dot-ico--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+<div class="dot-menu" role="listbox" aria-label="Resolution" style="width: auto; margin-top: 4px; font-family: var(--font-mono)">
+<button class="dot-menu__item" role="option" aria-selected="true" aria-current="true" style="font-family: var(--font-mono)"><span>1920 × 1200</span><span class="nil-label">Native</span></button>
+<button class="dot-menu__item" role="option" aria-selected="false" style="font-family: var(--font-mono)"><span>1680 × 1050</span></button>
+<button class="dot-menu__item" role="option" aria-selected="false" style="font-family: var(--font-mono)"><span>1280 × 800</span></button>
+</div>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 32px">
+<div>
+<div class="nil-label" style="margin-bottom: 12px">Tooltip — 500 ms delay, fades</div>
+<div style="display: flex; flex-direction: column; align-items: flex-start; gap: 8px">
+<button class="dot-iconbtn" aria-label="Search" style="color: var(--text-display); border-color: var(--border-visible)"><svg class="dot-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><path d="M20 20l-4.5-4.5"></path></svg></button>
+<span class="dot-tip" role="tooltip">Search &nbsp; Ctrl F</span>
+</div>
+</div>
+<div>
+<div class="nil-label" style="margin-bottom: 12px">Confirm dialog — the destructive step</div>
+<div class="nil-window" role="alertdialog" aria-label="Erase disk">
+<div class="nil-window__bar"><span class="nil-window__title">Installer</span><div class="nil-window__controls"><button class="close" aria-label="Close"></button></div></div>
+<div class="nil-window__body">
+<h2 class="dot-sub">Erase /dev/vda?</h2>
+<p class="dot-body-sm" style="margin-top: 8px">All 64 GB will be wiped. This cannot be undone.</p>
+<div style="display: flex; justify-content: flex-end; gap: 8px; margin-top: 24px">
+<button class="nil-btn nil-btn--ghost">Cancel</button>
+<button class="nil-btn nil-btn--destructive">Erase disk</button>
+</div>
+</div>
+</div>
+</div>
+<div>
+<div class="nil-label" style="margin-bottom: 12px">Inline status — replaces toasts</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span class="nil-status">[ OK ]</span>
+<span class="nil-status">[Saved] 14:02:11</span>
+<span class="nil-status">[Loading...]</span>
+<span class="nil-status" style="display: flex; align-items: center; gap: 8px"><span class="dot-dot"></span>[Error: disk full]</span>
+</div>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["dark","light"],"default":"dark"},"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+renderVals() {
+return { theme: this.props.theme === 'light' ? 'dot-light' : 'dot-dark' };
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Terminal and Konsole colour scheme</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/dotos/components/bundle.css">
+<link rel="stylesheet" href="dot.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@400..900&amp;family=Space+Grotesk:wght@300..700&amp;family=Space+Mono:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="nil dot-screen {{theme}}" style="width: 1280px; height: 800px; display: flex; flex-direction: column">
+
+<div class="nil-bar" role="toolbar" aria-label="Top bar" style="flex: none">
+<div class="nil-bar__group"><div class="nil-ws" aria-label="Workspaces"><span aria-current="true"><b>[</b> 1 <b>]</b></span><span class="is-occupied">2</span><span class="is-occupied">3</span><span>4</span><span>5</span></div><span>Terminal</span></div>
+<div class="nil-bar__clock">Thu 12 Nov&nbsp;&nbsp;09:41</div>
+<div class="nil-bar__group"><span>Net <b>5G</b></span><span>Vol <b>62</b></span><span>Bat <b>84%</b></span></div>
+</div>
+
+<div style="flex-grow: 1; min-height: 0; padding: 16px; display: flex; gap: 32px">
+
+<div class="nil-window" style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column; background: var(--black)">
+<div class="nil-window__bar" style="flex: none; background: var(--surface)"><span class="nil-window__title">Terminal — ~/dot-os</span><div class="nil-window__controls"><button aria-label="Minimise"></button><button aria-label="Maximise"></button><button class="close" aria-label="Close"></button></div></div>
+<div class="dot-tabs" role="tablist" style="flex: none; padding: 0 16px; background: var(--surface)"><button role="tab" aria-selected="true">1 ~/dot-os</button><button role="tab" aria-selected="false">2 lb build</button><button role="tab" aria-selected="false">3 ssh utm</button></div>
+<div class="nil-term" style="flex-grow: 1; white-space: normal">
+<div><span class="p">sougata@dot ~ &gt;</span> fastfetch</div>
+<div><span class="p" style="display: inline-block; width: 10ch">OS</span>DOT OS 0.1.0 arm64</div>
+<div><span class="p" style="display: inline-block; width: 10ch">HOST</span>UTM virtual machine</div>
+<div><span class="p" style="display: inline-block; width: 10ch">KERNEL</span>6.12.4-arm64</div>
+<div><span class="p" style="display: inline-block; width: 10ch">DE</span>KDE Plasma 6.3, Wayland</div>
+<div><span class="p" style="display: inline-block; width: 10ch">THEME</span>dot-os, dark</div>
+<div><span class="p" style="display: inline-block; width: 10ch">FONT</span>Space Mono 11</div>
+<div><span class="p" style="display: inline-block; width: 10ch">MEMORY</span>3.1 / 8.0 GB</div>
+<div>&nbsp;</div>
+<div><span class="p">sougata@dot ~ &gt;</span> cd dot-os &amp;&amp; git status -sb</div>
+<div><span class="c">## main...origin/main</span></div>
+<div><span class="g">&nbsp;M</span> packages/kvantum-theme/DotOS.kvconfig</div>
+<div><span class="r">&nbsp;D</span> packages/sddm-theme/Shadow.qml</div>
+<div><span class="y">??</span> packages/cursor-theme/</div>
+<div><span class="p">sougata@dot ~/dot-os &gt;</span> ls</div>
+<div><span class="b">packages</span>&nbsp; <span class="b">live-build</span>&nbsp; <span class="cy">installer</span>&nbsp; <span class="m">dot-os.iso</span>&nbsp; README.md</div>
+<div><span class="p">sougata@dot ~/dot-os &gt;</span> lb biuld</div>
+<div>lb: unknown command: biuld</div>
+<div><span class="p">sougata@dot ~/dot-os</span> <span class="r">&gt;</span> <span class="nil-term__cursor"></span></div>
+</div>
+</div>
+
+<aside style="width: 368px; flex: none; padding-top: 8px">
+<div class="nil-label" style="margin-bottom: 4px">Colour scheme — normal 0–7, bright 8–15</div>
+<ul class="nil-list">
+<li class="nil-row" style="align-items: center"><span class="nil-label">0 / 8 Black</span><span style="display: flex; align-items: center; gap: 8px"><span class="nil-caption">surface</span><i class="dot-swatch" style="background: var(--surface)"></i><i class="dot-swatch" style="background: var(--text-disabled)"></i><span class="nil-caption">text-disabled</span></span></li>
+<li class="nil-row" style="align-items: center"><span class="nil-label">1 / 9 Red</span><span style="display: flex; align-items: center; gap: 8px"><span class="nil-caption">ansi-red</span><i class="dot-swatch" style="background: var(--ansi-red)"></i><i class="dot-swatch" style="background: var(--ansi-red)"></i></span></li>
+<li class="nil-row" style="align-items: center"><span class="nil-label">2 / 10 Green</span><span style="display: flex; align-items: center; gap: 8px"><span class="nil-caption">ansi-green</span><i class="dot-swatch" style="background: var(--ansi-green)"></i><i class="dot-swatch" style="background: var(--ansi-green)"></i></span></li>
+<li class="nil-row" style="align-items: center"><span class="nil-label">3 / 11 Yellow</span><span style="display: flex; align-items: center; gap: 8px"><span class="nil-caption">ansi-yellow</span><i class="dot-swatch" style="background: var(--ansi-yellow)"></i><i class="dot-swatch" style="background: var(--ansi-yellow)"></i></span></li>
+<li class="nil-row" style="align-items: center"><span class="nil-label">4 / 12 Blue</span><span style="display: flex; align-items: center; gap: 8px"><span class="nil-caption">ansi-blue</span><i class="dot-swatch" style="background: var(--ansi-blue)"></i><i class="dot-swatch" style="background: var(--ansi-blue)"></i></span></li>
+<li class="nil-row" style="align-items: center"><span class="nil-label">5 / 13 Magenta</span><span style="display: flex; align-items: center; gap: 8px"><span class="nil-caption">ansi-magenta</span><i class="dot-swatch" style="background: var(--ansi-magenta)"></i><i class="dot-swatch" style="background: var(--ansi-magenta)"></i></span></li>
+<li class="nil-row" style="align-items: center"><span class="nil-label">6 / 14 Cyan</span><span style="display: flex; align-items: center; gap: 8px"><span class="nil-caption">ansi-cyan</span><i class="dot-swatch" style="background: var(--ansi-cyan)"></i><i class="dot-swatch" style="background: var(--ansi-cyan)"></i></span></li>
+<li class="nil-row" style="align-items: center"><span class="nil-label">7 / 15 White</span><span style="display: flex; align-items: center; gap: 8px"><span class="nil-caption">text-primary</span><i class="dot-swatch" style="background: var(--text-primary)"></i><i class="dot-swatch" style="background: var(--text-display)"></i><span class="nil-caption">text-display</span></span></li>
+</ul>
+<div class="nil-label" style="margin: 24px 0 4px">Profile</div>
+<ul class="nil-list">
+<li class="nil-row"><span class="nil-label">Background</span><span class="nil-row__value">black, opaque</span></li>
+<li class="nil-row"><span class="nil-label">Foreground</span><span class="nil-row__value">text-primary</span></li>
+<li class="nil-row"><span class="nil-label">Cursor</span><span class="nil-row__value">block, accent, no blink</span></li>
+<li class="nil-row"><span class="nil-label">Font</span><span class="nil-row__value">Space Mono 11 pt</span></li>
+<li class="nil-row"><span class="nil-label">Emphasis</span><span class="nil-row__value">bold, not a second hue</span></li>
+</ul>
+</aside>
+
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["dark","light"],"default":"dark"},"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+renderVals() {
+return { theme: this.props.theme === 'light' ? 'dot-light' : 'dot-dark' };
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+#!/bin/sh
+# DOT OS live image recipe: Debian 13 "trixie", arm64, KDE Plasma, Calamares.
+# Run through scripts/build-iso.sh (Docker) or directly on a Debian arm64 host.
+set -e
+
+lb config noauto \
+	--mode debian \
+	--distribution trixie \
+	--architecture arm64 \
+	--linux-flavours arm64 \
+	--archive-areas "main contrib non-free-firmware" \
+	--binary-image iso-hybrid \
+	--bootloaders grub-efi \
+	--debian-installer none \
+	--apt-recommends true \
+	--memtest none \
+	--bootappend-live "boot=live components quiet splash" \
+	--iso-application "DOT OS" \
+	--iso-publisher "DOT OS project" \
+	--iso-volume "DOT_OS_LIVE" \
+	--image-name "dot-os" \
+	"${@}"

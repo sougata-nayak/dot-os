@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Notifications, calendar and quick settings</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/dotos/components/bundle.css">
+<link rel="stylesheet" href="dot.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@400..900&amp;family=Space+Grotesk:wght@300..700&amp;family=Space+Mono:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="nil dot-screen {{theme}}" style="width: 1280px; height: 800px; display: flex; flex-direction: column">
+
+<div class="nil-bar" role="toolbar" aria-label="Top bar" style="flex: none">
+<div class="nil-bar__group"><div class="nil-ws" aria-label="Workspaces"><span aria-current="true"><b>[</b> 1 <b>]</b></span><span class="is-occupied">2</span><span class="is-occupied">3</span><span>4</span><span>5</span></div><span>Desktop</span></div>
+<div class="nil-bar__clock">Thu 12 Nov&nbsp;&nbsp;09:41</div>
+<div class="nil-bar__group"><span>Net <b>5G</b></span><span>Vol <b>62</b></span><span>Bat <b class="is-bad">5%</b></span></div>
+</div>
+
+<div class="nil-dot-grid" style="position: relative; flex-grow: 1">
+
+<div style="position: absolute; left: 16px; top: 8px; display: flex; flex-direction: column; gap: 8px">
+<div class="nil-note nil-note--critical"><div class="nil-note__head"><span class="nil-label">Power</span><span class="nil-label">Now</span></div><div class="nil-note__title">Battery at 5%</div><div class="nil-note__body">Suspending in 2 minutes unless you plug in.</div></div>
+<div class="nil-note"><div class="nil-note__head"><span class="nil-label">Updates</span><span class="nil-label">09:38</span></div><div class="nil-note__title">12 packages ready</div><div class="nil-note__body">Kernel 6.12 and 11 others. Installs on next restart.</div><div class="nil-note__actions"><button class="nil-btn nil-btn--ghost">Later</button><button class="nil-btn nil-btn--ghost" style="color: var(--text-display)">Restart</button></div></div>
+<div class="nil-note"><div class="nil-note__head"><span class="nil-label">Calendar</span><span class="nil-label">09:30</span></div><div class="nil-note__title">Standup in 30 minutes</div><div class="nil-note__body">10:00, call link in the invite.</div></div>
+<div class="nil-label" style="margin-top: 8px">Notifications — stack under the bar</div>
+</div>
+
+<div style="position: absolute; left: 480px; top: 8px; width: 320px">
+<div class="dot-pop" style="display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; align-items: flex-end; justify-content: space-between">
+<div><div class="nil-label">Thursday</div><div class="nil-display" style="margin-top: 8px; font-size: 48px">12</div></div>
+<div style="text-align: right"><div class="nil-label" style="color: var(--text-primary)">November 2026</div><div class="nil-label" style="margin-top: 4px">Week 46</div></div>
+</div>
+<div class="dot-cal" role="grid" aria-label="November 2026">
+<span class="h">M</span><span class="h">T</span><span class="h">W</span><span class="h">T</span><span class="h">F</span><span class="h">S</span><span class="h">S</span>
+<span class="o">26</span><span class="o">27</span><span class="o">28</span><span class="o">29</span><span class="o">30</span><span class="o">31</span><span>1</span>
+<span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span>
+<span>9</span><span>10</span><span>11</span><span class="t" aria-current="date">12</span><span>13</span><span>14</span><span>15</span>
+<span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span>
+<span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span>
+<span>30</span><span class="o">1</span><span class="o">2</span><span class="o">3</span><span class="o">4</span><span class="o">5</span><span class="o">6</span>
+</div>
+<ul class="nil-list">
+<li class="nil-row"><span style="font-size: 14px">Standup</span><span class="nil-row__value">10:00</span></li>
+<li class="nil-row"><span style="font-size: 14px">ISO build review</span><span class="nil-row__value">14:30</span></li>
+</ul>
+</div>
+<div class="nil-label" style="margin-top: 16px">Calendar — opens from the clock</div>
+</div>
+
+<div style="position: absolute; right: 16px; top: 8px; width: 320px">
+<div class="nil-qs" role="group" aria-label="Quick settings">
+<button class="nil-qs__tile" aria-pressed="true"><span class="nil-label">Wi-Fi</span><span>Studio 5G</span></button>
+<button class="nil-qs__tile" aria-pressed="false"><span class="nil-label">Bluetooth</span><span>Off</span></button>
+<button class="nil-qs__tile" aria-pressed="false"><span class="nil-label">Night light</span><span>Off</span></button>
+<button class="nil-qs__tile" aria-pressed="true"><span class="nil-label">Do not disturb</span><span>Until 18:00</span></button>
+<div class="nil-qs__wide nil-meter"><div class="nil-meter__head"><span class="nil-label">Brightness</span><span class="nil-caption">70%</span></div><div class="nil-seg"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+<div class="nil-qs__wide nil-meter"><div class="nil-meter__head"><span class="nil-label">Volume</span><span class="nil-caption">62%</span></div><div class="nil-seg"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+<div class="nil-qs__wide nil-meter"><div class="nil-meter__head"><span class="nil-label">Battery</span><span class="nil-caption">5% — plug in</span></div><div class="nil-seg nil-seg--compact nil-seg--bad"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+<div class="nil-qs__wide" style="display: flex; justify-content: space-between; border-top: 1px solid var(--border)">
+<button class="nil-btn nil-btn--ghost">Settings</button><button class="nil-btn nil-btn--ghost">Lock</button><button class="nil-btn nil-btn--ghost">Power</button>
+</div>
+</div>
+<div class="nil-label" style="margin-top: 16px">Quick settings — from the status group</div>
+</div>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["dark","light"],"default":"dark"},"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+renderVals() {
+return { theme: this.props.theme === 'light' ? 'dot-light' : 'dot-dark' };
+}
+}
+</script>
+</body>
+</html>

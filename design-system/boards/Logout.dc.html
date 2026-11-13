@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Power and logout screen</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/dotos/components/bundle.css">
+<link rel="stylesheet" href="dot.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@400..900&amp;family=Space+Grotesk:wght@300..700&amp;family=Space+Mono:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="nil dot-screen nil-dot-grid {{theme}}" style="width: 1280px; height: 800px; box-sizing: border-box; padding: 32px; display: flex; flex-direction: column; justify-content: space-between">
+
+<div>
+<div class="nil-label">Shutting down in</div>
+<div class="nil-display" style="margin-top: 8px; font-size: 96px">28<span class="nil-unit" style="font-size: 16px">S</span></div>
+<div class="nil-label" style="margin-top: 8px">Session — sougata@dot</div>
+</div>
+
+<div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 16px">
+<div class="nil-status">[ 2 apps have unsaved work ]</div>
+<div style="display: flex; align-items: center; gap: 16px">
+<button class="nil-btn nil-btn--primary">Shut down now</button>
+<button class="nil-btn nil-btn--secondary">Restart</button>
+<button class="nil-btn nil-btn--secondary">Sleep</button>
+<button class="nil-btn nil-btn--secondary">Log out</button>
+<button class="nil-btn nil-btn--ghost">Cancel</button>
+</div>
+</div>
+<div class="nil-label">Uptime 4d 02:17 &nbsp; Bat 84%</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["dark","light"],"default":"dark"},"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+renderVals() {
+return { theme: this.props.theme === 'light' ? 'dot-light' : 'dot-dark' };
+}
+}
+</script>
+</body>
+</html>

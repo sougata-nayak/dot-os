@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Wallpapers</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/dotos/components/bundle.css">
+<link rel="stylesheet" href="dot.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@400..900&amp;family=Space+Grotesk:wght@300..700&amp;family=Space+Mono:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="nil dot-sheet {{theme}}" style="width: 1280px; height: 800px; box-sizing: border-box; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; align-content: start">
+
+<div style="display: flex; flex-direction: column; gap: 12px">
+<div class="dot-dark" style="height: 288px; border: 1px solid var(--border-visible); border-radius: 12px; background-color: var(--black)"></div>
+<div style="display: flex; justify-content: space-between"><span class="nil-label" style="color: var(--text-primary)">01 Void</span><span class="nil-label">Solid black — dark default on OLED</span></div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 12px">
+<div class="dot-dark nil-dot-grid" style="height: 288px; border: 1px solid var(--border-visible); border-radius: 12px; background-color: var(--black)"></div>
+<div style="display: flex; justify-content: space-between"><span class="nil-label" style="color: var(--text-primary)">02 Grid</span><span class="nil-label">Black, 1 px dots at 16 px — dark default</span></div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 12px">
+<div class="dot-light" style="height: 288px; border: 1px solid var(--border-visible); border-radius: 12px; background-color: var(--black)"></div>
+<div style="display: flex; justify-content: space-between"><span class="nil-label" style="color: var(--text-primary)">03 Paper</span><span class="nil-label">Solid off-white</span></div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 12px">
+<div class="dot-light nil-dot-grid" style="height: 288px; border: 1px solid var(--border-visible); border-radius: 12px; background-color: var(--black)"></div>
+<div style="display: flex; justify-content: space-between"><span class="nil-label" style="color: var(--text-primary)">04 Paper grid</span><span class="nil-label">Off-white, 1 px dots at 16 px — light default</span></div>
+</div>
+
+<div class="nil-label" style="grid-column: 1 / -1">Crops at 100%. Export 3840 × 2400 PNG; the grid starts at 0,0 so widgets land on 16 px multiples.</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["dark","light"],"default":"dark"},"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+renderVals() {
+return { theme: this.props.theme === 'light' ? 'dot-light' : 'dot-dark' };
+}
+}
+</script>
+</body>
+</html>

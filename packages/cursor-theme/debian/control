@@ -1,0 +1,14 @@
+Source: dot-os-cursor-theme
+Section: x11
+Priority: optional
+Maintainer: DOT OS project <maintainers@dot-os.invalid>
+Build-Depends: debhelper-compat (= 13), librsvg2-bin, x11-apps
+Standards-Version: 4.7.2
+Rules-Requires-Root: no
+
+Package: dot-os-cursor-theme
+Architecture: all
+Depends: ${misc:Depends}
+Description: plain arrow cursors with a segmented busy indicator
+ A plain arrow with a one pixel outline and a segmented busy indicator,
+ in dark and light variants at 24, 32 and 48 pixels.

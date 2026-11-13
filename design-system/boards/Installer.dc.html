@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Installer, disk step</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/dotos/components/bundle.css">
+<link rel="stylesheet" href="dot.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@400..900&amp;family=Space+Grotesk:wght@300..700&amp;family=Space+Mono:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="nil dot-screen {{theme}}" style="width: 1280px; height: 800px; display: flex; flex-direction: column">
+
+<div class="nil-bar" role="toolbar" aria-label="Top bar" style="flex: none">
+<div class="nil-bar__group"><div class="nil-ws" aria-label="Workspaces"><span aria-current="true"><b>[</b> 1 <b>]</b></span><span>2</span><span>3</span><span>4</span><span>5</span></div><span>Installer</span></div>
+<div class="nil-bar__clock">Thu 12 Nov&nbsp;&nbsp;09:41</div>
+<div class="nil-bar__group"><span>Live session</span><span>Net <b>5G</b></span><span>Bat <b>84%</b></span></div>
+</div>
+
+<div style="flex-grow: 1; min-height: 0; padding: 16px; display: flex">
+<div class="nil-window" style="flex-grow: 1; display: flex; flex-direction: column">
+<div class="nil-window__bar" style="flex: none"><span class="nil-window__title">Install DOT OS</span><div class="nil-window__controls"><button aria-label="Minimise"></button><button aria-label="Maximise"></button><button class="close" aria-label="Close"></button></div></div>
+
+<div style="flex-grow: 1; min-height: 0; display: flex">
+
+<nav aria-label="Install steps" style="width: 224px; flex: none; box-sizing: border-box; padding: 32px 24px; border-right: 1px solid var(--border); display: flex; flex-direction: column; justify-content: space-between">
+<ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 16px; font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase">
+<li style="padding-left: 2ch; color: var(--text-secondary)">Welcome</li>
+<li style="padding-left: 2ch; color: var(--text-secondary)">Location</li>
+<li style="padding-left: 2ch; color: var(--text-secondary)">Keyboard</li>
+<li aria-current="step" style="color: var(--text-display)">[ Disk ]</li>
+<li style="padding-left: 2ch; color: var(--text-disabled)">User</li>
+<li style="padding-left: 2ch; color: var(--text-disabled)">Summary</li>
+<li style="padding-left: 2ch; color: var(--text-disabled)">Install</li>
+<li style="padding-left: 2ch; color: var(--text-disabled)">Finish</li>
+</ol>
+<div class="nil-label" style="line-height: 1.8">Step 4 / 8<br>v0.1.0 arm64</div>
+</nav>
+
+<div style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column">
+
+<div style="flex-grow: 1; padding: 32px 48px; display: flex; gap: 64px">
+
+<div style="width: 440px; flex: none; display: flex; flex-direction: column; gap: 24px">
+<div>
+<h1 class="dot-heading">Choose a disk</h1>
+<p class="dot-body-sm" style="margin-top: 8px">DOT OS needs 12 GB. Everything on the chosen disk is erased.</p>
+</div>
+<div class="nil-field">
+<span class="nil-label">Disk</span>
+<button class="dot-select" aria-haspopup="listbox" aria-expanded="false" aria-label="Disk"><span>/dev/vda — 64 GB VirtIO</span><svg class="dot-ico dot-ico--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+</div>
+<div>
+<label class="dot-opt"><input class="dot-radio" type="radio" name="mode" checked="checked">Erase disk and install</label>
+<label class="dot-opt"><input class="dot-radio" type="radio" name="mode">Manual partitioning</label>
+<label class="dot-opt"><input class="dot-check" type="checkbox">Encrypt the disk</label>
+</div>
+<label class="nil-field" style="width: 200px"><span class="nil-label">Swap size</span><input class="nil-input" value="4 GB"><span class="nil-field__msg">[ OK ]</span></label>
+</div>
+
+<div style="flex-grow: 1; min-width: 0">
+<div class="nil-meter">
+<div class="nil-meter__head"><span class="nil-label">After install — /dev/vda</span><span class="nil-caption">64 GB</span></div>
+<div class="nil-seg nil-seg--hero"><i style="background: var(--text-secondary)"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i style="background: var(--text-disabled)"></i><i style="background: var(--text-disabled)"></i></div>
+</div>
+<ul class="nil-list" style="margin-top: 16px">
+<li class="nil-row" style="align-items: center"><span class="nil-label" style="display: flex; align-items: center; gap: 8px"><i style="width: 8px; height: 8px; background: var(--text-secondary)"></i>/boot/efi — FAT32</span><span class="nil-row__value">512<span class="nil-unit">MB</span></span></li>
+<li class="nil-row" style="align-items: center"><span class="nil-label" style="display: flex; align-items: center; gap: 8px"><i style="width: 8px; height: 8px; background: var(--text-display)"></i>/ — ext4</span><span class="nil-row__value">59.5<span class="nil-unit">GB</span></span></li>
+<li class="nil-row" style="align-items: center"><span class="nil-label" style="display: flex; align-items: center; gap: 8px"><i style="width: 8px; height: 8px; background: var(--text-disabled)"></i>swap</span><span class="nil-row__value">4<span class="nil-unit">GB</span></span></li>
+</ul>
+<div class="nil-label" style="margin: 32px 0 4px">Now</div>
+<ul class="nil-list">
+<li class="nil-row"><span class="nil-label">Partition table</span><span class="nil-row__value">GPT</span></li>
+<li class="nil-row"><span class="nil-label">Boot</span><span class="nil-row__value">UEFI, grub-efi-arm64</span></li>
+<li class="nil-row"><span class="nil-label">Contents</span><span class="nil-row__value">unallocated</span></li>
+</ul>
+</div>
+
+</div>
+
+<div style="flex: none; display: flex; align-items: center; justify-content: space-between; padding: 16px 24px 16px 16px; border-top: 1px solid var(--border)">
+<button class="nil-btn nil-btn--ghost">Cancel</button>
+<div style="display: flex; gap: 8px">
+<button class="nil-btn nil-btn--secondary">Back</button>
+<button class="nil-btn nil-btn--primary">Next</button>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["dark","light"],"default":"dark"},"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+renderVals() {
+return { theme: this.props.theme === 'light' ? 'dot-light' : 'dot-dark' };
+}
+}
+</script>
+</body>
+</html>

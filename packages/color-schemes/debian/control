@@ -1,0 +1,14 @@
+Source: dot-os-color-schemes
+Section: x11
+Priority: optional
+Maintainer: DOT OS project <maintainers@dot-os.invalid>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.7.2
+Rules-Requires-Root: no
+
+Package: dot-os-color-schemes
+Architecture: all
+Depends: ${misc:Depends}
+Description: DOT OS colour schemes for KDE Plasma
+ Dark and light KDE colour schemes generated from the DOT OS design
+ tokens. Selection inverts to the text colour; red is kept for errors.
