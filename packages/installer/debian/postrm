@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+#DEBHELPER#
+if [ "$1" = remove ] || [ "$1" = abort-install ] || [ "$1" = disappear ]; then
+	for f in /etc/calamares/settings.conf /usr/share/applications/calamares-install-debian.desktop; do
+		dpkg-divert --package dot-os-installer --remove --rename --divert "$f.debian" "$f" >/dev/null || true
+	done
+fi

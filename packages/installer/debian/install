@@ -1,0 +1,6 @@
+build/dot-os usr/share/calamares/branding
+files/settings.conf usr/share/dot-os-installer
+files/modules/*.conf etc/calamares/modules
+files/calamares-install-debian.desktop usr/share/applications
+files/dot-os-install usr/bin
+files/dot-os-live-nolock.desktop etc/xdg/autostart

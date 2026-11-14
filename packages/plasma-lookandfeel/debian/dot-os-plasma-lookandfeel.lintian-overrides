@@ -1,0 +1,4 @@
+# /etc/skel/.face is the default account picture for new users; Debian's
+# desktop-base puts its logo there (diverted, see preinst). Ours is a symlink
+# into /usr/share/dot-os.
+package-contains-file-in-etc-skel [etc/skel/.face]

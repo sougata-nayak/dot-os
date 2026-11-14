@@ -1,0 +1,27 @@
+Source: dot-os-installer
+Section: admin
+Priority: optional
+Maintainer: DOT OS project <maintainers@dot-os.invalid>
+Build-Depends: debhelper-compat (= 13), python3, python3-fonttools, librsvg2-bin
+Standards-Version: 4.7.2
+Rules-Requires-Root: no
+
+Package: dot-os-installer
+Architecture: all
+Depends: ${misc:Depends},
+ calamares (>= 3.3),
+ calamares-settings-debian,
+ x11-xserver-utils,
+ kde-cli-tools,
+ x11-utils,
+ fonts-dot-os,
+ qml6-module-qtquick,
+ qml6-module-qtquick-controls,
+ qml6-module-qtquick-templates,
+ qml6-module-qtquick-window,
+ qml6-module-qtqml-workerscript
+Description: DOT OS look and setup for the Calamares installer
+ Branding, QML pages and a stylesheet that give Calamares the DOT OS
+ installer design: a mono step list, two-column pages and a segmented
+ install meter. Keeps Debian's install jobs; names the boot entry DOT OS.
+ Only useful on DOT OS live media.

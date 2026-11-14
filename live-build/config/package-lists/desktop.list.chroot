@@ -16,6 +16,7 @@ curl
 # Installer
 calamares
 calamares-settings-debian
+dot-os-installer
 grub-efi-arm64
 efibootmgr
 

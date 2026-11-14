@@ -1,0 +1,44 @@
+---
+# DOT OS branding for Calamares. build.py fills @version@.
+componentName: dot-os
+
+welcomeStyleCalamares: false
+welcomeExpandingLogo: false
+
+# The boards draw the installer as a large window on the desktop; Calamares
+# shrinks this to fit smaller screens.
+windowExpanding: normal
+windowSize: 1248px,700px
+windowPlacement: center
+
+sidebar: qml
+sidebarSide: left
+navigation: qml
+navigationSide: bottom
+
+strings:
+    productName:         DOT OS
+    shortProductName:    DOT OS
+    version:             @version@
+    shortVersion:        @version@
+    versionedName:       DOT OS @version@
+    shortVersionedName:  DOT OS @version@
+    bootloaderEntryName: DOT OS
+    productUrl:          https://github.com/sougata-nayak/dot-os
+    supportUrl:          https://github.com/sougata-nayak/dot-os/issues
+    knownIssuesUrl:      https://github.com/sougata-nayak/dot-os/blob/main/docs/STATUS.md
+    releaseNotesUrl:     https://github.com/sougata-nayak/dot-os/releases
+
+images:
+    productLogo:         "logo.png"
+    productIcon:         "logo.png"
+    productWelcome:      "logo.png"
+
+slideshow:               "show.qml"
+slideshowAPI: 2
+
+style:
+    SidebarBackground:        "@surface@"
+    SidebarText:              "@text-secondary@"
+    SidebarTextCurrent:       "@text-display@"
+    SidebarBackgroundCurrent: "@surface@"

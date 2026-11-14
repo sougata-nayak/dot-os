@@ -9,5 +9,8 @@ if [ "$1" = install ] || [ "$1" = upgrade ]; then
 	for f in lockscreen/LockScreen.qml osd/Osd.qml; do
 		dpkg-divert --package dot-os-plasma-lookandfeel --add --rename --divert "$D/$f.plasma" "$D/$f" >/dev/null
 	done
+	# Debian's desktop-base gives new accounts its swirl as the account
+	# picture; DOT OS links its own there (Debian's kept as .face.debian).
+	dpkg-divert --package dot-os-plasma-lookandfeel --add --rename --divert /etc/skel/.face.debian /etc/skel/.face >/dev/null
 fi
 #DEBHELPER#

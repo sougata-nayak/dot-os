@@ -1,2 +1,3 @@
 usr/share/dot-os/gtk-settings.ini etc/gtk-3.0/settings.ini
 usr/share/dot-os/gtk-settings.ini etc/gtk-4.0/settings.ini
+usr/share/dot-os/face.png etc/skel/.face

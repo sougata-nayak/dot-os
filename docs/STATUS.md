@@ -1,6 +1,6 @@
 # Status
 
-Last updated 13 November 2026.
+Last updated 14 November 2026.
 
 ## Done
 
@@ -42,8 +42,6 @@ Last updated 13 November 2026.
 - **Windows have square corners.** KWin's SVG decoration engine squeezes corner artwork to the 1px border, so the 12px radius on the Windows board is not possible; the frame is a 1px outline with a 40px title bar.
 - **Window titles are not uppercase** (KWin's decoration engine has no text-case option).
 - **The dock marks apps with a short bar, not a dot** (Plasma's task frames are stretched pieces). Red still means the focused app.
-- **The launcher's account picture** is the system default (a Debian logo from desktop-base) until Phase 5 sets a DOT OS default.
-- **KDE's Welcome Center** opens at first login; Phase 5 decides whether DOT OS replaces or disables it.
 - **The launcher and KRunner** are stock layouts in DOT OS colours; the selected KRunner row has no red edge.
 
 ## Phase 2 findings
@@ -53,7 +51,7 @@ Last updated 13 November 2026.
 - **The greeter kept an old copy of the theme** after an upgrade, because package builds pin file times and Qt's QML cache trusts them. The package clears the cache on install.
 - **GRUB ignores a progress bar's height** (it always drew 28px), so the countdown is text only.
 - **GRUB can't put brackets around the selected entry** (its highlight spans the whole menu width), so the selection inverts, like a menu's current item. The GRUB board was updated to match.
-- **Installed GRUB entries say "Debian GNU/Linux".** Renaming them means changing `GRUB_DISTRIBUTOR`, which also renames the EFI boot directory. That needs to be done together with the installer's `efiBootloaderId` in Phase 5.
+- **Installed GRUB entries said "Debian GNU/Linux".** Fixed in Phase 5: the installer sets `GRUB_DISTRIBUTOR` and the EFI boot directory together.
 - **Debian's plymouth has no `plymouth-set-default-theme`**; the package writes `/etc/plymouth/plymouthd.conf` directly.
 
 ## Phase 3 findings
@@ -92,7 +90,26 @@ Last updated 13 November 2026.
 - CI: package builds on every push; on a `v*` tag, packages, signed archive, ISO and a GitHub Release. Publishing to GitHub Pages waits for the `DOTOS_SIGNING_KEY` secret and `DOTOS_PUBLISH_REPO` variable (docs/RELEASING.md).
 - Live ISO checked: `dot-os-desktop` installed, `apt update` clean with the entry off.
 
+## Phase 5: installer
+
+- `dot-os-installer` (live ISO only): Calamares branding plus DOT OS versions of the sidebar, navigation, slideshow and the Welcome, Location, Keyboard, User, Summary and Finish pages, built from the `Install*` boards. "Install DOT OS" replaces Debian's launcher (diverted, restored on removal).
+- Installed systems boot from a firmware entry named `dot`, GRUB says "DOT OS", and the computer name defaults to `dot-<login>`.
+- New users get the DOT OS account picture (`/etc/skel/.face`, desktop-base's diverted) and no KDE Welcome Center.
+- The launcher runs Calamares as root on XWayland. Native Wayland got the size right but never got keyboard focus. After the live session switches to 4K at 250%, KWin keeps advertising the old work area, so the launcher fixes it first (otherwise Calamares opens at its 800x520 minimum).
+- Fixed: the login screen silently refused to log in (`root.login` moved inside the scaling item in the refinement pass).
+- The live session no longer locks or blanks the screen during an install: the launcher holds a KDE screen-saver and sleep inhibition while Calamares is open, and auto-lock is off in the live session only.
+- The Summary page fades the plan out at the bottom when there is more to scroll.
+- Checked: full install from the ISO to a blank disk in QEMU at 3840x2160 (about 3 minutes), Restart from the Finish page, boot from the `dot` entry, login, no Welcome Center, installer package removed from the installed system.
+
+### Installer known gaps
+
+These are drawn by Calamares itself and need a patched Calamares to change:
+
+- **Disk step** keeps Calamares' coloured partition bars, black legend text and option icons.
+- **Install step**: the percentage sits under the slideshow, the bar has no red live segment, and there is no "Show log".
+- **Finish page** occasionally stays on "Loading…" (a Calamares load race); Restart then does not reboot.
+
 ## Next
 
-1. Phase 5: Calamares branding, "DOT OS" boot entries, Welcome window and account picture, live session matching the installed system.
-2. Phase 6: first tagged release; then trim the ISO size.
+1. Phase 6: first tagged release; then trim the ISO size.
+2. Optional: patched Calamares for the gaps above; Raspberry Pi 5 image.

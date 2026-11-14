@@ -1,0 +1,169 @@
+/* DOT OS installer: the widget parts Calamares does not draw in QML (the
+   disk step, dialogs, and the install progress under show.qml).
+   Values are tokens; build.py fills the token markers. Board references:
+   design-system/boards/Installer.dc.html and Installing.dc.html. */
+
+QWidget {
+    background-color: @surface@;
+    color: @text-primary@;
+    font-family: "Space Grotesk";
+    font-size: 14px;
+    selection-background-color: @text-display@;
+    selection-color: @black@;
+}
+
+QLabel { background: transparent; }
+
+/* ---- Buttons (.nil-btn--secondary; the default one is primary) ---- */
+QPushButton, QToolButton {
+    min-height: 42px;
+    padding: 0 24px;
+    border: 1px solid @border-visible@;
+    border-radius: 22px;
+    background: transparent;
+    font-family: "Space Mono";
+    font-size: 13px;
+    color: @text-primary@;
+}
+QPushButton:hover, QToolButton:hover { border-color: @text-primary@; }
+QPushButton:pressed, QToolButton:pressed { background: @surface-raised@; }
+QPushButton:default {
+    background: @text-display@;
+    border-color: @text-display@;
+    color: @black@;
+}
+QPushButton:disabled, QToolButton:disabled { color: @text-disabled@; border-color: @border@; }
+QPushButton:focus, QToolButton:focus { outline: none; border: 2px solid @text-display@; }
+
+/* ---- Select (.dot-select) and its menu ---- */
+QComboBox {
+    min-height: 42px;
+    padding: 0 12px 0 16px;
+    border: 1px solid @border-visible@;
+    border-radius: 8px;
+    background: transparent;
+    font-family: "Space Mono";
+    font-size: 14px;
+}
+QComboBox:hover, QComboBox:focus, QComboBox:on { border-color: @text-primary@; }
+QComboBox::drop-down { border: 0; width: 36px; }
+QComboBox::down-arrow { image: url(@dir@/chevron.svg); width: 16px; height: 16px; }
+QComboBox QAbstractItemView {
+    background: @surface-raised@;
+    border: 1px solid @border-visible@;
+    padding: 4px;
+    outline: none;
+    font-family: "Space Mono";
+    font-size: 14px;
+}
+QComboBox QAbstractItemView::item { min-height: 36px; padding: 0 12px; border-radius: 4px; }
+QComboBox QAbstractItemView::item:selected { background: @text-display@; color: @black@; }
+
+/* ---- Options (.dot-opt: the mark is a filled block, not a tick) ---- */
+QRadioButton, QCheckBox { spacing: 12px; min-height: 44px; background: transparent; }
+QRadioButton::indicator, QCheckBox::indicator { width: 18px; height: 18px; }
+QRadioButton::indicator:unchecked { image: url(@dir@/radio-off.svg); }
+QRadioButton::indicator:checked { image: url(@dir@/radio-on.svg); }
+QCheckBox::indicator:unchecked { image: url(@dir@/check-off.svg); }
+QCheckBox::indicator:checked { image: url(@dir@/check-on.svg); }
+QRadioButton:disabled, QCheckBox:disabled { color: @text-disabled@; }
+
+/* ---- Input (.nil-input: one underline, mono) ---- */
+QLineEdit, QSpinBox {
+    padding: 8px 0;
+    border: 0;
+    border-bottom: 1px solid @border-visible@;
+    border-radius: 0;
+    background: transparent;
+    font-family: "Space Mono";
+    font-size: 16px;
+}
+QLineEdit:focus, QSpinBox:focus { border-bottom-color: @text-display@; }
+
+/* ---- Lists and tables (manual partitioning) ---- */
+QListView, QTreeView, QTableView {
+    border: 1px solid @border@;
+    background: @surface@;
+    alternate-background-color: @surface@;
+    outline: none;
+    font-family: "Space Mono";
+    font-size: 13px;
+}
+QTreeView::item, QListView::item { min-height: 32px; }
+QTreeView::item:selected, QListView::item:selected { background: @text-display@; color: @black@; }
+QHeaderView::section {
+    background: @surface@;
+    border: 0;
+    border-bottom: 1px solid @border@;
+    padding: 8px;
+    font-family: "Space Mono";
+    font-size: 11px;
+    color: @text-secondary@;
+}
+
+QScrollBar:vertical { width: 6px; background: transparent; margin: 0; }
+QScrollBar::handle:vertical { background: @border-visible@; min-height: 32px; border-radius: 3px; }
+QScrollBar:horizontal { height: 6px; background: transparent; margin: 0; }
+QScrollBar::handle:horizontal { background: @border-visible@; min-width: 32px; border-radius: 3px; }
+QScrollBar::add-line, QScrollBar::sub-line { width: 0; height: 0; }
+QScrollBar::add-page, QScrollBar::sub-page { background: transparent; }
+
+QFrame[frameShape="4"], QFrame[frameShape="5"] { color: @border@; }
+QGroupBox { border: 0; margin-top: 24px; font-family: "Space Mono"; font-size: 11px; color: @text-secondary@; }
+QGroupBox::title { subcontrol-origin: margin; left: 0; }
+QToolTip { background: @surface-raised@; color: @text-primary@; border: 1px solid @border-visible@; padding: 4px 8px; }
+
+QDialog, QMessageBox { background: @surface@; }
+
+/* ---- Install progress (Installing.dc.html): Doto percentage over a
+   segmented bar, then the status line. The bar is 16px segments 2px apart.
+   Qt draws the percentage at the widget's own left edge whatever the padding
+   (QStyleSheetStyle aligns SE_ProgressBarLabel in the full rect), so the bar,
+   the status line and show.qml's text all start at that edge too. */
+#slideshow { background: @surface@; }
+#exec-progress {
+    min-height: 176px;
+    max-height: 176px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    background-image: url(@dir@/seg-off.png);
+    background-repeat: repeat-x;
+    background-position: bottom left;
+    background-origin: content;
+    background-clip: content;
+    font-family: "Doto";
+    font-size: 144px;
+    font-weight: bold;
+    color: @text-display@;
+    text-align: left;
+}
+#exec-progress::chunk {
+    margin-top: 160px;
+    margin-right: 2px;
+    width: 14px;
+    background: @text-display@;
+}
+#exec-message {
+    margin: 8px 0 16px 0;
+    font-family: "Space Mono";
+    font-size: 12px;
+    color: @text-secondary@;
+}
+/* The slideshow sits in a hidden-tab QTabWidget; drop its frame. The log
+   toggle is not part of the board, so it is folded away. */
+#slideshow QTabWidget::pane { border: 0; background: @surface@; }
+#slideshow QToolBar { max-width: 0; border: 0; background: transparent; }
+
+/* ---- Disk step (Installer.dc.html). The option icons, the EFI badge and the
+   device-info icon are Calamares' own colour artwork, not on the board. ---- */
+PrettyRadioButton QRadioButton { icon-size: 0px; spacing: 16px; }
+BootInfoWidget, DeviceInfoWidget { max-width: 0; max-height: 0; }
+#m_drivesLabel, #m_selectLabel, #m_previewBeforeLabel, #m_previewAfterLabel {
+    font-family: "Space Mono";
+    font-size: 11px;
+    color: @text-secondary@;
+}
+#m_messageLabel { color: @text-secondary@; }
+#m_previewBeforeFrame, #m_previewAfterFrame { background: transparent; }

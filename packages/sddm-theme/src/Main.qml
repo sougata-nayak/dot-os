@@ -160,7 +160,7 @@ Rectangle {
             message: root.failed ? "[Error: wrong password]"
                      : (keyboard.capsLock ? "[Caps lock on]" : "")
             input.onTextEdited: root.failed = false
-            input.onAccepted: root.login()
+            input.onAccepted: ui.login()
             KeyNavigation.tab: loginButton
         }
         Row {
@@ -170,9 +170,9 @@ Rectangle {
                 width: loginText.implicitWidth + 48
                 height: 44
                 activeFocusOnTab: true
-                Keys.onReturnPressed: root.login()
-                Keys.onEnterPressed: root.login()
-                Keys.onSpacePressed: root.login()
+                Keys.onReturnPressed: ui.login()
+                Keys.onEnterPressed: ui.login()
+                Keys.onSpacePressed: ui.login()
                 Rectangle {
                     anchors.fill: parent
                     radius: height / 2
@@ -191,7 +191,7 @@ Rectangle {
                     color: root.cBlack
                 }
                 FocusRing { visible: loginButton.activeFocus }
-                MouseArea { id: loginMouse; anchors.fill: parent; hoverEnabled: true; onClicked: root.login() }
+                MouseArea { id: loginMouse; anchors.fill: parent; hoverEnabled: true; onClicked: ui.login() }
             }
             GhostButton {
                 text: "Other user"
@@ -244,6 +244,7 @@ Rectangle {
     }
 
     // ---- Behaviour ----
+    // Lives on `ui` (the scaling wrapper above), so callers use ui.login().
     function login() {
         if (root.busy || userField.input.text === "") return;
         root.busy = true;

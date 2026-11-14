@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+# calamares-settings-debian owns the installer sequence and the launcher.
+# DOT OS ships its own two files in their place; Debian's are kept beside
+# them (*.debian) and come back when this package is removed (see postrm).
+if [ "$1" = install ] || [ "$1" = upgrade ]; then
+	for f in /etc/calamares/settings.conf /usr/share/applications/calamares-install-debian.desktop; do
+		dpkg-divert --package dot-os-installer --add --rename --divert "$f.debian" "$f" >/dev/null
+	done
+fi
+#DEBHELPER#

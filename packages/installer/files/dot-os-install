@@ -1,0 +1,50 @@
+#!/bin/sh
+# Start the DOT OS installer: what Debian's calamares-install-debian does
+# (Calamares as root on XWayland), through sudo so DISPLAY and XAUTHORITY
+# reach it. Calamares picks up the desktop's scale from Xft.dpi itself.
+#
+# Not native Wayland: a root Wayland client gets the right size but never
+# receives keyboard focus from KWin, so the account fields cannot be typed in.
+# The QML disk cache is off: packaged files share one timestamp, so after an
+# upgrade Qt would keep running the previous pages from /root/.cache. The KDE
+# platform theme makes root read /etc/xdg/kdeglobals, so dialogs Calamares
+# opens outside its stylesheet (errors) still get the DOT OS style and colours.
+set -u
+
+# After the display scale changes during a session (the live session switches
+# to the panel's native mode at login), KWin keeps advertising the X11 work
+# area in the old logical units. Calamares sizes its window from that and
+# would open at its 800x520 minimum, so put the work area back in device
+# pixels when the advertised desktop is clearly smaller than the X screen.
+fix_workarea() {
+	dims=$(xdpyinfo 2>/dev/null | awk '/dimensions:/ { print $2; exit }')
+	geo=$(xprop -root _NET_DESKTOP_GEOMETRY 2>/dev/null | awk -F'= ' '{ print $2 }')
+	wa=$(xprop -root _NET_WORKAREA 2>/dev/null | awk -F'= ' '{ print $2 }')
+	[ -n "$dims" ] && [ -n "$geo" ] && [ -n "$wa" ] || return 0
+	new=$(awk -v dims="$dims" -v geo="$geo" -v wa="$wa" 'BEGIN {
+		split(dims, d, "x"); split(geo, g, ", *")
+		if (g[1] <= 0 || g[2] <= 0 || g[1] >= d[1] * 0.9) exit 1
+		fx = d[1] / g[1]; fy = d[2] / g[2]
+		n = split(wa, v, ", *")
+		for (i = 1; i <= n; i++) printf "%s%d", (i > 1 ? ", " : ""), v[i] * ((i % 2) ? fx : fy) + 0.5
+	}') || return 0
+	xprop -root -f _NET_WORKAREA 32c -set _NET_WORKAREA "$new"
+}
+fix_workarea
+
+# Stale file left behind by live-build that confuses partitioning.
+sudo mv /etc/fstab /etc/fstab.orig.calamares 2>/dev/null
+
+# Keep the screen on, unlocked and awake while the installer is open. Root's
+# Calamares cannot reach the user's session bus to ask for this itself, and
+# an install left alone otherwise ends behind the lock screen.
+inhibit=""
+command -v kde-inhibit >/dev/null && inhibit="kde-inhibit --power --screenSaver"
+
+xhost +si:localuser:root >/dev/null
+$inhibit sudo env DISPLAY="${DISPLAY:-:0}" XAUTHORITY="${XAUTHORITY:-}" QT_QPA_PLATFORM=xcb QML_DISABLE_DISK_CACHE=1 \
+	QT_QPA_PLATFORMTHEME=kde calamares "$@"
+xhost -si:localuser:root >/dev/null
+
+sudo mv /etc/fstab.orig.calamares /etc/fstab 2>/dev/null
+exit 0

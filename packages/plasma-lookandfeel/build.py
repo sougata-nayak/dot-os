@@ -15,6 +15,7 @@ import json
 import os
 import re
 import shutil
+import subprocess
 import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "tools"))
@@ -506,6 +507,25 @@ def main():
         copy_tree("src/common", "plasmoids/org.dotos.%s/contents/ui" % name, values)
     # Lock screen and OSD replace Plasma's own (see debian/postinst).
     copy_tree("src/shell", "shell", T["dark"])
+    face()
+
+
+def face():
+    """Default account picture: the icon theme's user glyph (Lucide "user")
+    in text-primary on surface. Replaces Debian's swirl from desktop-base,
+    which new accounts would otherwise get through /etc/skel/.face."""
+    t = T["dark"]
+    path = os.path.join(OUT, "face.png")
+    src = path + ".svg"
+    with open(src, "w") as fh:
+        fh.write('<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">'
+                 '<rect width="256" height="256" fill="%s"/>'
+                 '<g transform="translate(64 64) scale(5.333)" fill="none" stroke="%s" stroke-width="1.25" '
+                 'stroke-linecap="round" stroke-linejoin="round">'
+                 '<circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></g></svg>'
+                 % (t["surface"], t["text-primary"]))
+    subprocess.run(["rsvg-convert", src, "-o", path], check=True)
+    os.unlink(src)
 
 
 if __name__ == "__main__":

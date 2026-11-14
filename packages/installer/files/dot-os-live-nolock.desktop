@@ -1,0 +1,11 @@
+[Desktop Entry]
+# Live session only: the screen locker would otherwise lock the live user out
+# while a long install runs (the live password is not shown anywhere).
+# This package is removed from installed systems; the /run/live check keeps
+# the entry harmless if it ever stays behind.
+Type=Application
+Name=DOT OS live session: no screen lock
+Exec=sh -c '[ -d /run/live/medium ] && kwriteconfig6 --notify --file kscreenlockerrc --group Daemon --key Autolock false && kwriteconfig6 --notify --file kscreenlockerrc --group Daemon --key LockOnResume false'
+OnlyShowIn=KDE;
+NoDisplay=true
+X-KDE-autostart-phase=1

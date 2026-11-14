@@ -2,7 +2,7 @@ Source: dot-os-plasma-lookandfeel
 Section: x11
 Priority: optional
 Maintainer: DOT OS project <maintainers@dot-os.invalid>
-Build-Depends: debhelper-compat (= 13), python3
+Build-Depends: debhelper-compat (= 13), python3, librsvg2-bin
 Standards-Version: 4.7.2
 Rules-Requires-Root: no
 

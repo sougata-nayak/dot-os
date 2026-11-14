@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Install DOT OS
+GenericName=System Installer
+Comment=Install DOT OS on this computer
+Exec=dot-os-install
+Keywords=calamares;system;install;installer;dot;debian
+Icon=install-debian
+Terminal=false
+Categories=Qt;System;
+StartupWMClass=calamares
+StartupNotify=true

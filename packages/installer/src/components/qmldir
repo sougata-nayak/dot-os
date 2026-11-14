@@ -1,0 +1,14 @@
+singleton T 1.0 T.qml
+DLabel 1.0 DLabel.qml
+DHeading 1.0 DHeading.qml
+DBody 1.0 DBody.qml
+DDisplay 1.0 DDisplay.qml
+DStatus 1.0 DStatus.qml
+DButton 1.0 DButton.qml
+DField 1.0 DField.qml
+DInput 1.0 DInput.qml
+DSelect 1.0 DSelect.qml
+DCheck 1.0 DCheck.qml
+DRow 1.0 DRow.qml
+DSeg 1.0 DSeg.qml
+DPage 1.0 DPage.qml

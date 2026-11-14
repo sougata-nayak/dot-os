@@ -11,7 +11,8 @@ DOT OS is a Debian 13 "trixie" spin for arm64. It is three things in one repo:
 3. **A design system** — the tokens and component designs every package is generated from.
 
 > Status: early. The ISO boots with the DOT OS boot menu, splash and login screen,
-> installs with Calamares, and new users log in to the DOT OS desktop. Installer branding and the APT repository are next.
+> installs with the DOT OS-branded Calamares installer, and new users log in to the DOT OS desktop.
+> The signed APT archive is built but not published yet; the first tagged release is next.
 > See [docs/STATUS.md](docs/STATUS.md).
 
 ## Layout
@@ -21,7 +22,7 @@ design-system/   tokens.json, brand book, component CSS, design boards (synced, 
 tools/           generate.py: tokens.json -> theme files under packages/
 packages/        one Debian package per theme layer
 live-build/      the ISO recipe
-installer/       Calamares branding (not started)
+installer/       pointer to packages/installer (Calamares branding)
 scripts/         build-debs.sh, build-iso.sh, run-vm.sh
 docs/            the build plan, status, testing notes
 ```
@@ -67,6 +68,7 @@ and the UTM settings.
 | `dot-os-plasma-lookandfeel` | global theme: bar, dock, panels, windows, wallpaper, splash, power screen, defaults | builds, tested as a new user at 1x and 2x |
 | `dot-os-desktop` | meta-package: Plasma plus every DOT OS package | builds, installed by the ISO |
 | `dot-os-archive-keyring` | archive key and source entry (off until published) | builds |
+| `dot-os-installer` | Calamares branding and pages, "Install DOT OS" launcher (live ISO only) | builds, full install tested in QEMU |
 
 ## Licence
 

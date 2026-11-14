@@ -1,0 +1,7 @@
+# DOT OS system default: don't open KDE's Welcome Center at first login or
+# after Plasma updates. It is still in the app launcher as "Welcome Center".
+# (plasma-welcome opens itself when LastSeenVersion is missing or older than
+# the running Plasma; this keeps it ahead.)
+[General]
+LastSeenVersion=99.0.0
+ShowUpdatePage=false
