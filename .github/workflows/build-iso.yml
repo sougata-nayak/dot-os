@@ -21,6 +21,9 @@ jobs:
       - name: Build packages
         run: scripts/build-debs.sh
 
+      - name: Build the patched Calamares
+        run: scripts/build-calamares.sh
+
       - name: Sign the APT archive
         env:
           DOTOS_SIGNING_KEY: ${{ secrets.DOTOS_SIGNING_KEY }}

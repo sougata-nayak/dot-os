@@ -69,6 +69,7 @@ and the UTM settings.
 | `dot-os-desktop` | meta-package: Plasma plus every DOT OS package | builds, installed by the ISO |
 | `dot-os-archive-keyring` | archive key and source entry (off until published) | builds |
 | `dot-os-installer` | Calamares branding and pages, "Install DOT OS" launcher (live ISO only) | builds, full install tested in QEMU |
+| `calamares` (`+dotos1`) | Debian's Calamares with three DOT OS patches (`packages/calamares`, built by `scripts/build-calamares.sh`) | builds |
 
 ## Licence
 

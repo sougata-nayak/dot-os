@@ -115,50 +115,27 @@ QToolTip { background: @surface-raised@; color: @text-primary@; border: 1px soli
 
 QDialog, QMessageBox { background: @surface@; }
 
-/* ---- Install progress (Installing.dc.html): Doto percentage over a
-   segmented bar, then the status line. The bar is 16px segments 2px apart.
-   Qt draws the percentage at the widget's own left edge whatever the padding
-   (QStyleSheetStyle aligns SE_ProgressBarLabel in the full rect), so the bar,
-   the status line and show.qml's text all start at that edge too. */
+/* ---- Install step (Installing.dc.html). show.qml draws the whole page;
+   DOT OS's Calamares hides its own bar, status line and log toggle. "Show
+   log" (navigation) swaps the slideshow for Calamares' log view. ---- */
 #slideshow { background: @surface@; }
-#exec-progress {
-    min-height: 176px;
-    max-height: 176px;
-    margin: 0;
-    padding: 0;
+#slideshow QTabWidget::pane { border: 0; background: @surface@; }
+
+#slideshow QPlainTextEdit {
+    margin: 32px 48px;
     border: 0;
-    background: transparent;
-    background-image: url(@dir@/seg-off.png);
-    background-repeat: repeat-x;
-    background-position: bottom left;
-    background-origin: content;
-    background-clip: content;
-    font-family: "Doto";
-    font-size: 144px;
-    font-weight: bold;
-    color: @text-display@;
-    text-align: left;
-}
-#exec-progress::chunk {
-    margin-top: 160px;
-    margin-right: 2px;
-    width: 14px;
-    background: @text-display@;
-}
-#exec-message {
-    margin: 8px 0 16px 0;
+    background: @surface@;
+    color: @text-secondary@;
     font-family: "Space Mono";
     font-size: 12px;
-    color: @text-secondary@;
+    selection-background-color: @text-display@;
+    selection-color: @black@;
 }
-/* The slideshow sits in a hidden-tab QTabWidget; drop its frame. The log
-   toggle is not part of the board, so it is folded away. */
-#slideshow QTabWidget::pane { border: 0; background: @surface@; }
-#slideshow QToolBar { max-width: 0; border: 0; background: transparent; }
 
-/* ---- Disk step (Installer.dc.html). The option icons, the EFI badge and the
-   device-info icon are Calamares' own colour artwork, not on the board. ---- */
-PrettyRadioButton QRadioButton { icon-size: 0px; spacing: 16px; }
+/* ---- Disk step (Installer.dc.html). DOT OS's Calamares drops the option
+   artwork and draws the partition bar and legend in the board's greys; the
+   EFI badge and device-info icon are folded away here. ---- */
+PrettyRadioButton QRadioButton { spacing: 16px; }
 BootInfoWidget, DeviceInfoWidget { max-width: 0; max-height: 0; }
 #m_drivesLabel, #m_selectLabel, #m_previewBeforeLabel, #m_previewAfterLabel {
     font-family: "Space Mono";

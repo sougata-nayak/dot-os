@@ -25,9 +25,17 @@ Rectangle {
         x: 16
         anchors.verticalCenter: parent.verticalCenter
         spacing: 8
+        // Install step: the log replaces Cancel (cancelling is off while
+        // files are written). Execution comes from DOT OS's Calamares patch.
         DButton {
             kind: "ghost"
-            visible: ViewManager.quitVisible && !nav.last
+            visible: nav.installing
+            text: Execution.logVisible ? "Hide log" : "Show log"
+            onClicked: Execution.toggleLog()
+        }
+        DButton {
+            kind: "ghost"
+            visible: ViewManager.quitVisible && !nav.last && !nav.installing
             enabled: ViewManager.quitEnabled
             text: nav.first ? "Quit" : T.plain(ViewManager.quitLabel)
             onClicked: ViewManager.quit()

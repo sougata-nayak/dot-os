@@ -9,7 +9,7 @@ Rules-Requires-Root: no
 Package: dot-os-installer
 Architecture: all
 Depends: ${misc:Depends},
- calamares (>= 3.3),
+ calamares (>= 3.3.14-1+dotos1),
  calamares-settings-debian,
  x11-xserver-utils,
  kde-cli-tools,

@@ -40,8 +40,6 @@ def main():
     p = lambda name: os.path.join(OUT, name)  # noqa: E731
     # Wordmark: there is no logo, only the name in Doto (design-system/README.md).
     b.text(p("logo.png"), "DOT OS", b.DOTO, 48, "text-display", -0.03, axes=b.DOTO_AXES, height=48)
-    # One empty segment and its 2px gap, tiled under the install progress bar.
-    b.svg(p("seg-off.png"), 16, 16, '<rect width="14" height="16" fill="%s"/>' % t["border-visible"])
 
     def write(name, body):
         with open(p(name), "w") as fh:

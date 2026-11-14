@@ -1,0 +1,252 @@
+Description: Draw the partition step in DOT OS greys
+ Partition colours from the design system instead of the Breeze rainbow (new
+ partitions by role: system white, EFI grey, swap dark grey), a flat
+ segmented bar, a readable legend with flat squares, and no option artwork.
+Author: DOT OS project
+Forwarded: no
+Last-Update: 2026-11-14
+---
+diff --git a/src/modules/partition/core/ColorUtils.cpp b/src/modules/partition/core/ColorUtils.cpp
+index 6dc17be..d992bad 100644
+--- a/src/modules/partition/core/ColorUtils.cpp
++++ b/src/modules/partition/core/ColorUtils.cpp
+@@ -28,25 +28,43 @@ using Calamares::Partition::isPartitionFreeSpace;
+ using Calamares::Partition::isPartitionNew;
+ using Calamares::Partition::PartitionIterator;
+ 
+-static const int NUM_PARTITION_COLORS = 5;
+-static const int NUM_NEW_PARTITION_COLORS = 4;
+-//Let's try to use the Breeze palette
++// DOT OS: greys from the design system (dark theme) instead of the Breeze
++// rainbow, as on design-system/boards/Installer.dc.html. Existing
++// partitions step through greys; new ones are coloured by what they are
++// (see newPartitionColor()).
++static const int NUM_PARTITION_COLORS = 4;
++static const int NUM_NEW_PARTITION_COLORS = 3;
+ static const QColor PARTITION_COLORS[ NUM_PARTITION_COLORS ] = {
+-    "#2980b9",  //Dark Plasma Blue
+-    "#27ae60",  //Dark Icon Green
+-    "#c9ce3b",  //Dirty Yellow
+-    "#3daee9",  //Plasma Blue
+-    "#9b59b6",  //Purple
++    "#999999",  // text-secondary
++    "#E8E8E8",  // text-primary
++    "#666666",  // text-disabled
++    "#CCCCCC",
+ };
+ static const QColor NEW_PARTITION_COLORS[ NUM_NEW_PARTITION_COLORS ] = {
+-    "#c0392b",  //Dark Icon Red
+-    "#f39c1f",  //Dark Icon Yellow
+-    "#f1b7bc",  //Light Salmon
+-    "#fed999",  //Light Orange
++    "#FFFFFF",  // text-display
++    "#999999",  // text-secondary
++    "#666666",  // text-disabled
+ };
+-static QColor FREE_SPACE_COLOR = "#777777";
+-static QColor EXTENDED_COLOR = "#aaaaaa";
+-static QColor UNKNOWN_DISKLABEL_COLOR = "#4d4151";
++static QColor FREE_SPACE_COLOR = "#222222";  // border
++static QColor EXTENDED_COLOR = "#333333";  // border-visible
++static QColor UNKNOWN_DISKLABEL_COLOR = "#1A1A1A";  // surface-raised
++
++// The board's legend: the EFI system partition in text-secondary, swap in
++// text-disabled, everything else (the system itself) in text-display.
++static QColor
++newPartitionColor( Partition* partition )
++{
++    const auto type = partition->fileSystem().type();
++    if ( type == FileSystem::LinuxSwap )
++    {
++        return NEW_PARTITION_COLORS[ 2 ];
++    }
++    if ( type == FileSystem::Fat32 || type == FileSystem::Fat16 || type == FileSystem::Fat12 )
++    {
++        return NEW_PARTITION_COLORS[ 1 ];
++    }
++    return NEW_PARTITION_COLORS[ 0 ];
++}
+ 
+ static QMap< QString, QColor > s_partitionColorsCache;
+ 
+@@ -140,7 +158,8 @@ colorForPartition( Partition* partition )
+ 
+     if ( isPartitionNew( partition ) )
+     {
+-        return NEW_PARTITION_COLORS[ newColorIdx % NUM_NEW_PARTITION_COLORS ];
++        Q_UNUSED( newColorIdx )
++        return newPartitionColor( partition );
+     }
+ 
+     if ( partition->fileSystem().supportGetUUID() != FileSystem::cmdSupportNone
+@@ -184,7 +203,9 @@ colorForPartitionInFreeSpace( Partition* partition )
+             ++newColorIdx;
+         }
+     }
+-    return NEW_PARTITION_COLORS[ newColorIdx % NUM_NEW_PARTITION_COLORS ];
++    // The new system's own partition: always the hero colour.
++    Q_UNUSED( newColorIdx )
++    return NEW_PARTITION_COLORS[ 0 ];
+ }
+ 
+ 
+diff --git a/src/modules/partition/gui/ChoicePage.cpp b/src/modules/partition/gui/ChoicePage.cpp
+index 382c1a7..f989056 100644
+--- a/src/modules/partition/gui/ChoicePage.cpp
++++ b/src/modules/partition/gui/ChoicePage.cpp
+@@ -252,25 +252,22 @@ ChoicePage::setupChoices()
+     //  3) Manual
+     //  TBD: upgrade option?
+ 
+-    QSize iconSize( Calamares::defaultIconSize().width() * 2, Calamares::defaultIconSize().height() * 2 );
++    // DOT OS: no option artwork (the board's options are plain radio
++    // buttons); a zero icon size keeps the radio and text aligned.
++    QSize iconSize( 0, 0 );
+     m_grp = new QButtonGroup( this );
+ 
+     m_alongsideButton = new PrettyRadioButton;
+     m_alongsideButton->setIconSize( iconSize );
+-    m_alongsideButton->setIcon(
+-        Calamares::defaultPixmap( Calamares::PartitionAlongside, Calamares::Original, iconSize ) );
+     m_alongsideButton->addToGroup( m_grp, InstallChoice::Alongside );
+ 
+     m_eraseButton = new PrettyRadioButton;
+     m_eraseButton->setIconSize( iconSize );
+-    m_eraseButton->setIcon( Calamares::defaultPixmap( Calamares::PartitionEraseAuto, Calamares::Original, iconSize ) );
+     m_eraseButton->addToGroup( m_grp, InstallChoice::Erase );
+ 
+     m_replaceButton = new PrettyRadioButton;
+ 
+     m_replaceButton->setIconSize( iconSize );
+-    m_replaceButton->setIcon(
+-        Calamares::defaultPixmap( Calamares::PartitionReplaceOs, Calamares::Original, iconSize ) );
+     m_replaceButton->addToGroup( m_grp, InstallChoice::Replace );
+ 
+     // Fill up swap options
+@@ -306,8 +303,6 @@ ChoicePage::setupChoices()
+ 
+     m_somethingElseButton = new PrettyRadioButton;
+     m_somethingElseButton->setIconSize( iconSize );
+-    m_somethingElseButton->setIcon(
+-        Calamares::defaultPixmap( Calamares::PartitionManual, Calamares::Original, iconSize ) );
+     m_itemsLayout->addWidget( m_somethingElseButton );
+     m_somethingElseButton->addToGroup( m_grp, InstallChoice::Manual );
+ 
+diff --git a/src/modules/partition/gui/PartitionBarsView.cpp b/src/modules/partition/gui/PartitionBarsView.cpp
+index ef748d2..4dca6c8 100644
+--- a/src/modules/partition/gui/PartitionBarsView.cpp
++++ b/src/modules/partition/gui/PartitionBarsView.cpp
+@@ -129,26 +129,28 @@ PartitionBarsView::drawSection( QPainter* painter, const QRect& rect_, int x, in
+ 
+     QColor borderColor = color.darker();
+ 
+-    painter->setPen( borderColor );
+-
+-    painter->drawRoundedRect( rect, radius, radius );
+-
+-    // Draw shade
+-    if ( !isFreeSpace )
++    // DOT OS: a flat segmented meter, as on the Installer board: no outline,
++    // no rounded ends, no sheen. Gaps every 16px are cut in the window
++    // colour, counted from the start of the whole bar so they line up
++    // across partitions.
++    Q_UNUSED( isFreeSpace )
++    Q_UNUSED( radius )
++    painter->translate( -0.5, -0.5 );
++    painter->setPen( Qt::NoPen );
++    painter->fillRect( QRect( x, y, width, height ), painter->brush() );
+     {
+-        rect.adjust( 2, 2, -2, -2 );
++        constexpr int segment = 16;
++        constexpr int gap = 2;
++        const QColor gapColor = palette().window().color();
++        for ( int gx = rect_.x() + segment - gap; gx < x + width; gx += segment )
++        {
++            if ( gx + gap > x )
++            {
++                painter->fillRect( QRect( gx, y, gap, height ), gapColor );
++            }
++        }
+     }
+-
+-    QLinearGradient gradient( 0, 0, 0, height / 2 );
+-
+-    qreal c = isFreeSpace ? 0 : 1;
+-    gradient.setColorAt( 0, QColor::fromRgbF( c, c, c, 0.3 ) );
+-    gradient.setColorAt( 1, QColor::fromRgbF( c, c, c, 0 ) );
+-
+-    painter->setPen( Qt::NoPen );
+-
+-    painter->setBrush( gradient );
+-    painter->drawRoundedRect( rect, radius, radius );
++    painter->translate( 0.5, 0.5 );
+ 
+     if ( selectionMode() != QAbstractItemView::NoSelection && index.isValid() && selectionModel()
+          && !selectionModel()->selectedIndexes().isEmpty() && selectionModel()->selectedIndexes().first() == index )
+diff --git a/src/modules/partition/gui/PartitionLabelsView.cpp b/src/modules/partition/gui/PartitionLabelsView.cpp
+index e338da2..5bb4dd3 100644
+--- a/src/modules/partition/gui/PartitionLabelsView.cpp
++++ b/src/modules/partition/gui/PartitionLabelsView.cpp
+@@ -96,12 +96,8 @@ PartitionLabelsView::labelsRect() const
+ static void
+ drawPartitionSquare( QPainter* painter, const QRect& rect, const QBrush& brush )
+ {
+-    painter->fillRect( rect.adjusted( 1, 1, -1, -1 ), brush );
+-    painter->setRenderHint( QPainter::Antialiasing, true );
+-    painter->setPen( QPalette().shadow().color() );
+-    painter->translate( .5, .5 );
+-    painter->drawRoundedRect( rect.adjusted( 0, 0, -1, -1 ), CORNER_RADIUS, CORNER_RADIUS );
+-    painter->translate( -.5, -.5 );
++    // DOT OS: a flat square, no outline (Installer board legend).
++    painter->fillRect( rect, brush );
+ }
+ 
+ static void
+@@ -360,29 +356,41 @@ PartitionLabelsView::drawLabel( QPainter* painter,
+                                 const QPoint& pos,
+                                 bool selected )
+ {
+-    painter->setPen( Qt::black );
++    // DOT OS: the name in the text colour, the details under it in the
++    // secondary grey (was black and grey, unreadable on a dark window).
++    const QColor primary = palette().color( QPalette::WindowText );
++    const QColor secondary( "#999999" );
++    painter->setPen( primary );
+     int vertOffset = 0;
+     int width = 0;
++    int firstLineHeight = 0;
+     for ( const QString& textLine : text )
+     {
+         QSize textSize = painter->fontMetrics().size( Qt::TextSingleLine, textLine );
++        if ( !firstLineHeight )
++        {
++            firstLineHeight = textSize.height();
++        }
+         painter->drawText(
+             pos.x() + LABEL_PARTITION_SQUARE_MARGIN, pos.y() + vertOffset + textSize.height() / 2, textLine );
+         vertOffset += textSize.height();
+-        painter->setPen( Qt::gray );
++        painter->setPen( secondary );
+         width = qMax( width, textSize.width() );
+     }
+ 
+-    QRect partitionSquareRect(
+-        pos.x(), pos.y() - 3, LABEL_PARTITION_SQUARE_MARGIN - 5, LABEL_PARTITION_SQUARE_MARGIN - 5 );
++    // 8px square, centred on the first line's capitals (its baseline is
++    // at pos.y() + height / 2).
++    const int square = 8;
++    const int capCentre = pos.y() + firstLineHeight / 2 - painter->fontMetrics().capHeight() / 2;
++    QRect partitionSquareRect( pos.x(), capCentre - square / 2, square, square );
+     drawPartitionSquare( painter, partitionSquareRect, color );
+ 
+     if ( selected )
+     {
+-        drawSelectionSquare( painter, partitionSquareRect.adjusted( 2, 2, -2, -2 ), color );
++        drawSelectionSquare( painter, partitionSquareRect.adjusted( -2, -2, 2, 2 ), color );
+     }
+ 
+-    painter->setPen( Qt::black );
++    painter->setPen( primary );
+ }
+ 
+ QModelIndex

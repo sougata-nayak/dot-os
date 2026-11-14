@@ -101,15 +101,18 @@ Last updated 14 November 2026.
 - The Summary page fades the plan out at the bottom when there is more to scroll.
 - Checked: full install from the ISO to a blank disk in QEMU at 3840x2160 (about 3 minutes), Restart from the Finish page, boot from the `dot` entry, login, no Welcome Center, installer package removed from the installed system.
 
-### Installer known gaps
+### Patched Calamares
 
-These are drawn by Calamares itself and need a patched Calamares to change:
+DOT OS builds Debian's Calamares 3.3.14 with three patches (`packages/calamares`, `scripts/build-calamares.sh`, version `3.3.14-1+dotos1`):
 
-- **Disk step** keeps Calamares' coloured partition bars, black legend text and option icons.
-- **Install step**: the percentage sits under the slideshow, the bar has no red live segment, and there is no "Show log".
-- **Finish page** occasionally stays on "Loading…" (a Calamares load race); Restart then does not reboot.
+- **Disk step** in the board's greys: the new system white, EFI grey, swap dark grey, a flat segmented bar, a readable legend, no option artwork.
+- **Install step** drawn entirely by `show.qml` from a new `Execution` QML singleton: Doto percentage, 20 segments with a red leading one, uppercase status line, time left, slides, and "Show log" / "Hide log" in the footer.
+- **Finish page** load race fixed (a page that finished loading before Calamares listened for it stayed on "Loading…").
+- Checked: full install from the ISO in QEMU at 3840x2160 with the patched build; Disk, Install (with the log shown and hidden) and Finish pages on screen.
+
+Still different from the boards: the Disk step keeps Calamares' own layout (storage selector at the top, the "Current" and "After" bars at the foot) rather than the board's two columns.
 
 ## Next
 
 1. Phase 6: first tagged release; then trim the ISO size.
-2. Optional: patched Calamares for the gaps above; Raspberry Pi 5 image.
+2. Optional: Raspberry Pi 5 image.

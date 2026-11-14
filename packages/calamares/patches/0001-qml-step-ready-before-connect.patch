@@ -1,0 +1,27 @@
+Description: Show QML pages that finish loading before statusChanged is connected
+ An Asynchronous QQmlComponent for a local file can be Ready as soon as it is
+ created, so statusChanged never fires and the page stays on "Loading…".
+ Seen with finishedq: Restart then did nothing.
+Author: DOT OS project
+Forwarded: no
+Last-Update: 2026-11-14
+---
+diff --git a/src/libcalamaresui/viewpages/QmlViewStep.cpp b/src/libcalamaresui/viewpages/QmlViewStep.cpp
+index 086f8fa..a98e8e9 100644
+--- a/src/libcalamaresui/viewpages/QmlViewStep.cpp
++++ b/src/libcalamaresui/viewpages/QmlViewStep.cpp
+@@ -264,9 +264,12 @@ QmlViewStep::setConfigurationMap( const QVariantMap& configurationMap )
+         m_qmlComponent
+             = new QQmlComponent( m_qmlEngine, QUrl( m_qmlFileName ), QQmlComponent::CompilationMode::Asynchronous );
+         connect( m_qmlComponent, &QQmlComponent::statusChanged, this, &QmlViewStep::loadComplete );
+-        if ( m_qmlComponent->status() == QQmlComponent::Error )
++        // An "asynchronous" component can finish loading before this point
++        // (local file, already compiled), and then statusChanged never fires:
++        // the page stayed on "Loading…" for good. Handle Ready here as well.
++        if ( m_qmlComponent->status() != QQmlComponent::Loading )
+         {
+-            showFailedQml();
++            loadComplete();
+         }
+     }
+     else
