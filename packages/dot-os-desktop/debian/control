@@ -1,0 +1,34 @@
+Source: dot-os-desktop
+Section: metapackages
+Priority: optional
+Maintainer: DOT OS project <maintainers@dot-os.invalid>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.7.2
+Rules-Requires-Root: no
+
+Package: dot-os-desktop
+Architecture: all
+Depends: ${misc:Depends},
+ kde-plasma-desktop,
+ sddm (>= 0.21),
+ plymouth,
+ qt6-style-kvantum,
+ fonts-dot-os (>= 0.1.0),
+ dot-os-color-schemes (>= 0.1.0),
+ dot-os-konsole-profile (>= 0.1.0),
+ dot-os-gtk-theme (>= 0.1.0),
+ dot-os-kvantum-theme (>= 0.1.0),
+ dot-os-icon-theme (>= 0.1.0),
+ dot-os-cursor-theme (>= 0.1.0),
+ dot-os-sddm-theme (>= 0.1.0),
+ dot-os-plymouth-theme (>= 0.1.0),
+ dot-os-plasma-lookandfeel (>= 0.1.0),
+ dot-os-archive-keyring (>= 0.1.0)
+Recommends: dot-os-grub-theme (>= 0.1.0)
+Description: DOT OS desktop on Debian and KDE Plasma
+ Installs everything that makes up the DOT OS desktop: the Plasma global
+ theme, widget, GTK and icon themes, cursors, fonts, terminal palette, boot
+ splash and login screen, and the DOT OS package archive key.
+ .
+ Install it on Debian 13 to turn a Plasma desktop into DOT OS. New users get
+ the DOT OS desktop at their first login.

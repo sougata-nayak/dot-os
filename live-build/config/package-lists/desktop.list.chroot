@@ -3,7 +3,8 @@ live-boot
 live-config
 live-config-systemd
 
-# Desktop
+# Desktop: the DOT OS meta-package pulls in Plasma and every theme package
+dot-os-desktop
 kde-plasma-desktop
 sddm
 network-manager

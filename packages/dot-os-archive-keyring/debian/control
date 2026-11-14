@@ -1,0 +1,16 @@
+Source: dot-os-archive-keyring
+Section: misc
+Priority: optional
+Maintainer: DOT OS project <maintainers@dot-os.invalid>
+Build-Depends: debhelper-compat (= 13), gnupg
+Standards-Version: 4.7.2
+Rules-Requires-Root: no
+
+Package: dot-os-archive-keyring
+Architecture: all
+Depends: ${misc:Depends}
+Description: signing key and source entry for the DOT OS package archive
+ Installs the public key that DOT OS packages are signed with and an APT
+ source entry for the DOT OS archive, so theme updates arrive with
+ apt upgrade. The entry ships switched off until the archive is published;
+ set "Enabled: yes" in /etc/apt/sources.list.d/dot-os.sources to use it.

@@ -1,0 +1,10 @@
+#!/usr/bin/make -f
+%:
+	dh $@
+
+override_dh_auto_build:
+	mkdir -p build
+	gpg --dearmor < files/dot-os-archive-keyring.asc > build/dot-os-archive-keyring.gpg
+
+override_dh_auto_clean:
+	rm -rf build

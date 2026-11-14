@@ -83,8 +83,16 @@ Last updated 13 November 2026.
 - The login screen scales itself to 250% on 4K panels, and desktop widget positions are saved for the 4K logical size so they don't move when the mode changes. Screenshots 24-26.
 - `scripts/run-vm.sh` now starts the VM with a 3840x2160 display. In UTM, set the display to 3840x2160 (see TESTING.md).
 
+## Phase 4: meta-package and APT archive
+
+- `dot-os-desktop` depends on Plasma and every DOT OS package; on a plain Debian 13 + Plasma machine, installing it alone gives the DOT OS desktop. The ISO now installs it rather than a list of packages.
+- `dot-os-archive-keyring` ships the archive's public key and an APT source entry, switched off until the archive is published.
+- `scripts/build-repo.sh` builds a signed archive (reprepro, ed25519 key). Checked from a clean Debian container: apt verifies the signature, `dot-os-desktop` resolves all 12 packages, and a tampered index is rejected.
+- `scripts/make-signing-key.sh` created the key; the private half is only in the gitignored `keys/` folder.
+- CI: package builds on every push; on a `v*` tag, packages, signed archive, ISO and a GitHub Release. Publishing to GitHub Pages waits for the `DOTOS_SIGNING_KEY` secret and `DOTOS_PUBLISH_REPO` variable (docs/RELEASING.md).
+- Live ISO checked: `dot-os-desktop` installed, `apt update` clean with the entry off.
+
 ## Next
 
-1. Phase 4: `dot-os-desktop` meta-package and a signed APT repository.
-2. Phase 5: Calamares branding, "DOT OS" boot entries, live session matching the installed system.
-3. Phase 6: CI release on tag.
+1. Phase 5: Calamares branding, "DOT OS" boot entries, Welcome window and account picture, live session matching the installed system.
+2. Phase 6: first tagged release; then trim the ISO size.

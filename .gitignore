@@ -43,3 +43,6 @@ live-build/chroot*
 out/
 packages/*/build/
 __pycache__/
+
+# signing keys never go in git
+keys/

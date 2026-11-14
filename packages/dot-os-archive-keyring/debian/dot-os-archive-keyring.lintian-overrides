@@ -1,0 +1,3 @@
+# The archive entry is this distribution's own package source, shipped
+# switched off until the archive is published.
+dot-os-archive-keyring: package-installs-apt-sources [etc/apt/sources.list.d/dot-os.sources]

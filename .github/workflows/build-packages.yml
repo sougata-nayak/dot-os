@@ -1,54 +1,29 @@
 name: Build theme packages
 
-# Builds every Debian package under packages/ on each push/PR, so a broken
-# debian/control or rules file is caught immediately. Does NOT build the
-# ISO — see build-iso.yml for that (tag-triggered only).
+# Builds every Debian package under packages/ on each push and pull request,
+# so a broken debian/ directory or generator is caught immediately.
 
 on:
   push:
     branches: [main]
-    paths: ["packages/**", "tools/**", "design-system/tokens.json", ".github/workflows/build-packages.yml"]
+    paths: ["packages/**", "tools/**", "design-system/tokens.json", "scripts/build-debs.sh", ".github/workflows/build-packages.yml"]
   pull_request:
-    paths: ["packages/**", "tools/**", "design-system/tokens.json", ".github/workflows/build-packages.yml"]
+    paths: ["packages/**", "tools/**", "design-system/tokens.json", "scripts/build-debs.sh", ".github/workflows/build-packages.yml"]
 
 jobs:
   build:
-    # Native arm64 runner: DOT OS packages are all Architecture: all or
-    # arm64-specific, and building on arm64 avoids any cross-arch surprises.
-    # (ubuntu-24.04-arm is GitHub-hosted and free for public repos as of
-    # this writing -- re-check GitHub's runner docs if this starts failing.)
     runs-on: ubuntu-24.04-arm
-    strategy:
-      fail-fast: false
-      matrix:
-        package:
-          # Add a package here once it has a debian/ directory.
-          - color-schemes
-          - konsole-profile
-          - fonts
-          - gtk-theme
-          - kvantum-theme
-          - cursor-theme
-          - icon-theme
-          - grub-theme
-          - plymouth-theme
-          - sddm-theme
-          - plasma-lookandfeel
     steps:
       - uses: actions/checkout@v4
-
-      - name: Install build tooling
-        run: sudo apt-get update && sudo apt-get install -y devscripts debhelper build-essential librsvg2-bin x11-apps python3-fonttools grub-common
 
       - name: Generated theme files are up to date
         run: python3 tools/generate.py --check
 
-      - name: Build packages/${{ matrix.package }}
-        working-directory: packages/${{ matrix.package }}
-        run: dpkg-buildpackage -us -uc -b
+      - name: Build all packages in Debian 13
+        run: scripts/build-debs.sh
 
-      - name: Upload .deb
+      - name: Upload packages
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.package }}-deb
-          path: packages/*.deb
+          name: debs
+          path: out/debs/*.deb

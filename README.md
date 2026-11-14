@@ -65,7 +65,8 @@ and the UTM settings.
 | `dot-os-plymouth-theme` | boot splash | builds, tested on live ISO and installed system |
 | `dot-os-sddm-theme` | login screen | builds, tested on installed system |
 | `dot-os-plasma-lookandfeel` | global theme: bar, dock, panels, windows, wallpaper, splash, power screen, defaults | builds, tested as a new user at 1x and 2x |
-| `dot-os-desktop` | meta-package | not started |
+| `dot-os-desktop` | meta-package: Plasma plus every DOT OS package | builds, installed by the ISO |
+| `dot-os-archive-keyring` | archive key and source entry (off until published) | builds |
 
 ## Licence
 

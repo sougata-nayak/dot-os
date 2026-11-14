@@ -1,0 +1,2 @@
+build/dot-os-archive-keyring.gpg usr/share/keyrings
+files/dot-os.sources etc/apt/sources.list.d

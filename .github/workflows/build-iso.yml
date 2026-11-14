@@ -1,55 +1,46 @@
-name: Build ISO
+name: Release
 
-# Only runs on a tag push (e.g. v0.1.0) -- building the full live ISO is
-# slow and only worth doing for an actual release. Publishes the ISO +
-# checksum to a GitHub Release, and (eventually) updates the GitHub Pages
-# APT repo. See docs/PLAN.md's "Repository & open-source setup" section.
+# On a version tag (v0.1.0, ...): build every package, sign the APT archive,
+# build the ISO, and attach the ISO and checksums to a GitHub Release.
+# Publishing the archive to GitHub Pages is off until the repository variable
+# DOTOS_PUBLISH_REPO is set to "true" (see docs/RELEASING.md).
 
 on:
   push:
     tags: ["v*"]
 
+permissions:
+  contents: write
+
 jobs:
-  build-iso:
-    # Native arm64 runner -- live-build cannot cross-build, and QEMU
-    # emulation here would make this job take hours instead of minutes.
+  release:
     runs-on: ubuntu-24.04-arm
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install live-build tooling
-        run: sudo apt-get update && sudo apt-get install -y live-build
+      - name: Build packages
+        run: scripts/build-debs.sh
 
-      - name: Build theme packages and stage a local APT repo
-        run: |
-          echo "TODO: build packages/*, then reprepro/aptly them into a
-          local repo that live-build/config/archives can point at. This
-          step is intentionally not fleshed out yet -- see docs/PLAN.md
-          Roadmap Phase 2/3. Do not let this placeholder silently pass CI
-          once the ISO build step below is real; wire this before relying
-          on this workflow."
+      - name: Sign the APT archive
+        env:
+          DOTOS_SIGNING_KEY: ${{ secrets.DOTOS_SIGNING_KEY }}
+        run: scripts/build-repo.sh
 
-      - name: lb config
-        working-directory: live-build
-        run: ./auto/config
+      - name: Build the ISO
+        run: scripts/build-iso.sh
 
-      - name: lb build
-        working-directory: live-build
-        run: sudo lb build
-
-      - name: Checksum
-        working-directory: live-build
-        run: sha256sum *.iso > SHA256SUMS
-
-      - name: Publish to GitHub Release
+      - name: Publish the release
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            live-build/*.iso
-            live-build/SHA256SUMS
+            out/*.iso
+            out/SHA256SUMS
 
-      - name: Update GitHub Pages APT repo
-        run: |
-          echo "TODO: publish the reprepro/aptly repo tree built above to
-          the gh-pages branch / Pages site. See docs/PLAN.md's hosting
-          decision (GitHub Releases + GitHub Pages)."
+      - name: Publish the APT archive to GitHub Pages
+        if: vars.DOTOS_PUBLISH_REPO == 'true'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: out/repo
+          publish_branch: gh-pages
+          keep_files: false

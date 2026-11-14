@@ -27,6 +27,8 @@ docker run --rm --platform linux/arm64 \
 			[ -d "$dir/debian" ] || continue
 			if [ -n "$wanted" ]; then case " $wanted " in *" $dir "*) ;; *) continue ;; esac; fi
 			echo "=== $dir"
+			# Each package declares its own build tools in debian/control.
+			apt-get build-dep -y -qq "./$dir" >/dev/null 2>&1 || { apt-get build-dep -y "./$dir"; exit 1; }
 			(cd "$dir" && dpkg-buildpackage -us -uc -b >/tmp/build.log 2>&1) || { cat /tmp/build.log; exit 1; }
 		done
 		for deb in ./*.deb; do rm -f /out/"$(dpkg-deb -f "$deb" Package)"_*.deb; done
