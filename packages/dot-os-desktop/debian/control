@@ -23,12 +23,17 @@ Depends: ${misc:Depends},
  dot-os-sddm-theme (>= 0.1.0),
  dot-os-plymouth-theme (>= 0.1.0),
  dot-os-plasma-lookandfeel (>= 0.1.0),
- dot-os-archive-keyring (>= 0.1.0)
+ dot-os-archive-keyring (>= 0.1.0),
+ dolphin (>= 4:25.04.3-1+deb13u1+dotos1),
+ libkf6kiofilewidgets6 (>= 6.13.0-6+dotos1),
+ systemsettings (>= 4:6.3.4-2+dotos1),
+ konsole
 Recommends: dot-os-grub-theme (>= 0.1.0)
 Description: DOT OS desktop on Debian and KDE Plasma
  Installs everything that makes up the DOT OS desktop: the Plasma global
  theme, widget, GTK and icon themes, cursors, fonts, terminal palette, boot
- splash and login screen, and the DOT OS package archive key.
+ splash and login screen, the DOT OS package archive key, and the DOT OS
+ builds of Dolphin, System Settings and the KIO file widgets.
  .
  Install it on Debian 13 to turn a Plasma desktop into DOT OS. New users get
  the DOT OS desktop at their first login.

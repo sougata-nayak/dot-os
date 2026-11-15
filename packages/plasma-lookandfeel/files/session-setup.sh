@@ -12,6 +12,25 @@ if [ ! -e "$css" ] && [ ! -L "$css" ]; then
 	ln -s /usr/share/dot-os/gtk-4.0/dark.css "$css"
 fi
 
+# App window layouts (which toolbars show). Copied once; files the user
+# already has are left alone.
+if [ ! -e "$mark/app-layouts" ]; then
+	# Konsole's own first-run update turns its menu bar on when it finds the
+	# toolbars hidden, unless the user's konsolerc already has a MenuBar line.
+	# Write that line before the layouts that hide the toolbars, and by hand:
+	# kwriteconfig6 skips a value equal to the /etc/xdg default, which leaves
+	# no line at all. Ctrl+Shift+M still brings the menu bar back.
+	grep -qs '^MenuBar=' "$conf/konsolerc" ||
+		printf '\n[MainWindow]\nMenuBar=Disabled\n' >> "$conf/konsolerc"
+	data="${XDG_DATA_HOME:-$HOME/.local/share}/kxmlgui5"
+	for f in /usr/share/dot-os/kxmlgui5/*/*.rc; do
+		[ -e "$f" ] || continue
+		rel="${f#/usr/share/dot-os/kxmlgui5/}"
+		[ -e "$data/$rel" ] || install -D -m 644 "$f" "$data/$rel"
+	done
+	: > "$mark/app-layouts"
+fi
+
 # Plasma's GTK bridge defaults to Breeze; point it at the DOT OS theme.
 if [ ! -e "$mark/gtk-theme" ]; then
 	for try in 1 2 3 4 5 6; do

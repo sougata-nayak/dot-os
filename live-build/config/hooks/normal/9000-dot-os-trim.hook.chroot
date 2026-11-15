@@ -1,0 +1,38 @@
+#!/bin/sh
+# DOT OS is a lightweight desktop. Plasma recommends apps that DOT OS does not
+# ship: duplicates of something already there (a second browser and terminal,
+# an old search tool) or extras that also run at every login (phone pairing,
+# backups). Remove them, and whatever only they pulled in, from the image.
+# Installed systems are copied from this image, so they leave it too.
+# Users can still install any of them with apt.
+set -e
+
+remove="
+konqueror
+zutty
+kfind
+kdeconnect
+kup-backup
+plasma-welcome
+khelpcenter
+kmenuedit
+plasma-vault
+plasma-firewall
+plasma-browser-integration
+webext-plasma-browser-integration
+xwaylandvideobridge
+"
+
+# Keep the man command, which only came in through the removed apps.
+apt-mark manual man-db >/dev/null
+
+# shellcheck disable=SC2086
+DEBIAN_FRONTEND=noninteractive apt-get purge -y --autoremove $remove
+
+# Kvantum Manager ships in the same package as the Kvantum engine that draws
+# every DOT OS widget, so it stays installed; it is only taken off the menus.
+if [ -f /usr/share/applications/kvantummanager.desktop ]; then
+	mkdir -p /usr/local/share/applications
+	sed '/^\[Desktop Entry\]/a NoDisplay=true' /usr/share/applications/kvantummanager.desktop \
+		> /usr/local/share/applications/kvantummanager.desktop
+fi

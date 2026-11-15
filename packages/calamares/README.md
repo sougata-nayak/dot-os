@@ -2,7 +2,7 @@
 
 DOT OS ships Debian's Calamares with three patches, so the installer can match
 `design-system/boards/Installer.dc.html` and `Installing.dc.html`. There is no
-`debian/` folder here: `scripts/build-calamares.sh` fetches Debian's source
+`debian/` folder here: `scripts/build-patched.sh calamares` fetches Debian's source
 package, adds `patches/` to its quilt series, versions it `+dotos1`, and
 builds it. The result goes to `out/debs/` with the other packages, and
 `dot-os-installer` depends on it.

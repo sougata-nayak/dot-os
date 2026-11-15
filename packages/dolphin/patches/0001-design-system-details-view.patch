@@ -1,0 +1,345 @@
+Description: Details view, toolbar and status bar follow the DOT OS design system
+ Text-only 40px rows divided by hairlines, mono capital column headers, kind
+ as a capital label, size and date in the mono face. Details is the default
+ view with Name, Kind, Size and Modified. The toolbar is Back, Forward, Up,
+ the path, List, Grid, Search and the menu. The status bar is full width and
+ set as a mono capital label. See design-system/boards/Files.dc.html.
+Author: DOT OS project <maintainers@dot-os.invalid>
+Forwarded: not-needed
+Last-Update: 2026-11-14
+---
+diff --git a/src/dolphinui.rc b/src/dolphinui.rc
+index fdc6520..7c67698 100644
+--- a/src/dolphinui.rc
++++ b/src/dolphinui.rc
+@@ -106,10 +106,10 @@
+         <text context="@title:menu">Main Toolbar</text>
+         <Action name="go_back" />
+         <Action name="go_forward" />
+-        <Action name="view_mode" />
++        <Action name="go_up" />
+         <Action name="url_navigators" />
+-        <Action name="split_view" />
+-        <Action name="split_stash" />
++        <Action name="details" />
++        <Action name="icons" />
+         <Action name="toggle_search" />
+         <Action name="hamburger_menu" />
+     </ToolBar>
+diff --git a/src/kitemviews/kfileitemlistwidget.cpp b/src/kitemviews/kfileitemlistwidget.cpp
+index e1da719..5924372 100644
+--- a/src/kitemviews/kfileitemlistwidget.cpp
++++ b/src/kitemviews/kfileitemlistwidget.cpp
+@@ -146,7 +146,7 @@ KItemListWidgetInformant *KFileItemListWidget::createInformant()
+ 
+ bool KFileItemListWidget::isRoleRightAligned(const QByteArray &role) const
+ {
+-    return role == "size" || role == "permissions";
++    return role == "size" || role == "permissions" || role == "modificationtime"; // DOT OS: dates are numeric columns
+ }
+ 
+ bool KFileItemListWidget::isHidden() const
+diff --git a/src/kitemviews/kstandarditemlistview.cpp b/src/kitemviews/kstandarditemlistview.cpp
+index a4e7c3e..708f2fe 100644
+--- a/src/kitemviews/kstandarditemlistview.cpp
++++ b/src/kitemviews/kstandarditemlistview.cpp
+@@ -17,7 +17,7 @@ KStandardItemListView::KStandardItemListView(QGraphicsWidget *parent)
+     setAcceptDrops(true);
+     setScrollOrientation(Qt::Vertical);
+     setVisibleRoles({"text"});
+-    setAlternateBackgrounds(true);
++    setAlternateBackgrounds(false); // DOT OS: rows are divided by hairlines, not stripes
+ }
+ 
+ KStandardItemListView::~KStandardItemListView()
+diff --git a/src/kitemviews/kstandarditemlistwidget.cpp b/src/kitemviews/kstandarditemlistwidget.cpp
+index 729411c..a6991ea 100644
+--- a/src/kitemviews/kstandarditemlistwidget.cpp
++++ b/src/kitemviews/kstandarditemlistwidget.cpp
+@@ -28,6 +28,21 @@
+ #include <QTextBoundaryFinder>
+ #include <QVariantAnimation>
+ 
++// DOT OS: the details view follows the design system's Table. Every column
++// after the name is set in the mono face, and the kind is a small capital label.
++static QFont dotInfoFont(const QFont &base, const QByteArray &role)
++{
++    QFont font(QStringLiteral("Space Mono"));
++    font.setStyleHint(QFont::Monospace);
++    if (role == "type") {
++        font.setPointSizeF(base.pointSizeF() * 11.0 / 14.0);
++        font.setLetterSpacing(QFont::PercentageSpacing, 108);
++    } else {
++        font.setPointSizeF(base.pointSizeF() * 13.0 / 14.0);
++    }
++    return font;
++}
++
+ // #define KSTANDARDITEMLISTWIDGET_DEBUG
+ 
+ KStandardItemListWidgetInformant::KStandardItemListWidgetInformant()
+@@ -79,7 +94,12 @@ qreal KStandardItemListWidgetInformant::preferredRoleColumnWidth(const QByteArra
+         // If current item is a link, we use the customized link font metrics instead of the normal font metrics.
+         const QFontMetrics &fontMetrics = itemIsLink(index, view) ? linkFontMetrics : normalFontMetrics;
+ 
+-        width += fontMetrics.horizontalAdvance(text);
++        if (role == "text") {
++            width += fontMetrics.horizontalAdvance(text);
++        } else {
++            // DOT OS: the other columns are set in the mono face (see dotInfoFont)
++            width += QFontMetricsF(dotInfoFont(option.font, role)).horizontalAdvance(role == "type" ? text.toUpper() : text) + 2;
++        }
+ 
+         if (role == "text") {
+             if (view->supportsItemExpanding()) {
+@@ -246,7 +266,8 @@ void KStandardItemListWidgetInformant::calculateDetailsLayoutItemSizeHints(QVect
+                                                                            const KItemListView *view) const
+ {
+     const KItemListStyleOption &option = view->styleOption();
+-    const qreal height = option.padding * 2 + qMax(option.iconSize, option.fontMetrics.height());
++    // DOT OS: text-only rows at the design system's 40px table row height.
++    const qreal height = qMax(qreal(40), option.padding * 2.0 + option.fontMetrics.height());
+     logicalHeightHints.fill(std::make_pair(height, false));
+     logicalWidthHint = -1.0;
+ }
+@@ -361,6 +382,13 @@ void KStandardItemListWidget::paint(QPainter *painter, const QStyleOptionGraphic
+     }
+ 
+     const KItemListStyleOption &itemListStyleOption = styleOption();
++    if (m_layout == DetailsLayout) {
++        // DOT OS: rows are text only, divided by a hairline.
++        pixmap = QPixmap();
++        QColor rule = itemListStyleOption.palette.color(QPalette::Text);
++        rule.setAlphaF(0.13);
++        painter->fillRect(QRectF(0, size().height() - 1, size().width(), 1), rule);
++    }
+     if (isHovered() && !pixmap.isNull()) {
+         if (hoverOpacity() < 1.0) {
+             /*
+@@ -452,6 +480,9 @@ void KStandardItemListWidget::paint(QPainter *painter, const QStyleOptionGraphic
+ 
+     for (int i = 1; i < m_sortedVisibleRoles.count(); ++i) {
+         const TextInfo *textInfo = m_textInfo.value(m_sortedVisibleRoles[i]);
++        if (m_layout == DetailsLayout) {
++            painter->setFont(dotInfoFont(m_customizedFont, m_sortedVisibleRoles[i]));
++        }
+         painter->drawStaticText(textInfo->pos, textInfo->staticText);
+     }
+ 
+@@ -1478,10 +1509,9 @@ void KStandardItemListWidget::updateDetailsLayoutTextCache()
+     const QHash<QByteArray, QVariant> values = data();
+ 
+     const qreal widgetHeight = size().height();
+-    const int fontHeight = m_customizedFontMetrics.height();
+ 
+     const qreal columnWidthInc = columnPadding(option);
+-    qreal firstColumnInc = iconSize();
++    qreal firstColumnInc = 0; // DOT OS: no icon in the details view
+     if (m_supportsItemExpanding) {
+         firstColumnInc += isLeftToRight ? (m_expansionArea.left() + m_expansionArea.right() + widgetHeight) / 2
+                                         : ((size().width() - m_expansionArea.left()) + (size().width() - m_expansionArea.right()) + widgetHeight) / 2;
+@@ -1490,30 +1520,35 @@ void KStandardItemListWidget::updateDetailsLayoutTextCache()
+     }
+ 
+     qreal x = firstColumnInc;
+-    const qreal y = qMax(qreal(option.padding), (widgetHeight - fontHeight) / 2);
+ 
+     for (const QByteArray &role : std::as_const(m_sortedVisibleRoles)) {
+         QString text = roleText(role, values);
+ 
++        const bool isTextRole = (role == "text");
++        if (role == "type") {
++            text = text.toUpper();
++        }
++        const QFontMetricsF roleMetrics(isTextRole ? m_customizedFont : dotInfoFont(m_customizedFont, role));
++        const qreal roleY = qMax(qreal(option.padding), (widgetHeight - roleMetrics.height()) / 2);
++
+         // Elide the text in case it does not fit into the available column-width
+-        qreal requiredWidth = m_customizedFontMetrics.horizontalAdvance(text);
++        qreal requiredWidth = roleMetrics.horizontalAdvance(text);
+         const qreal roleWidth = columnWidth(role);
+         qreal availableTextWidth = roleWidth - columnWidthInc;
+ 
+-        const bool isTextRole = (role == "text");
+         if (isTextRole) {
+             text = escapeString(text);
+             availableTextWidth -= firstColumnInc - (isLeftToRight ? leftPadding() : rightPadding());
+         }
+ 
+         if (requiredWidth > availableTextWidth) {
+-            text = m_customizedFontMetrics.elidedText(text, Qt::ElideMiddle, availableTextWidth);
+-            requiredWidth = m_customizedFontMetrics.horizontalAdvance(text);
++            text = roleMetrics.elidedText(text, Qt::ElideMiddle, availableTextWidth);
++            requiredWidth = roleMetrics.horizontalAdvance(text);
+         }
+ 
+         TextInfo *textInfo = m_textInfo.value(role);
+         textInfo->staticText.setText(text);
+-        textInfo->pos = QPointF(isLeftToRight ? (x + columnWidthInc / 2) : (size().width() - (x + columnWidthInc / 2) - requiredWidth), y);
++        textInfo->pos = QPointF(isLeftToRight ? (x + columnWidthInc / 2) : (size().width() - (x + columnWidthInc / 2) - requiredWidth), roleY);
+         x += roleWidth;
+ 
+         if (isTextRole) {
+diff --git a/src/kitemviews/private/kitemlistheaderwidget.cpp b/src/kitemviews/private/kitemlistheaderwidget.cpp
+index 3dc82ad..a9fa4be 100644
+--- a/src/kitemviews/private/kitemlistheaderwidget.cpp
++++ b/src/kitemviews/private/kitemlistheaderwidget.cpp
+@@ -206,7 +206,12 @@ void KItemListHeaderWidget::paint(QPainter *painter, const QStyleOptionGraphicsI
+     }
+ 
+     // Draw roles
+-    painter->setFont(font());
++    // DOT OS: column headers are small capital labels in the mono face.
++    QFont labelFont(QStringLiteral("Space Mono"));
++    labelFont.setStyleHint(QFont::Monospace);
++    labelFont.setPointSizeF(font().pointSizeF() * 11.0 / 14.0);
++    labelFont.setLetterSpacing(QFont::PercentageSpacing, 108);
++    painter->setFont(labelFont);
+     painter->setPen(palette().text().color());
+ 
+     qreal x = -m_offset + m_leftPadding + unusedSpace();
+@@ -468,7 +473,7 @@ void KItemListHeaderWidget::paintRole(QPainter *painter, const QByteArray &role,
+     option.rect = rect.toRect();
+     option.orientation = Qt::Horizontal;
+     option.selectedPosition = QStyleOptionHeader::NotAdjacent;
+-    option.text = m_model->roleDescription(role);
++    option.text = m_model->roleDescription(role).toUpper();
+ 
+     // First we paint any potential empty (padding) space on left and/or right of this role's column.
+     const auto paintPadding = [&](int section, const QRectF &rect, const QStyleOptionHeader::SectionPosition &pos) {
+diff --git a/src/settings/dolphin_detailsmodesettings.kcfg b/src/settings/dolphin_detailsmodesettings.kcfg
+index 52d85fa..7e23743 100644
+--- a/src/settings/dolphin_detailsmodesettings.kcfg
++++ b/src/settings/dolphin_detailsmodesettings.kcfg
+@@ -29,7 +29,7 @@
+         </entry>
+         <entry name="LeftPadding" type="UInt">
+             <label>Left side padding</label>
+-            <default>20</default>
++            <default>10</default>
+         </entry>
+         <entry name="RightPadding" type="UInt">
+             <label>Right side padding</label>
+@@ -41,7 +41,7 @@
+         </entry>
+         <entry name="ExpandableFolders" type="Bool">
+             <label>Expandable folders</label>
+-            <default>true</default>
++            <default>false</default>
+         </entry>
+     </group>
+ </kcfg>
+diff --git a/src/settings/dolphin_directoryviewpropertysettings.kcfg b/src/settings/dolphin_directoryviewpropertysettings.kcfg
+index e0c8aa1..411b7fe 100644
+--- a/src/settings/dolphin_directoryviewpropertysettings.kcfg
++++ b/src/settings/dolphin_directoryviewpropertysettings.kcfg
+@@ -24,7 +24,7 @@
+         <entry name="ViewMode" type="Int" >
+             <label context="@label">View Mode</label>
+             <whatsthis context="@info:whatsthis">This option controls the style of the view. Currently supported values include icons (0), details (1) and column (2) views.</whatsthis>
+-            <default code="true">DolphinView::IconsView</default>
++            <default code="true">DolphinView::DetailsView</default>
+         </entry>
+ 
+         <entry name="PreviewsShown" type="Bool" >
+diff --git a/src/settings/dolphin_generalsettings.kcfg b/src/settings/dolphin_generalsettings.kcfg
+index e950099..71c71d3 100644
+--- a/src/settings/dolphin_generalsettings.kcfg
++++ b/src/settings/dolphin_generalsettings.kcfg
+@@ -124,7 +124,7 @@
+                 <choice name="Disabled" />
+             </choices>
+             <label>Statusbar</label>
+-            <default>0</default>
++            <default>1</default>
+             <emit signal="showStatusBarChanged" />
+         </entry>
+         <entry name="ShowZoomSlider" type="Bool">
+diff --git a/src/statusbar/dolphinstatusbar.cpp b/src/statusbar/dolphinstatusbar.cpp
+index f81120a..42c019d 100644
+--- a/src/statusbar/dolphinstatusbar.cpp
++++ b/src/statusbar/dolphinstatusbar.cpp
+@@ -55,6 +55,17 @@ DolphinStatusBar::DolphinStatusBar(QWidget *parent)
+     // Initialize text label
+     m_label = new KSqueezedTextLabel(m_text, contentsContainer);
+     m_label->setTextFormat(Qt::PlainText);
++    {
++        // DOT OS: status text is a small capital label in the mono face.
++        QFont labelFont(QStringLiteral("Space Mono"));
++        labelFont.setStyleHint(QFont::Monospace);
++        labelFont.setPointSizeF(font().pointSizeF() * 11.0 / 14.0);
++        labelFont.setLetterSpacing(QFont::PercentageSpacing, 108);
++        m_label->setFont(labelFont);
++        QPalette labelPalette = m_label->palette();
++        labelPalette.setColor(QPalette::WindowText, labelPalette.color(QPalette::PlaceholderText));
++        m_label->setPalette(labelPalette);
++    }
+     m_label->setTextInteractionFlags(Qt::TextBrowserInteraction | Qt::TextSelectableByKeyboard); // for accessibility but also to allow copy-pasting this text.
+ 
+     // Initialize zoom slider's explanatory label
+@@ -393,7 +404,7 @@ void DolphinStatusBar::updateProgressInfo()
+ 
+ void DolphinStatusBar::updateLabelText()
+ {
+-    const QString text = m_text.isEmpty() ? m_defaultText : m_text;
++    const QString text = (m_text.isEmpty() ? m_defaultText : m_text).toUpper();
+     m_label->setText(text);
+     updateWidthToContent();
+ }
+diff --git a/src/statusbar/statusbarspaceinfo.cpp b/src/statusbar/statusbarspaceinfo.cpp
+index c25d028..ab10681 100644
+--- a/src/statusbar/statusbarspaceinfo.cpp
++++ b/src/statusbar/statusbarspaceinfo.cpp
+@@ -38,8 +38,17 @@ StatusBarSpaceInfo::StatusBarSpaceInfo(QWidget *parent)
+     hide(); // Only become visible when we have space info to show. @see StatusBarSpaceInfo::setShown().
+ 
+     m_capacityBar = new KCapacityBar(KCapacityBar::DrawTextInline, this);
++    m_capacityBar->setVisible(false); // DOT OS: free space is a text label only
++    m_capacityBar->setMaximumWidth(0);
+     m_textInfoButton = new QToolButton(this);
+     m_textInfoButton->setAutoRaise(true);
++    {
++        QFont labelFont(QStringLiteral("Space Mono"));
++        labelFont.setStyleHint(QFont::Monospace);
++        labelFont.setPointSizeF(font().pointSizeF() * 11.0 / 14.0);
++        labelFont.setLetterSpacing(QFont::PercentageSpacing, 108);
++        m_textInfoButton->setFont(labelFont);
++    }
+     m_textInfoButton->setPopupMode(QToolButton::InstantPopup);
+     m_buttonMenu = new QMenu(this);
+     m_textInfoButton->setMenu(m_buttonMenu);
+@@ -240,7 +249,7 @@ void StatusBarSpaceInfo::slotValuesChanged()
+     const quint64 used = size - available;
+     const int percentUsed = qRound(100.0 * qreal(used) / qreal(size));
+ 
+-    m_textInfoButton->setText(i18nc("@info:status Free disk space", "%1 free", KIO::convertSize(available)));
++    m_textInfoButton->setText(i18nc("@info:status Free disk space", "%1 free", KIO::convertSize(available)).toUpper());
+     setToolTip(i18nc("tooltip:status Free disk space", "%1 free out of %2 (%3% used)", KIO::convertSize(available), KIO::convertSize(size), percentUsed));
+     m_textInfoButton->setToolTip(i18nc("@info:tooltip for the free disk space button",
+                                        "%1 free out of %2 (%3% used)\nPress to manage disk space usage.",
+diff --git a/src/views/dolphinitemlistview.cpp b/src/views/dolphinitemlistview.cpp
+index d31dc11..8b1f7df 100644
+--- a/src/views/dolphinitemlistview.cpp
++++ b/src/views/dolphinitemlistview.cpp
+@@ -215,7 +215,8 @@ void DolphinItemListView::updateGridSize()
+     }
+     case KFileItemListView::DetailsLayout: {
+         itemWidth = -1;
+-        itemHeight = padding * 2 + qMax(iconSize, option.fontMetrics.lineSpacing());
++        // DOT OS: text-only rows at the design system's 40px table row height.
++        itemHeight = qMax(40, padding * 2 + option.fontMetrics.lineSpacing());
+         break;
+     }
+     default:
+diff --git a/src/views/viewproperties.cpp b/src/views/viewproperties.cpp
+index 99a6bb3..48ed016 100644
+--- a/src/views/viewproperties.cpp
++++ b/src/views/viewproperties.cpp
+@@ -433,6 +433,7 @@ QList<QByteArray> ViewProperties::visibleRoles() const
+     const bool useDefaultValues = roles.count() == 1 // "text"
+         && (m_node->viewMode() == DolphinView::DetailsView) && !visibleRoles.contains(CustomizedDetailsString);
+     if (useDefaultValues) {
++        roles.append("type"); // DOT OS: Name, Kind, Size, Modified
+         roles.append("size");
+         roles.append("modificationtime");
+     }

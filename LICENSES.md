@@ -14,7 +14,8 @@ own licence under `/usr/share/doc/<package>/copyright`. Notable parts:
 
 - **Debian** — DOT OS is built on Debian and is not affiliated with or endorsed by the Debian project.
 - **KDE Plasma** — the desktop. "KDE" and "Plasma" are trademarks of KDE e.V.; DOT OS is not affiliated with or endorsed by KDE.
-- **Calamares** — the installer, GPL-3.0-or-later, built to be rebranded by distributions.
+- **Calamares** — the installer, GPL-3.0-or-later, built to be rebranded by distributions. DOT OS ships a patched build (`packages/calamares`).
+- **Dolphin, KIO and System Settings** — DOT OS ships patched builds of these KDE programs (`packages/dolphin`, `packages/kio`, `packages/systemsettings`). Dolphin and System Settings are GPL-2.0-or-later and KIO is LGPL-2.0-or-later; the patches are under the same licences, and the modified packages carry a `+dotos` version so they are not mistaken for Debian's or KDE's own builds.
 - **Kvantum** — the Qt widget style engine the DOT OS widget theme runs on, GPL-3.0-or-later.
 
 DOT OS is an original visual language. It does not use the name, logo or

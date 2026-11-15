@@ -34,6 +34,7 @@ You need Docker. On an Apple Silicon Mac everything runs natively as arm64.
 ```sh
 python3 tools/generate.py     # regenerate theme files after changing tokens.json
 scripts/build-debs.sh         # -> out/debs/*.deb
+scripts/build-patched.sh      # -> out/debs/: patched Calamares, Dolphin, KIO, System Settings (about 30 min)
 scripts/build-iso.sh          # -> out/dot-os-arm64.hybrid.iso (30-60 min, about 6 GB of downloads)
 scripts/run-vm.sh             # boot the ISO in QEMU; or open it in UTM
 ```
@@ -69,7 +70,14 @@ and the UTM settings.
 | `dot-os-desktop` | meta-package: Plasma plus every DOT OS package | builds, installed by the ISO |
 | `dot-os-archive-keyring` | archive key and source entry (off until published) | builds |
 | `dot-os-installer` | Calamares branding and pages, "Install DOT OS" launcher (live ISO only) | builds, full install tested in QEMU |
-| `calamares` (`+dotos1`) | Debian's Calamares with three DOT OS patches (`packages/calamares`, built by `scripts/build-calamares.sh`) | builds |
+| `calamares` (`+dotos1`) | Debian's Calamares with three DOT OS patches: Disk, Install and Finish steps | builds, full install tested |
+| `dolphin` (`+dotos1`) | Debian's Dolphin patched to the Files board: text-only list, mono capital headers, DOT OS toolbar and status bar | builds, tested in QEMU |
+| `libkf6kiofilewidgets6` (`+dotos1`) | Debian's KIO file widgets patched: text-only Places panel with segmented disk meters, mono path bar | builds, tested in QEMU |
+| `systemsettings` (`+dotos1`) | Debian's System Settings patched: text-only sidebar with mono section labels | builds, tested in QEMU |
+
+The four `+dotos1` packages are Debian's own source plus the patches in
+`packages/<name>/patches`, built by `scripts/build-patched.sh` (full compiles,
+separate from `build-debs.sh`).
 
 ## Licence
 

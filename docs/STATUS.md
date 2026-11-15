@@ -103,7 +103,7 @@ Last updated 14 November 2026.
 
 ### Patched Calamares
 
-DOT OS builds Debian's Calamares 3.3.14 with three patches (`packages/calamares`, `scripts/build-calamares.sh`, version `3.3.14-1+dotos1`):
+DOT OS builds Debian's Calamares 3.3.14 with three patches (`packages/calamares`, `scripts/build-patched.sh calamares`, version `3.3.14-1+dotos1`):
 
 - **Disk step** in the board's greys: the new system white, EFI grey, swap dark grey, a flat segmented bar, a readable legend, no option artwork.
 - **Install step** drawn entirely by `show.qml` from a new `Execution` QML singleton: Doto percentage, 20 segments with a red leading one, uppercase status line, time left, slides, and "Show log" / "Hide log" in the footer.
@@ -111,6 +111,32 @@ DOT OS builds Debian's Calamares 3.3.14 with three patches (`packages/calamares`
 - Checked: full install from the ISO in QEMU at 3840x2160 with the patched build; Disk, Install (with the log shown and hidden) and Finish pages on screen.
 
 Still different from the boards: the Disk step keeps Calamares' own layout (storage selector at the top, the "Current" and "After" bars at the foot) rather than the board's two columns.
+
+### Applications: Files, Terminal, System Settings
+
+Theme packages only recolour an app; they cannot change its layout. To match `Files.dc.html`, `Terminal.dc.html` and `Settings.dc.html`, DOT OS patches three more Debian packages (`scripts/build-patched.sh`, each versioned `+dotos1`) and ships Konsole defaults:
+
+- **Files (Dolphin, `packages/dolphin`)**: details view by default with Name, Kind, Size and Modified; text-only 40px rows divided by hairlines; mono capital column headers; kind as a capital label; toolbar of Back, Forward, Up, path, List, Grid, Search, menu; full-width mono status bar.
+- **Places panel and path bar (KIO, `packages/kio`)**: text-only 36px rows, mono capital section names, a 20-segment capacity meter with a percentage for each device, and the path as `ROOT / USR / SHARE` in mono capitals. This also applies to file dialogs in every KDE app.
+- **System Settings (`packages/systemsettings`)**: text-only sidebar with the current page on a raised surface and mono capital section names.
+- **Terminal (Konsole, no patch)**: no menu bar or toolbars (Ctrl+Shift+M shows the menu bar), a tab strip under the title bar styled as design-system Tabs, tabs titled `1 ~/DIR`, and the `user@host ~ >` prompt from `linux-surfaces.md` (`/etc/profile.d/dot-os-prompt.sh`), with a red `>` after a failed command.
+- **Icons**: about 90 more names mapped, mostly System Settings pages, which all used to fall back to the monitor glyph.
+- Checked in QEMU at 3840x2160 as new users: Dolphin, Konsole with two tabs, System Settings.
+
+Still different from the boards:
+
+- Settings pages themselves (the right-hand side of System Settings) keep KDE's form layout: labels on the left of controls with colons, checkboxes where the board has toggles. Each page is a separate KDE module.
+- The file list keeps a focus outline on the current item, and Grid view still shows icons.
+- The free-space label at the right of the Files status bar does not appear yet.
+- When Debian updates one of the patched packages, `apt` installs Debian's newer build and that app goes back to its stock layout until the DOT OS build is refreshed.
+
+### Lightweight image
+
+Plasma recommends apps DOT OS does not ship. `live-build/config/hooks/normal/9000-dot-os-trim.hook.chroot` removes them from the image, with whatever only they pulled in (about 60 packages, including `git`); installed systems are copied from the image, so they leave too. Users can still `apt install` any of them.
+
+- Removed: Konqueror, Zutty, KFind, KDE Connect, Kup, Welcome Center, Help Center, Menu Editor, Plasma Vault, Plasma Firewall, Plasma Browser Integration, Xwayland Video Bridge.
+- Kept on purpose: `man-db` (the `man` command), and `kde-baseapps`, a meta-package `kde-plasma-desktop` depends on.
+- Kvantum Manager ships in the same package as the Kvantum engine, so it stays installed but is hidden from the launcher.
 
 ## Next
 

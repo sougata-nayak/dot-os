@@ -1,0 +1,116 @@
+Description: Sidebar follows the DOT OS design system
+ Text-only 36px rows with the current page on a raised surface, and section
+ names as mono capital labels. See design-system/boards/Settings.dc.html.
+Author: DOT OS project <maintainers@dot-os.invalid>
+Forwarded: not-needed
+Last-Update: 2026-11-14
+---
+diff --git a/app/qml/CategoriesPage.qml b/app/qml/CategoriesPage.qml
+index 24552af..3c543a8 100644
+--- a/app/qml/CategoriesPage.qml
++++ b/app/qml/CategoriesPage.qml
+@@ -138,12 +138,25 @@ Kirigami.ScrollablePage {
+ 
+         section {
+             property: "categoryDisplayRole"
+-            delegate: Kirigami.ListSectionHeader {
+-
++            // DOT OS: section names are small capital labels in the mono face.
++            delegate: Item {
+                 required property string section
+ 
+                 width: ListView.view.width
+-                label: section
++                implicitHeight: 44
++
++                Text {
++                    anchors.left: parent.left
++                    anchors.leftMargin: 28
++                    anchors.bottom: parent.bottom
++                    anchors.bottomMargin: 8
++                    text: parent.section.toUpperCase()
++                    textFormat: Text.PlainText
++                    font.family: "Space Mono"
++                    font.pixelSize: 11
++                    font.letterSpacing: 0.9
++                    color: Kirigami.Theme.disabledTextColor
++                }
+             }
+         }
+ 
+diff --git a/app/qml/CategoryItem.qml b/app/qml/CategoryItem.qml
+index c3ae2e1..10e42ed 100644
+--- a/app/qml/CategoryItem.qml
++++ b/app/qml/CategoryItem.qml
+@@ -22,26 +22,48 @@ ItemDelegate {
+     Accessible.name: text
+     Accessible.onPressAction: clicked()
+ 
++    // DOT OS: a design-system SidebarNav row. Text only, 36px tall, with the
++    // current page on a raised surface instead of an inverted highlight.
++    implicitHeight: 38
++    topInset: 1
++    bottomInset: 1
++    leftInset: 16
++    rightInset: 16
++    topPadding: 0
++    bottomPadding: 0
++    leftPadding: 28 + delegate.leadingPadding
++    rightPadding: 28
++
++    background: Rectangle {
++        Kirigami.Theme.colorSet: Kirigami.Theme.Window
++        Kirigami.Theme.inherit: false
++        radius: 8
++        color: delegate.selected ? Kirigami.Theme.alternateBackgroundColor : "transparent"
++    }
++
+     contentItem: RowLayout {
+-        spacing: Kirigami.Units.smallSpacing
++        spacing: 12
+ 
+-        Kirigami.IconTitleSubtitle {
++        Text {
+             Layout.fillWidth: true
+-            Layout.leftMargin: delegate.leadingPadding
+-            icon: icon.fromControlsIcon(delegate.icon)
+-            title: delegate.text
+-            selected: delegate.selected
++            Layout.alignment: Qt.AlignVCenter
++            text: delegate.text
++            textFormat: Text.PlainText
++            elide: Text.ElideRight
++            font: delegate.font
++            color: (delegate.selected || delegate.hovered) && delegate.enabled
++                ? Kirigami.Theme.activeTextColor : Kirigami.Theme.disabledTextColor
++            Behavior on color { ColorAnimation { duration: 200 } }
+         }
+ 
+         Rectangle {
+             Layout.alignment: Qt.AlignVCenter
+-            Layout.preferredWidth: Kirigami.Units.largeSpacing
+-            Layout.preferredHeight: Kirigami.Units.largeSpacing
++            Layout.preferredWidth: 6
++            Layout.preferredHeight: 6
+ 
+-            radius: width * 0.5
++            radius: 3
+             visible: delegate.showDefaultIndicator && systemsettings.defaultsIndicatorsVisible
+-            Kirigami.Theme.colorSet: Kirigami.Theme.View
+-            color: Kirigami.Theme.neutralTextColor
++            color: Kirigami.Theme.disabledTextColor
+         }
+ 
+         Kirigami.Icon {
+@@ -49,9 +71,9 @@ ItemDelegate {
+             Layout.preferredWidth: Kirigami.Units.iconSizes.small
+             Layout.preferredHeight: Kirigami.Units.iconSizes.small
+ 
+-            opacity: delegate.showArrow ? 0.7 : 0.0
++            visible: delegate.showArrow
++            opacity: 0.5
+             source: LayoutMirroring.enabled ? "go-next-symbolic-rtl" : "go-next-symbolic"
+-            selected: delegate.selected
+         }
+     }
+ }

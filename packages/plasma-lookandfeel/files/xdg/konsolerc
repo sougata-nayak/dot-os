@@ -1,2 +1,22 @@
+# DOT OS: a bare terminal. Tabs sit under the title bar; the menu bar and
+# toolbars are hidden (Ctrl+Shift+M shows the menu bar).
 [Desktop Entry]
 DefaultProfile=DotOSDark.profile
+
+[KonsoleWindow]
+ShowMenuBarByDefault=false
+RememberWindowSize=false
+
+[MainWindow]
+MenuBar=Disabled
+ToolBarsMovable=Disabled
+
+[TabBar]
+TabBarPosition=Top
+TabBarVisibility=AlwaysShowTabBar
+NewTabButton=false
+CloseTabButton=None
+SearchTabsButton=HideSearchTabsButton
+ExpandTabWidth=false
+TabBarUseUserStyleSheet=true
+TabBarUserStyleSheetFile=file:///usr/share/dot-os/konsole-tabbar.css

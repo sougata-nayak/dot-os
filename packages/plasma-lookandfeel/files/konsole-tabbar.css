@@ -1,0 +1,26 @@
+/* DOT OS Konsole tab strip: design-system Tabs. Colours come from the
+   active colour scheme, so the same file serves dark and light. */
+QTabWidget::pane { border: 0; }
+QTabBar {
+	background: palette(button);
+	border: 0;
+	qproperty-drawBase: 0;
+	qproperty-expanding: 0;
+	font-family: "Space Mono";
+	font-size: 11px;
+}
+QTabBar::tab {
+	height: 38px;
+	margin: 0 24px 0 0;
+	padding: 0 2px;
+	border: 0;
+	border-bottom: 2px solid transparent;
+	background: transparent;
+	color: palette(placeholder-text);
+}
+QTabBar::tab:first, QTabBar::tab:only-one { margin-left: 16px; }
+QTabBar::tab:hover { color: palette(window-text); }
+QTabBar::tab:selected {
+	color: palette(bright-text);
+	border-bottom: 2px solid palette(bright-text);
+}

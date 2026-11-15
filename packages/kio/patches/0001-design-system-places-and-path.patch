@@ -1,0 +1,239 @@
+Description: Places panel and path bar follow the DOT OS design system
+ Places rows are text only at 36px, section names are mono capital labels,
+ and a device shows a 20-segment capacity meter with its percentage. The
+ path bar is set in mono capitals divided by slashes. This affects every
+ app that uses the KIO file widgets, including file dialogs. See
+ design-system/boards/Files.dc.html.
+Author: DOT OS project <maintainers@dot-os.invalid>
+Forwarded: not-needed
+Last-Update: 2026-11-14
+---
+diff --git a/src/filewidgets/kfileplacesview.cpp b/src/filewidgets/kfileplacesview.cpp
+index 30ca95f..b9edd5c 100644
+--- a/src/filewidgets/kfileplacesview.cpp
++++ b/src/filewidgets/kfileplacesview.cpp
+@@ -83,7 +83,9 @@ KFilePlacesViewDelegate::~KFilePlacesViewDelegate()
+ 
+ QSize KFilePlacesViewDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
+ {
+-    int height = std::max(m_iconSize, option.fontMetrics.height()) + s_lateralMargin;
++    // DOT OS: design-system SidebarNav rows, 36px with a 2px gap. A device row
++    // is taller: its name sits above a segmented capacity meter.
++    int height = index.data(KFilePlacesModel::CapacityBarRecommendedRole).toBool() ? 52 : 38;
+ 
+     if (m_appearingItems.contains(index)) {
+         height *= m_appearingHeightScale;
+@@ -165,7 +167,7 @@ void KFilePlacesViewDelegate::paint(QPainter *painter, const QStyleOptionViewIte
+     }
+ 
+     bool isLTR = opt.direction == Qt::LeftToRight;
+-    const int iconAreaWidth = s_lateralMargin + m_iconSize;
++    const int iconAreaWidth = 8; // DOT OS: rows are text only; text starts 12px in
+     const int actionAreaWidth = !actionIcon.isNull() ? s_lateralMargin + actionIconSize() : 0;
+     QRect rectText((isLTR ? iconAreaWidth : actionAreaWidth) + s_lateralMargin,
+                    opt.rect.top(),
+@@ -184,7 +186,7 @@ void KFilePlacesViewDelegate::paint(QPainter *painter, const QStyleOptionViewIte
+     QPixmap pm = icon.pixmap(m_iconSize, m_iconSize, mode);
+     QPoint point(isLTR ? opt.rect.left() + s_lateralMargin : opt.rect.right() - s_lateralMargin - m_iconSize,
+                  opt.rect.top() + (opt.rect.height() - m_iconSize) / 2);
+-    painter->drawPixmap(point, pm);
++    Q_UNUSED(point) // DOT OS: no place icons
+ 
+     if (!actionIcon.isNull()) {
+         const int iconSize = actionIconSize();
+@@ -223,11 +225,10 @@ void KFilePlacesViewDelegate::paint(QPainter *painter, const QStyleOptionViewIte
+         }
+     }
+ 
+-    if (selectedAndActive) {
+-        painter->setPen(opt.palette.highlightedText().color());
+-    } else {
+-        painter->setPen(opt.palette.text().color());
+-    }
++    // DOT OS: secondary text; the current or hovered row is at full strength.
++    const QColor dotStrong = opt.palette.color(QPalette::BrightText);
++    const QColor dotQuiet = opt.palette.color(QPalette::PlaceholderText);
++    painter->setPen((opt.state & (QStyle::State_Selected | QStyle::State_MouseOver)) ? dotStrong : dotQuiet);
+ 
+     if (placesModel->data(index, KFilePlacesModel::CapacityBarRecommendedRole).toBool()) {
+         const auto info = m_freeSpaceInfo.value(persistentIndex);
+@@ -235,49 +236,47 @@ void KFilePlacesViewDelegate::paint(QPainter *painter, const QStyleOptionViewIte
+         checkFreeSpace(index); // async
+ 
+         if (info.size > 0) {
+-            const int capacityBarHeight = std::ceil(m_iconSize / 8.0);
++            // DOT OS: a 20-segment meter under the name, with the percentage
++            // as a mono caption on the right.
+             const qreal usedSpace = info.used / qreal(info.size);
++            const int segments = 20;
++            const int gap = 2;
++            const int barHeight = 4;
+ 
+-            // Vertically center text + capacity bar, so move text up a bit
+-            rectText.setTop(opt.rect.top() + (opt.rect.height() - opt.fontMetrics.height() - capacityBarHeight) / 2);
++            rectText.setTop(opt.rect.top() + 8);
+             rectText.setHeight(opt.fontMetrics.height());
+ 
+-            const int radius = capacityBarHeight / 2;
+-            QRect capacityBgRect(rectText.x(), rectText.bottom(), rectText.width(), capacityBarHeight);
+-            capacityBgRect.adjust(0.5, 0.5, -0.5, -0.5);
+-            QRect capacityFillRect = capacityBgRect;
+-            capacityFillRect.setWidth(capacityFillRect.width() * usedSpace);
+-
+-            QPalette::ColorGroup cg = QPalette::Active;
+-            if (!(opt.state & QStyle::State_Enabled)) {
+-                cg = QPalette::Disabled;
+-            } else if (!m_view->isActiveWindow()) {
+-                cg = QPalette::Inactive;
+-            }
++            QFont captionFont(QStringLiteral("Space Mono"));
++            captionFont.setStyleHint(QFont::Monospace);
++            captionFont.setPointSizeF(opt.font.pointSizeF() * 11.0 / 14.0);
++            const QString caption = QStringLiteral("%1%").arg(qRound(usedSpace * 100));
++            const int captionWidth = QFontMetrics(captionFont).horizontalAdvance(caption);
+ 
+-            // Adapted from Breeze style's progress bar rendering
+-            QColor capacityBgColor(opt.palette.color(QPalette::WindowText));
+-            capacityBgColor.setAlphaF(0.2 * capacityBgColor.alphaF());
+-
+-            QColor capacityFgColor(selectedAndActive ? opt.palette.color(cg, QPalette::HighlightedText) : opt.palette.color(cg, QPalette::Highlight));
++            QColor onColor = dotStrong;
+             if (usedSpace > 0.95) {
+                 if (!m_warningCapacityBarColor.isValid()) {
+-                    m_warningCapacityBarColor = KColorScheme(cg, KColorScheme::View).foreground(KColorScheme::NegativeText).color();
++                    m_warningCapacityBarColor = KColorScheme(QPalette::Active, KColorScheme::View).foreground(KColorScheme::NegativeText).color();
+                 }
+-                capacityFgColor = m_warningCapacityBarColor;
++                onColor = m_warningCapacityBarColor;
++            } else if (usedSpace >= 0.8) {
++                onColor = KColorScheme(QPalette::Active, KColorScheme::View).foreground(KColorScheme::NeutralText).color();
+             }
++            QColor offColor(opt.palette.color(QPalette::WindowText));
++            offColor.setAlphaF(0.2);
+ 
+             painter->save();
+-
+-            painter->setRenderHint(QPainter::Antialiasing, true);
+-            painter->setPen(Qt::NoPen);
+-
+-            painter->setBrush(capacityBgColor);
+-            painter->drawRoundedRect(capacityBgRect, radius, radius);
+-
+-            painter->setBrush(capacityFgColor);
+-            painter->drawRoundedRect(capacityFillRect, radius, radius);
+-
++            painter->setFont(captionFont);
++            painter->setPen(dotQuiet);
++            painter->drawText(rectText, Qt::AlignRight | Qt::AlignVCenter, caption);
++
++            const qreal barTop = opt.rect.bottom() - 9 - barHeight;
++            const qreal segmentWidth = (rectText.width() - (segments - 1) * gap) / qreal(segments);
++            const int lit = usedSpace > 0 ? std::max(1, qRound(usedSpace * segments)) : 0;
++            for (int s = 0; s < segments; ++s) {
++                const QRectF segment(rectText.x() + s * (segmentWidth + gap), barTop, segmentWidth, barHeight);
++                painter->fillRect(segment, s < lit ? onColor : offColor);
++            }
++            rectText.setWidth(rectText.width() - captionWidth - 8);
+             painter->restore();
+         }
+     }
+@@ -665,7 +664,7 @@ void KFilePlacesViewDelegate::drawSectionHeader(QPainter *painter, const QStyleO
+         : groupLabel;
+ 
+     QRect textRect(option.rect);
+-    textRect.setLeft(textRect.left() + 6);
++    textRect.setLeft(textRect.left() + 12);
+     /* Take spacing into account:
+        The spacing to the previous section compensates for the spacing to the first item.*/
+     textRect.setY(textRect.y() /* + qMax(2, m_view->spacing()) - qMax(2, m_view->spacing())*/);
+@@ -678,8 +677,15 @@ void KFilePlacesViewDelegate::drawSectionHeader(QPainter *painter, const QStyleO
+     const QColor c2 = baseColor(option);
+     QColor penColor = mixedColor(c1, c2, 60);
+ 
+-    painter->setPen(penColor);
+-    painter->drawText(textRect, Qt::AlignLeft | Qt::AlignBottom, option.fontMetrics.elidedText(category, Qt::ElideRight, textRect.width()));
++    // DOT OS: section names are small capital labels in the mono face.
++    Q_UNUSED(penColor)
++    QFont labelFont(QStringLiteral("Space Mono"));
++    labelFont.setStyleHint(QFont::Monospace);
++    labelFont.setPointSizeF(option.font.pointSizeF() * 11.0 / 14.0);
++    labelFont.setLetterSpacing(QFont::PercentageSpacing, 108);
++    painter->setFont(labelFont);
++    painter->setPen(option.palette.color(QPalette::PlaceholderText));
++    painter->drawText(textRect, Qt::AlignLeft | Qt::AlignBottom, QFontMetrics(labelFont).elidedText(category.toUpper(), Qt::ElideRight, textRect.width()));
+     painter->restore();
+ }
+ 
+diff --git a/src/filewidgets/kurlnavigatorbutton.cpp b/src/filewidgets/kurlnavigatorbutton.cpp
+index c6bc91a..1bfdf36 100644
+--- a/src/filewidgets/kurlnavigatorbutton.cpp
++++ b/src/filewidgets/kurlnavigatorbutton.cpp
+@@ -43,6 +43,15 @@ KUrlNavigatorButton::KUrlNavigatorButton(const QUrl &url, KUrlNavigator *parent)
+     , m_padding(5)
+ {
+     setAcceptDrops(true);
++    {
++        // DOT OS: the path is a row of small capital labels in the mono face,
++        // divided by slashes; only the last one is at full strength.
++        QFont labelFont(QStringLiteral("Space Mono"));
++        labelFont.setStyleHint(QFont::Monospace);
++        labelFont.setPointSizeF(font().pointSizeF() * 11.0 / 14.0);
++        labelFont.setLetterSpacing(QFont::PercentageSpacing, 108);
++        setFont(labelFont);
++    }
+     setUrl(url);
+     setMouseTracking(true);
+ 
+@@ -128,7 +137,6 @@ QString KUrlNavigatorButton::activeSubDirectory() const
+ QSize KUrlNavigatorButton::sizeHint() const
+ {
+     QFont adjustedFont(font());
+-    adjustedFont.setBold(m_subDir.isEmpty());
+     // preferred width is textWidth, iconWidth and padding combined
+     // add extra padding in end to make sure the space between divider and button is consistent
+     // the first padding is used between icon and text, second in the end of text
+@@ -169,7 +177,6 @@ void KUrlNavigatorButton::paintEvent(QPaintEvent *event)
+     QPainter painter(this);
+ 
+     QFont adjustedFont(font());
+-    adjustedFont.setBold(m_subDir.isEmpty());
+     painter.setFont(adjustedFont);
+ 
+     int buttonWidth = width();
+@@ -183,7 +190,7 @@ void KUrlNavigatorButton::paintEvent(QPaintEvent *event)
+         buttonWidth = preferredWidth;
+     }
+     const int buttonHeight = height();
+-    const QColor fgColor = foregroundColor();
++    const QColor fgColor = (m_subDir.isEmpty() || isDisplayHintEnabled(EnteredHint)) ? palette().color(QPalette::BrightText) : palette().color(QPalette::PlaceholderText); // DOT OS
+     const bool leftToRight = (layoutDirection() == Qt::LeftToRight);
+ 
+     // Prepare sizes for icon
+@@ -248,7 +255,9 @@ void KUrlNavigatorButton::paintEvent(QPaintEvent *event)
+         if (!m_hoverOverArrow) {
+             option.state = QStyle::State_None;
+         }
+-        style()->drawPrimitive(leftToRight ? QStyle::PE_IndicatorArrowRight : QStyle::PE_IndicatorArrowLeft, &option, &painter, this);
++        // DOT OS: a slash, not an arrow
++        painter.setPen(palette().color(QPalette::PlaceholderText));
++        painter.drawText(option.rect, Qt::AlignCenter, QStringLiteral("/"));
+     }
+ }
+ 
+@@ -642,7 +651,7 @@ QString KUrlNavigatorButton::plainText() const
+ 
+     dest.resize(destIndex);
+ 
+-    return dest;
++    return dest.toUpper(); // DOT OS
+ }
+ 
+ int KUrlNavigatorButton::arrowWidth() const
+@@ -662,7 +671,6 @@ int KUrlNavigatorButton::arrowWidth() const
+ int KUrlNavigatorButton::textWidth() const
+ {
+     QFont adjustedFont(font());
+-    adjustedFont.setBold(m_subDir.isEmpty());
+     return QFontMetrics(adjustedFont).size(Qt::TextSingleLine, plainText()).width();
+ }
+ 

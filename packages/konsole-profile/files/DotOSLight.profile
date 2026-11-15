@@ -17,6 +17,8 @@ UseCustomCursorColor=true
 [General]
 Name=DOT OS Light
 Parent=FALLBACK/
+LocalTabTitleFormat=%# %w
+RemoteTabTitleFormat=%# %w
 TerminalMargin=16
 
 [Scrolling]

@@ -21,8 +21,8 @@ jobs:
       - name: Build packages
         run: scripts/build-debs.sh
 
-      - name: Build the patched Calamares
-        run: scripts/build-calamares.sh
+      - name: Build the patched Debian packages
+        run: scripts/build-patched.sh
 
       - name: Sign the APT archive
         env:
