@@ -5,6 +5,7 @@ set -e
 # their place. Plasma's originals are kept beside them as *.plasma and come
 # back when this package is removed (see postrm).
 D=/usr/share/plasma/shells/org.kde.plasma.desktop/contents
+A=/usr/share/applications/kcm_lookandfeel.desktop
 if [ "$1" = install ] || [ "$1" = upgrade ]; then
 	for f in lockscreen/LockScreen.qml osd/Osd.qml; do
 		dpkg-divert --package dot-os-plasma-lookandfeel --add --rename --divert "$D/$f.plasma" "$D/$f" >/dev/null
@@ -12,5 +13,9 @@ if [ "$1" = install ] || [ "$1" = upgrade ]; then
 	# Debian's desktop-base gives new accounts its swirl as the account
 	# picture; DOT OS links its own there (Debian's kept as .face.debian).
 	dpkg-divert --package dot-os-plasma-lookandfeel --add --rename --divert /etc/skel/.face.debian /etc/skel/.face >/dev/null
+	# The Global Theme page is locked (see /etc/xdg/kdeglobals); taking its
+	# launcher entry away also removes the "Global Theme" button that System
+	# Settings' Quick Settings page shows whenever the entry exists.
+	dpkg-divert --package dot-os-plasma-lookandfeel --add --rename --divert "$A.dotos-locked" "$A" >/dev/null
 fi
 #DEBHELPER#

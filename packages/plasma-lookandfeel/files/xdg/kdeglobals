@@ -1,6 +1,9 @@
 # DOT OS system defaults. A user's own ~/.config/kdeglobals overrides these.
 [KDE]
 LookAndFeelPackage=org.dotos.desktop
+# The two choices on System Settings' Quick Settings page.
+DefaultLightLookAndFeel=org.dotos.desktop.light
+DefaultDarkLookAndFeel=org.dotos.desktop
 widgetStyle=kvantum
 AnimationDurationFactor=0.5
 
@@ -20,3 +23,23 @@ Theme=dot-os
 
 [WM]
 activeFont=Space Mono,9,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+
+# DOT OS keeps one look: the System Settings pages that change the theme are
+# switched off for every user ([$i]: a user's own kdeglobals cannot turn them
+# back on). They also drop out of the settings list and search. Wallpaper
+# stays open, and Quick Settings still switches between DOT OS Dark and Light.
+[KDE Control Module Restrictions][$i]
+kcm_lookandfeel=false
+kcm_colors=false
+kcm_style=false
+kcm_desktoptheme=false
+kcm_kwindecoration=false
+kcm_breezedecoration=false
+kcm_icons=false
+kcm_cursortheme=false
+kcm_splashscreen=false
+kcm_sddm=false
+kcm_plymouth=false
+kcm_fonts=false
+kcm_fontinst=false
+kcm_soundtheme=false

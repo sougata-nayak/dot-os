@@ -84,6 +84,7 @@ def look_and_feel(theme):
         },
         "X-Plasma-APIVersion": "2",
     }, indent=4) + "\n")
+    preview(t, base + "contents/previews/preview.png")
     cursor = "DotOS-Cursors" + ("" if theme == "dark" else "-Light")
     write(base + "contents/defaults", """[kdeglobals][KDE]
 widgetStyle=kvantum
@@ -112,6 +113,44 @@ Theme=%(ident)s
 [Wallpaper]
 Image=
 """ % {"cap": CAP[theme], "icon": "" if theme == "dark" else "-light", "cursor": cursor, "ident": ident})
+
+
+def preview(t, rel):
+    """Thumbnail for System Settings' Quick Settings page: the DOT OS desktop
+    in miniature (dot grid, top bar, a window, the dock) in this theme."""
+    w, h = 480, 300
+    dots = "".join('<circle cx="%d" cy="%d" r="0.9"/>' % (x, y)
+                   for y in range(24, h, 12) for x in range(6, w, 12))
+    svg = ('<svg xmlns="http://www.w3.org/2000/svg" width="%(w)d" height="%(h)d" viewBox="0 0 %(w)d %(h)d">'
+           '<rect width="%(w)d" height="%(h)d" fill="%(black)s"/>'
+           '<g fill="%(border-visible)s">%(dots)s</g>'
+           '<rect width="%(w)d" height="14" fill="%(black)s"/>'
+           '<rect y="14" width="%(w)d" height="1" fill="%(border)s"/>'
+           '<rect x="8" y="5" width="4" height="4" fill="%(accent)s"/>'
+           '<rect x="16" y="5" width="20" height="4" fill="%(text-secondary)s"/>'
+           '<rect x="220" y="5" width="40" height="4" fill="%(text-primary)s"/>'
+           '<rect x="96" y="44" width="288" height="176" rx="8" fill="%(surface)s" stroke="%(border-visible)s"/>'
+           '<rect x="96.5" y="68" width="287" height="1" fill="%(border)s"/>'
+           '<rect x="108" y="54" width="60" height="5" fill="%(text-secondary)s"/>'
+           '<circle cx="348" cy="56" r="3" fill="none" stroke="%(text-secondary)s"/>'
+           '<circle cx="360" cy="56" r="3" fill="none" stroke="%(text-secondary)s"/>'
+           '<circle cx="372" cy="56" r="3" fill="%(text-display)s"/>'
+           '<rect x="112" y="84" width="72" height="6" fill="%(text-display)s"/>'
+           '<g fill="%(border-visible)s">'
+           '<rect x="112" y="102" width="200" height="4"/><rect x="112" y="114" width="168" height="4"/>'
+           '<rect x="112" y="126" width="184" height="4"/></g>'
+           '<g fill="%(text-display)s">' + "".join('<rect x="%d" y="150" width="11" height="6"/>' % (112 + i * 13) for i in range(12)) + '</g>'
+           '<g fill="%(border-visible)s">' + "".join('<rect x="%d" y="150" width="11" height="6"/>' % (112 + i * 13) for i in range(12, 20)) + '</g>'
+           '<rect x="164" y="258" width="152" height="28" rx="14" fill="%(surface)s" stroke="%(border-visible)s"/>'
+           '<g fill="%(text-primary)s">' + "".join('<rect x="%d" y="268" width="8" height="8" rx="1"/>' % (182 + i * 24) for i in range(5)) + '</g>'
+           '<rect x="206" y="282" width="20" height="2" fill="%(accent)s"/>'
+           '</svg>') % dict(t, w=w, h=h, dots=dots)
+    path = os.path.join(OUT, rel)
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path + ".svg", "w") as fh:
+        fh.write(svg)
+    subprocess.run(["rsvg-convert", path + ".svg", "-o", path], check=True)
+    os.unlink(path + ".svg")
 
 
 # ---------------------------------------------------------------- plasma theme

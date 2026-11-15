@@ -130,6 +130,14 @@ Still different from the boards:
 - The free-space label at the right of the Files status bar does not appear yet.
 - When Debian updates one of the patched packages, `apt` installs Debian's newer build and that app goes back to its stock layout until the DOT OS build is refreshed.
 
+### Theme lock
+
+DOT OS keeps one look. `/etc/xdg/kdeglobals` switches off the System Settings pages that change it, for every user (KDE's Kiosk `[KDE Control Module Restrictions][$i]`, which a user's own settings cannot undo): Global Theme, Colours, Application Style, Plasma Style, Window Decorations, Icons, Cursors, Splash Screen, Login Screen, Boot Splash, Fonts, Font Management (it can switch off DOT OS's fonts) and System Sounds. They also drop out of the settings list and search.
+
+- Still open: Wallpaper, and the Dark/Light choice on Quick Settings, which now offers DOT OS Dark and DOT OS Light (with preview thumbnails) instead of Breeze.
+- The Global Theme page's launcher entry is diverted (`*.dotos-locked`) so Quick Settings no longer shows a "Global Theme" button.
+- The lock covers System Settings only; command-line tools such as `plasma-apply-colorscheme` still work.
+
 ### Lightweight image
 
 Plasma recommends apps DOT OS does not ship. `live-build/config/hooks/normal/9000-dot-os-trim.hook.chroot` removes them from the image, with whatever only they pulled in (about 60 packages, including `git`); installed systems are copied from the image, so they leave too. Users can still `apt install` any of them.
