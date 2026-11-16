@@ -23,8 +23,42 @@ webext-plasma-browser-integration
 xwaylandvideobridge
 "
 
-# Keep the man command, which only came in through the removed apps.
-apt-mark manual man-db >/dev/null
+# The image must stay under GitHub's 2 GiB limit for a release file.
+# Firmware for hardware no arm64 desktop has: datacenter network cards and
+# GPUs, telephony and TV-tuner cards, and Wi-Fi from x86-era laptops. Firmware
+# for Snapdragon and Raspberry Pi boards, Wi-Fi, Bluetooth and desktop GPUs
+# stays.
+remove="$remove
+firmware-netronome
+firmware-nvidia-tesla-535-gsp
+firmware-marvell-prestera
+firmware-cavium
+firmware-qlogic
+firmware-myricom
+firmware-bnx2x
+firmware-bnx2
+firmware-netxen
+dahdi-firmware-nonfree
+firmware-ivtv
+firmware-siano
+firmware-ipw2x00
+firmware-libertas
+"
+
+# Noto's extra weights and second copies of scripts. Every script still has
+# a font: the core, CJK, emoji and mono Noto sets stay (marked below so the
+# autoremove does not take them with the extras).
+remove="$remove
+fonts-noto
+fonts-noto-extra
+fonts-noto-ui-extra
+fonts-noto-cjk-extra
+"
+
+# Keep the man command, which only came in through the removed apps, and the
+# core fonts, which came in through fonts-noto.
+apt-mark manual man-db fonts-noto-core fonts-noto-ui-core fonts-noto-cjk \
+	fonts-noto-mono fonts-noto-color-emoji >/dev/null
 
 # shellcheck disable=SC2086
 DEBIAN_FRONTEND=noninteractive apt-get purge -y --autoremove $remove

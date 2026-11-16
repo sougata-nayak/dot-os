@@ -137,6 +137,7 @@ DOT OS keeps one look. `/etc/xdg/kdeglobals` switches off the System Settings pa
 - Still open: Wallpaper, and the Dark/Light choice on Quick Settings, which now offers DOT OS Dark and DOT OS Light (with preview thumbnails) instead of Breeze.
 - The Global Theme page's launcher entry is diverted (`*.dotos-locked`) so Quick Settings no longer shows a "Global Theme" button.
 - The lock covers System Settings only; command-line tools such as `plasma-apply-colorscheme` still work.
+- Plasma's Dark/Light switch does not reach the Kvantum widget theme or GTK, so `/usr/share/dot-os/follow-theme.sh` (autostarted) watches for colour changes and switches both, plus libadwaita's stylesheet. Apps already open get the new widget theme when they are next started.
 
 ### Lightweight image
 
@@ -145,6 +146,7 @@ Plasma recommends apps DOT OS does not ship. `live-build/config/hooks/normal/900
 - Removed: Konqueror, Zutty, KFind, KDE Connect, Kup, Welcome Center, Help Center, Menu Editor, Plasma Vault, Plasma Firewall, Plasma Browser Integration, Xwayland Video Bridge.
 - Kept on purpose: `man-db` (the `man` command), and `kde-baseapps`, a meta-package `kde-plasma-desktop` depends on.
 - Kvantum Manager ships in the same package as the Kvantum engine, so it stays installed but is hidden from the launcher.
+- To stay under GitHub's 2 GiB limit for a release file, the same hook removes firmware for hardware no arm64 desktop has (datacenter network cards and GPUs, telephony and TV-tuner cards, x86-era Wi-Fi) and Noto's extra font sets. Snapdragon, Raspberry Pi, Wi-Fi, Bluetooth and desktop GPU firmware stay, as do the core, CJK, emoji and mono Noto fonts.
 
 ## Next
 

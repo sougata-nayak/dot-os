@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=DOT OS theme follower
+Comment=Keeps widget and GTK themes in step with DOT OS Dark or Light
+Exec=/bin/sh /usr/share/dot-os/follow-theme.sh
+OnlyShowIn=KDE;
+NoDisplay=true
+X-KDE-autostart-phase=2

@@ -20,7 +20,9 @@ QTabBar::tab {
 }
 QTabBar::tab:first, QTabBar::tab:only-one { margin-left: 16px; }
 QTabBar::tab:hover { color: palette(window-text); }
+/* window-text, not bright-text: Qt's bright text is white in the light
+   scheme, which made the current tab vanish on the light strip. */
 QTabBar::tab:selected {
-	color: palette(bright-text);
-	border-bottom: 2px solid palette(bright-text);
+	color: palette(window-text);
+	border-bottom: 2px solid palette(window-text);
 }

@@ -429,7 +429,11 @@ def aurorae(theme):
             for pos, x, y in (("left", 0, th), ("right", 1 + c, th), ("bottomleft", 0, th + c),
                               ("bottom", 1, th + c), ("bottomright", 1 + c, th + c)):
                 el(pos, x, y, c if pos == "bottom" else 1, c if pos in ("left", "right") else 1, "")
-            el("center", 1, th, c, c, "")
+            # A maximised window has no borders, so Aurorae paints only this
+            # centre piece, stretched over the whole title bar. Left empty, the
+            # title bar was see-through.
+            el("center", 1, th, c, th, '<rect width="%s" height="%s" fill="%s"/><rect y="%s" width="%s" height="1" '
+               'fill="%s"/>' % (c, th, fill, th - 1, c, t["border"]))
             return "\n".join(out)
         # Aurorae scales each corner piece to the border width (1px), so the
         # frame is square: a 1px outline all round and a hairline under the title.

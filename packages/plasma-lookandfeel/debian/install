@@ -30,3 +30,5 @@ files/xdg/plasma-welcomerc etc/xdg
 files/konsole-tabbar.css usr/share/dot-os
 files/kxmlgui5 usr/share/dot-os
 files/profile.d/dot-os-prompt.sh etc/profile.d
+files/follow-theme.sh usr/share/dot-os
+files/dot-os-follow-theme.desktop etc/xdg/autostart
