@@ -35,6 +35,8 @@ jobs:
       - name: Publish the release
         uses: softprops/action-gh-release@v2
         with:
+          # A tag with a hyphen (v0.1.0-rc1) is a dry run: published as a prerelease.
+          prerelease: ${{ contains(github.ref_name, '-') }}
           files: |
             out/*.iso
             out/SHA256SUMS
