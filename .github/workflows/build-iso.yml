@@ -37,6 +37,7 @@ jobs:
         with:
           # A tag with a hyphen (v0.1.0-rc1) is a dry run: published as a prerelease.
           prerelease: ${{ contains(github.ref_name, '-') }}
+          body_path: docs/RELEASE_NOTES.md
           files: |
             out/*.iso
             out/SHA256SUMS

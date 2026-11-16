@@ -23,8 +23,7 @@ Last updated 14 November 2026.
 
 ## Not checked yet
 
-- Booting the ISO in UTM (it was booted in QEMU, which UTM is built on).
-- Every light theme.
+- Every light theme beyond the desktop, Settings and Terminal.
 - GTK and libadwaita apps.
 - The cursor theme on screen.
 
@@ -150,5 +149,5 @@ Plasma recommends apps DOT OS does not ship. `live-build/config/hooks/normal/900
 
 ## Next
 
-1. Phase 6: first tagged release; then trim the ISO size.
+1. Publish the signed APT archive on GitHub Pages (set `DOTOS_PUBLISH_REPO=true`) so installed systems get updates, and rebuild the patched packages when Debian updates them.
 2. Optional: Raspberry Pi 5 image.
