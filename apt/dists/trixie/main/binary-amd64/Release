@@ -1,0 +1,6 @@
+Archive: stable
+Component: main
+Origin: DOT OS
+Label: DOT OS
+Architecture: amd64
+Description: DOT OS desktop packages, built on Debian 13

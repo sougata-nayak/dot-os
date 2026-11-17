@@ -1,0 +1,29 @@
+Origin: DOT OS
+Label: DOT OS
+Suite: stable
+Codename: trixie
+Date: Tue, 17 Nov 2026 01:45:51 UTC
+Architectures: arm64 amd64
+Components: main
+Description: DOT OS desktop packages, built on Debian 13
+MD5Sum:
+ 6c9a6086011cd1b82efbabf32a300c5e 20063 main/binary-arm64/Packages
+ 9e3ac759c457e088ded0d798eaf7b7ac 6616 main/binary-arm64/Packages.gz
+ 6415a15afd771bd74434ac98f88b5799 138 main/binary-arm64/Release
+ c3c020db15bee6d92d11a31f90cb8fd2 11464 main/binary-amd64/Packages
+ 5b408d712547a21122d3e5ff88012db4 4163 main/binary-amd64/Packages.gz
+ 02a4cd9ff017b672bd894844b5e52c9a 138 main/binary-amd64/Release
+SHA1:
+ d1307849aa1a984df582fa35b354e49c7f711e91 20063 main/binary-arm64/Packages
+ 28e3197e0731ecb05d70e8418a69289f036f2f2b 6616 main/binary-arm64/Packages.gz
+ f608884439371d11e3eab1596432f063c74178d3 138 main/binary-arm64/Release
+ b7393dd533920a8711968d13192236b1ea55114d 11464 main/binary-amd64/Packages
+ 8b4f8be8c0320599d1d5a13b0f50b8ff48de65c5 4163 main/binary-amd64/Packages.gz
+ 90c48b5347603f623ad39773efded045bef11db9 138 main/binary-amd64/Release
+SHA256:
+ acbef50f92c8b9b8ad08486441e6058f93f25ba0a776664e66137bb12945cbdd 20063 main/binary-arm64/Packages
+ d2cd8d264be56facc52b8c6dc07c1bc331f214d09ebfe2be56fadda12e2430b5 6616 main/binary-arm64/Packages.gz
+ e178660b0b4b08aed62f16b89cfd369d64a692f70f72ba77ce222d72e837c8fe 138 main/binary-arm64/Release
+ 761905b0a2ffc13a920e9a5ba025133939377b466d3811eb6c21a140dd3bc4fb 11464 main/binary-amd64/Packages
+ d107d80f0e1cb12615431ff7f52ac3cc2906a75a4011da1187fee1795e6ab3c8 4163 main/binary-amd64/Packages.gz
+ c7f99521758e2233b0a2f309443230f9a4ab200cf91fdc72a127cb943fac816f 138 main/binary-amd64/Release
