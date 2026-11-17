@@ -1,0 +1,43 @@
+name: Publish APT archive
+
+# Builds the DOT OS packages, signs the archive with DOTOS_SIGNING_KEY and
+# publishes it to the gh-pages branch, which GitHub Pages serves at
+# https://sougata-nayak.github.io/dot-os/apt. No ISO is built.
+# Run it by hand (Actions tab -> Run workflow) or push a tag such as apt-0.1.0.
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ["apt-*"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-apt
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build packages
+        run: scripts/build-debs.sh
+
+      - name: Build the patched Debian packages
+        run: scripts/build-patched.sh
+
+      - name: Sign the APT archive
+        env:
+          DOTOS_SIGNING_KEY: ${{ secrets.DOTOS_SIGNING_KEY }}
+        run: scripts/build-repo.sh
+
+      - name: Publish the APT archive to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: out/repo
+          publish_branch: gh-pages
+          keep_files: false

@@ -30,15 +30,20 @@ scripts/build-iso.sh       # -> out/dot-os-arm64.hybrid.iso
 3. The Release workflow builds the packages, signs the archive, builds the
    ISO and attaches the ISO and `SHA256SUMS` to a GitHub Release.
 
-## Publishing the APT archive (off for now)
+## Publishing the APT archive
 
 The archive is served from GitHub Pages at
-`https://sougata-nayak.github.io/dot-os/apt`. To turn it on:
+`https://sougata-nayak.github.io/dot-os/apt`.
 
 1. Add the `DOTOS_SIGNING_KEY` secret (above).
-2. Settings → Secrets and variables → Actions → Variables: add
-   `DOTOS_PUBLISH_REPO` = `true`.
-3. Settings → Pages: deploy from the `gh-pages` branch, folder `/`.
+2. Publish it: Actions → "Publish APT archive" → Run workflow, or push a tag
+   such as `git tag apt-0.1.0 && git push origin apt-0.1.0`. This builds the
+   packages, signs the archive and pushes it to the `gh-pages` branch (about
+   40 minutes). To have every release publish it too, add the repository
+   variable `DOTOS_PUBLISH_REPO` = `true` (Settings → Secrets and variables →
+   Actions → Variables).
+3. Settings → Pages: deploy from the `gh-pages` branch, folder `/` (the branch
+   exists after step 2).
 4. In `packages/dot-os-archive-keyring/files/dot-os.sources`, change
    `Enabled: no` to `Enabled: yes`, bump that package's version, and release.
 
