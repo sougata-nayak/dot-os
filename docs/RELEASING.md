@@ -23,6 +23,16 @@ scripts/build-repo.sh      # -> out/repo/apt/ (signed)
 scripts/build-iso.sh       # -> out/dot-os-arm64.hybrid.iso
 ```
 
+## Building the ISO with the archive enabled
+
+The ISO ships the DOT OS archive as a package source. live-build ends its
+chroot stage with `apt-get dist-upgrade -y`, and with the archive present apt
+sees two copies of each DOT OS package (live-build's local one and the
+archive's) and reports swapping them as a downgrade, which stops the build.
+`live-build/config/apt/apt.conf` allows downgrades for the build only;
+live-build deletes it at the end, so it is not in the shipped image. If an ISO
+build ever fails with "Packages were downgraded", look there first.
+
 ## Cutting a release
 
 1. Bump the version in each changed package's `debian/changelog`.
