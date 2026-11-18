@@ -11,10 +11,10 @@ Homepage: https://github.com/calamares/calamares
 Priority: optional
 Section: utils
 Filename: pool/main/c/calamares/calamares_3.3.14-1+dotos1_arm64.deb
-Size: 4100004
-SHA256: aad9d9950019dbf336affa9a71cd9ebaef2a98a5f1f3e0f9925a7c0efa4ea6ef
-SHA1: 3ed531f0d8696317de9b7eca1f11de45e437bb2c
-MD5sum: 0728feb5a6a48f917d05d88b92da10f5
+Size: 4100368
+SHA256: ca8ce2f50e4781bffaeaa7ef00eec7bafefb64b9e8becb17211a1a30a8e72ee8
+SHA1: 8c20913663b08742af6195db28cc649377095e2b
+MD5sum: 73b82fd5ed4c9fdb2d08554ea661cb20
 Description: distribution-independent installer framework
  Calamares is a distribution-independent installer framework.
  .
@@ -41,10 +41,10 @@ Homepage: https://apps.kde.org/dolphin/
 Priority: optional
 Section: utils
 Filename: pool/main/d/dolphin/dolphin_25.04.3-1+deb13u1+dotos1_arm64.deb
-Size: 881396
-SHA256: 3eed9d4db6d8ae97d8a6eabff713e584eefacf15eb3353ba54314a19220597a7
-SHA1: cf0e6599b63fb92e2e9d5472d88f656df90ff80c
-MD5sum: 45758fcb9c66a4796ce54cd0ca220e0c
+Size: 882008
+SHA256: b103cf24b9f4b8e9718c801d2eaddc45c7b7ca5948614c3cc16c484e25e329cb
+SHA1: 98af4c946fb2e1d513a5db6629ea1dd88d2a3ef9
+MD5sum: d009da8601ae0ef14a69950975fa3f21
 Description: file manager
  Dolphin is KDE's file manager that lets you navigate and browse the contents
  of your hard drives, USB sticks, SD cards, and more. Creating, moving, or
@@ -72,10 +72,10 @@ Homepage: https://apps.kde.org/dolphin/
 Priority: optional
 Section: utils
 Filename: pool/main/d/dolphin/dolphin-data_25.04.3-1+deb13u1+dotos1_all.deb
-Size: 872812
-SHA256: 41b09918570fbd16ec9d4771609ae29c27ee6b48f65735482d3d7e28111e6a6f
-SHA1: ff8369bcf8f127f22b9e5c212a8b1415a1aab338
-MD5sum: 1f3f428a96dc9d478adde98b7d5f79c1
+Size: 874276
+SHA256: cde4db7a04087605b363815856d3dfcf8994ed8e668e2700cc0182fb6a5d322f
+SHA1: ff742eb7887713f69a4b9060e8b54be5c3d08996
+MD5sum: 4d80a398bf238dc580821f7742000ac5
 Description: file manager - data
  Dolphin is KDE's file manager that lets you navigate and browse the contents
  of your hard drives, USB sticks, SD cards, and more. Creating, moving, or
@@ -84,57 +84,58 @@ Description: file manager - data
  This package contains architecture-independent data files.
 
 Package: dot-os-archive-keyring
-Version: 0.1.0
+Version: 0.1.1
 Architecture: all
 Maintainer: DOT OS project <maintainers@dot-os.invalid>
-Installed-Size: 19
+Installed-Size: 21
 Priority: optional
 Section: misc
-Filename: pool/main/d/dot-os-archive-keyring/dot-os-archive-keyring_0.1.0_all.deb
-Size: 2788
-SHA256: 06dc6ef674ba4fd0e781d9a84eabaddd2b43bf432234efa1ee1c797b2dfd5ab6
-SHA1: 33c40b8cd6bcf224d59102d7433fc52bdfc08387
-MD5sum: bfeb3bd16d6c7994c11c7a2b7e03c011
+Filename: pool/main/d/dot-os-archive-keyring/dot-os-archive-keyring_0.1.1_all.deb
+Size: 3352
+SHA256: 696d51e34bb12aa5b2c3a8efba7f4e4e9f04515ad46257abe3e69d6dc26080c8
+SHA1: fe29486a72a514599eeba30cc5d0c66b831e12d4
+MD5sum: 46bc0eae1e4fd4d701fc8639e85455af
 Description: signing key and source entry for the DOT OS package archive
- Installs the public key that DOT OS packages are signed with and an APT
- source entry for the DOT OS archive, so theme updates arrive with
- apt upgrade. The entry ships switched off until the archive is published;
- set "Enabled: yes" in /etc/apt/sources.list.d/dot-os.sources to use it.
+ Installs the public key that DOT OS packages are signed with, an APT source
+ entry for the DOT OS archive (on by default), and an APT preference that
+ pins the archive above Debian's own packages, so the DOT OS builds of
+ Dolphin, System Settings, the KDE file widgets and Calamares always win and
+ theme updates arrive with apt upgrade.
 
 Package: dot-os-color-schemes
-Version: 0.1.0
+Version: 0.1.1
 Architecture: all
 Maintainer: DOT OS project <maintainers@dot-os.invalid>
 Installed-Size: 18
 Priority: optional
 Section: x11
-Filename: pool/main/d/dot-os-color-schemes/dot-os-color-schemes_0.1.0_all.deb
-Size: 2784
-SHA256: ce52928579312a952ad2da3718de3d8e707a8e29392c761c2962b05673922467
-SHA1: 9f11734fb37f1ac48aca75097f14b5e3fcdee435
-MD5sum: 7afb782c76640df1dd7e8544aea824ad
+Filename: pool/main/d/dot-os-color-schemes/dot-os-color-schemes_0.1.1_all.deb
+Size: 2840
+SHA256: 55a290ec5bc9590dd2fb3a73273d92517430ef3ce94c12a988244346443e61f5
+SHA1: 75debbbd7d44273767fbea810ecf2474d005dc53
+MD5sum: 2b01b332f4ec2175f8ab4c8b07d2a801
 Description: DOT OS colour schemes for KDE Plasma
  Dark and light KDE colour schemes generated from the DOT OS design
  tokens. Selection inverts to the text colour; red is kept for errors.
 
 Package: dot-os-cursor-theme
-Version: 0.1.0
+Version: 0.1.1
 Architecture: all
 Maintainer: DOT OS project <maintainers@dot-os.invalid>
 Installed-Size: 5328
 Priority: optional
 Section: x11
-Filename: pool/main/d/dot-os-cursor-theme/dot-os-cursor-theme_0.1.0_all.deb
-Size: 85360
-SHA256: b8489daa0b1cc9ad423f449edb358f8ab36cf5be69c910cb1b6e61ba920b7981
-SHA1: 229d6fa1a3d2349f409ddb1b9c82b10eb60b3c96
-MD5sum: 3e875f478d1e2e70ac0575892aa06f93
+Filename: pool/main/d/dot-os-cursor-theme/dot-os-cursor-theme_0.1.1_all.deb
+Size: 85236
+SHA256: bbc83f9fc32a09c636c772f76e5f3dd33fbde190037a643102d4fcee73f533e5
+SHA1: f07e277d1db4d310abede5fe76fc9c524d183c1d
+MD5sum: 133d3998bb43ce42cafb7133c87e42fc
 Description: plain arrow cursors with a segmented busy indicator
  A plain arrow with a one pixel outline and a segmented busy indicator,
  in dark and light variants at 24, 32 and 48 pixels.
 
 Package: dot-os-desktop
-Version: 0.1.0
+Version: 0.1.1
 Architecture: all
 Maintainer: DOT OS project <maintainers@dot-os.invalid>
 Installed-Size: 9
@@ -142,11 +143,11 @@ Depends: kde-plasma-desktop, sddm (>= 0.21), plymouth, qt6-style-kvantum, fonts-
 Recommends: dot-os-grub-theme (>= 0.1.0)
 Priority: optional
 Section: metapackages
-Filename: pool/main/d/dot-os-desktop/dot-os-desktop_0.1.0_all.deb
-Size: 2308
-SHA256: 95b43d946e25eddc9d8a4df954ad5d6e38abc98351b840f49941dee833751c06
-SHA1: 41a78445cd97ecb7b53a7ae45527d4c18c9a726f
-MD5sum: bcc66048d4ba722350a34eaddccee87a
+Filename: pool/main/d/dot-os-desktop/dot-os-desktop_0.1.1_all.deb
+Size: 2360
+SHA256: 7a312618aecdb3d2c78662a2d0afff3a204f808716f4ecbd496c02c1e6506296
+SHA1: 2a2683efac4d9500597f2359b308f27f2e0531cb
+MD5sum: 341da2eabe777592c7c3d5c5f3d4d5bd
 Description: DOT OS desktop on Debian and KDE Plasma
  Installs everything that makes up the DOT OS desktop: the Plasma global
  theme, widget, GTK and icon themes, cursors, fonts, terminal palette, boot
@@ -157,68 +158,68 @@ Description: DOT OS desktop on Debian and KDE Plasma
  the DOT OS desktop at their first login.
 
 Package: dot-os-grub-theme
-Version: 0.1.0
+Version: 0.1.1
 Architecture: all
 Maintainer: DOT OS project <maintainers@dot-os.invalid>
 Installed-Size: 85
 Depends: grub-common
 Priority: optional
 Section: x11
-Filename: pool/main/d/dot-os-grub-theme/dot-os-grub-theme_0.1.0_all.deb
-Size: 22728
-SHA256: d64dee66b4d22929e2046d138db328b9d03bc3bf8e9a2d73f29f8d766abae603
-SHA1: 624090ebdcb53300aefbb1252c5ead4368655f6d
-MD5sum: 19a390b6b75df359aba9a0edaf412af0
+Filename: pool/main/d/dot-os-grub-theme/dot-os-grub-theme_0.1.1_all.deb
+Size: 22780
+SHA256: 99a169ffc0a70d25b4af5e388f930c0a2753b18842cdef260465472c56a8a628
+SHA1: 2865cd28f283f8c72a630d6dd3ecdb115593196d
+MD5sum: a26467741182d45ed0cb190ffa10dc8c
 Description: bootloader menu theme for DOT OS
  A GRUB theme in the DOT OS style: wordmark, an inverted selection bar
  and a segmented countdown on black. Sets itself as the GRUB theme.
 
 Package: dot-os-gtk-theme
-Version: 0.1.0
+Version: 0.1.1
 Architecture: all
 Maintainer: DOT OS project <maintainers@dot-os.invalid>
 Installed-Size: 76
 Priority: optional
 Section: x11
-Filename: pool/main/d/dot-os-gtk-theme/dot-os-gtk-theme_0.1.0_all.deb
-Size: 5848
-SHA256: e1451ed3fad533e718033b8fb6c8fdaf6e6d11501f04f4f809d3190eb4e6a8f5
-SHA1: 810441cd6af958c6de9a4da134c78856cba0f26d
-MD5sum: b86616249d6aedddf737234a07b6d847
+Filename: pool/main/d/dot-os-gtk-theme/dot-os-gtk-theme_0.1.1_all.deb
+Size: 5896
+SHA256: 983b4c046003fecaac92d92a3494626c37eed17ea146af94dcc36438a0900137
+SHA1: 42db2715d1b23c5333cc5f413f848af46d0c172e
+MD5sum: 38b292dff818b4044c24d54a675d6dd6
 Description: DOT OS theme for GTK 3 and GTK 4 applications
  Dark and light GTK themes that lay the DOT OS colours and shapes over
  Adwaita, plus a colour file for libadwaita applications.
 
 Package: dot-os-icon-theme
-Version: 0.1.0
+Version: 0.1.1
 Architecture: all
 Maintainer: DOT OS project <maintainers@dot-os.invalid>
 Installed-Size: 2083
 Depends: breeze-icon-theme, hicolor-icon-theme
 Priority: optional
 Section: x11
-Filename: pool/main/d/dot-os-icon-theme/dot-os-icon-theme_0.1.0_all.deb
-Size: 68896
-SHA256: b141333e5c0bc7f67d95704c1a00a6aec7032d6b9028369af615b497e6aee999
-SHA1: 664451b49becf979eb632492c421007d323ad7cd
-MD5sum: 2c770dafad89a5098e1474011c92ca30
+Filename: pool/main/d/dot-os-icon-theme/dot-os-icon-theme_0.1.1_all.deb
+Size: 68956
+SHA256: 5009e19b17a980d9f09e546b61c7b7112079b6bb3e3d2cee43653fb32e043f9c
+SHA1: 8319bc94b8401a9718e2361a7ceadbea09fab83a
+MD5sum: 3269f77a7dd31c7f54e55a9d260cc49a
 Description: monoline icons mapped to freedesktop names
  Monoline icons at a 1.5 pixel stroke, drawn from Lucide and mapped to
  freedesktop icon names. Falls back to Breeze for anything not covered.
 
 Package: dot-os-installer
-Version: 0.1.0
+Version: 0.1.1
 Architecture: all
 Maintainer: DOT OS project <maintainers@dot-os.invalid>
 Installed-Size: 117
 Depends: calamares (>= 3.3.14-1+dotos1), calamares-settings-debian, x11-xserver-utils, kde-cli-tools, x11-utils, fonts-dot-os, qml6-module-qtquick, qml6-module-qtquick-controls, qml6-module-qtquick-templates, qml6-module-qtquick-window, qml6-module-qtqml-workerscript
 Priority: optional
 Section: admin
-Filename: pool/main/d/dot-os-installer/dot-os-installer_0.1.0_all.deb
-Size: 22736
-SHA256: 3c77d10f91e8151767d344da00a882cbc172306c00720033d23f5e0c9972985e
-SHA1: c5e0bf4de77c3f97666f4c2528b7e41864ab77e3
-MD5sum: c235cccb9708cc6aaaae0b4e114f3642
+Filename: pool/main/d/dot-os-installer/dot-os-installer_0.1.1_all.deb
+Size: 22808
+SHA256: 9923b27337436ce07e6357f4c78a3a18e148b384338c5fd2b69b3acc81e822c4
+SHA1: b5e9c35f163ae46c5865a2dcbe70aded962b08af
+MD5sum: 2233b3f7ecfa544e1d01ac5f3b0cb235
 Description: DOT OS look and setup for the Calamares installer
  Branding, QML pages and a stylesheet that give Calamares the DOT OS
  installer design: a mono step list, two-column pages and a segmented
@@ -226,41 +227,41 @@ Description: DOT OS look and setup for the Calamares installer
  Only useful on DOT OS live media.
 
 Package: dot-os-konsole-profile
-Version: 0.1.0
+Version: 0.1.1
 Architecture: all
 Maintainer: DOT OS project <maintainers@dot-os.invalid>
 Installed-Size: 16
 Depends: fonts-dot-os
 Priority: optional
 Section: x11
-Filename: pool/main/d/dot-os-konsole-profile/dot-os-konsole-profile_0.1.0_all.deb
-Size: 2936
-SHA256: 1ef8917ec5ed9fdca837ce4890bd70c2b1d46004c168eabf5926735eb994b6b3
-SHA1: b76e7c272213a78ef2c6bec956e397247b4faeeb
-MD5sum: b1324c855b8b06d0464f9fd181fb7cca
+Filename: pool/main/d/dot-os-konsole-profile/dot-os-konsole-profile_0.1.1_all.deb
+Size: 2996
+SHA256: 8fdb23a6862c6116a830b52a8e5aec0502e9962b7055f76c19e0ac1c9d6ab36d
+SHA1: 6765001c071881bf8b55598c01a7291d7710811c
+MD5sum: a632570acaf4ec1b5f742a1057d46ce5
 Description: DOT OS terminal palette and profile for Konsole
  Konsole colour schemes and profiles in the DOT OS palette: Space Mono,
  a block cursor, and bright colours equal to normal ones.
 
 Package: dot-os-kvantum-theme
-Version: 0.1.0
+Version: 0.1.1
 Architecture: all
 Maintainer: DOT OS project <maintainers@dot-os.invalid>
 Installed-Size: 306
 Depends: qt6-style-kvantum
 Priority: optional
 Section: x11
-Filename: pool/main/d/dot-os-kvantum-theme/dot-os-kvantum-theme_0.1.0_all.deb
-Size: 13380
-SHA256: f73bdc90558cc4a660c6887844f0f1f662d5f555aa6420344c7c10f395f10c9d
-SHA1: 8bd97b44cb651357b6ad7e776382782ca225216e
-MD5sum: 37ab063143573102a581b5415f6b1c56
+Filename: pool/main/d/dot-os-kvantum-theme/dot-os-kvantum-theme_0.1.1_all.deb
+Size: 13436
+SHA256: 8e3af725c5d027644548cab3c8d4ceb0ea1225ae514d64f58afa43dbb5cd2279
+SHA1: 6f704d71e10dcc6faf3d276ee4838f8e3ddf9ec2
+MD5sum: 691d162cde64dceaa68e030d2d9a4e6f
 Description: DOT OS widget theme for Qt applications (Kvantum)
  Dark and light Kvantum themes: pill buttons, underline text fields,
  inverted selection, segmented progress, no shadows or gradients.
 
 Package: dot-os-plasma-lookandfeel
-Version: 0.1.0
+Version: 0.1.1
 Architecture: all
 Maintainer: DOT OS project <maintainers@dot-os.invalid>
 Installed-Size: 745
@@ -268,63 +269,63 @@ Depends: plasma-workspace (>= 4:6.3), kwin-wayland | kwin-x11, qt6-style-kvantum
 Recommends: dot-os-sddm-theme, dot-os-plymouth-theme, dot-os-grub-theme
 Priority: optional
 Section: x11
-Filename: pool/main/d/dot-os-plasma-lookandfeel/dot-os-plasma-lookandfeel_0.1.0_all.deb
-Size: 44176
-SHA256: 443aa5ff79f0d70c8570098e657f1e1ab0c7ac4950aaa515cea968f60475f4f7
-SHA1: 93f9387c68cf4e53e37935c34dee5551498dca81
-MD5sum: 9b360c9a1ed5e068b0d7487e0bdd6105
+Filename: pool/main/d/dot-os-plasma-lookandfeel/dot-os-plasma-lookandfeel_0.1.1_all.deb
+Size: 44228
+SHA256: 35b5b6b954fa4ef9f27d2f0e2173784e8cc9ff4f2676d9dd2f35ffb90b4a21f5
+SHA1: a09b7ceca784b02b9b0f8a275b8f44fe772db56c
+MD5sum: 2274d3336174b0a8cfe4468d378f59c2
 Description: DOT OS global theme for KDE Plasma
  The DOT OS desktop: a top bar and floating dock, flat panels and popups,
  window decorations, the dot grid wallpaper, lock screen, session splash and
  power screen. Installs system defaults so new users start in DOT OS.
 
 Package: dot-os-plymouth-theme
-Version: 0.1.0
+Version: 0.1.1
 Architecture: all
 Maintainer: DOT OS project <maintainers@dot-os.invalid>
 Installed-Size: 101
 Depends: plymouth
 Priority: optional
 Section: x11
-Filename: pool/main/d/dot-os-plymouth-theme/dot-os-plymouth-theme_0.1.0_all.deb
-Size: 42092
-SHA256: 0ff33abf4ea3169c151fe4f4753b77ace983ca8cd00d1f101e53412ddb3d9fe1
-SHA1: 6ad1c6f87da40843ef4db94c80f452cdbf642f83
-MD5sum: 7e88ff1abb5b636aef1f5f8b7bfba4eb
+Filename: pool/main/d/dot-os-plymouth-theme/dot-os-plymouth-theme_0.1.1_all.deb
+Size: 42160
+SHA256: b2348ade3985bf503e4469f520424963d0a3359c3b478934f033c0563159c4e9
+SHA1: ddc51f2ac5991eca25c9265a387dffac1119f3c6
+MD5sum: 52dbb575abaf09af49337897ee9e6265
 Description: boot splash for DOT OS
  A Plymouth script theme: the DOT OS wordmark over a 20-segment progress
  bar, and a password field for unlocking an encrypted disk.
 
 Package: dot-os-sddm-theme
-Version: 0.1.0
+Version: 0.1.1
 Architecture: all
 Maintainer: DOT OS project <maintainers@dot-os.invalid>
 Installed-Size: 33
 Depends: sddm (>= 0.21), qml6-module-qtquick, fonts-dot-os
 Priority: optional
 Section: x11
-Filename: pool/main/d/dot-os-sddm-theme/dot-os-sddm-theme_0.1.0_all.deb
-Size: 6428
-SHA256: 4417fdfd82c15f34df87b5895925ac1331eb197ec719220187ccb76ba1b62203
-SHA1: be02488f81c0f07897133a8a086ab65834b95d2a
-MD5sum: 8dc7f89517a4ceb3bee6b9898cc1b077
+Filename: pool/main/d/dot-os-sddm-theme/dot-os-sddm-theme_0.1.1_all.deb
+Size: 6480
+SHA256: e39e6159ab91b29d648b9d883cf3ab2c001e386c1330bfcc346ab53a3d4beafa
+SHA1: 40928b2b500d34c2008df76534d1ad29afdab293
+MD5sum: 0fc1a75a1b12a03e515408b7fb0a1776
 Description: login screen theme for DOT OS
  An SDDM greeter theme for Qt 6: a dot-matrix clock, user and password
  fields and power controls on the dot grid. Sets itself as the SDDM theme.
 
 Package: fonts-dot-os
-Version: 0.1.0
+Version: 0.1.1
 Architecture: all
 Maintainer: DOT OS project <maintainers@dot-os.invalid>
 Installed-Size: 1349
 Depends: fontconfig
 Priority: optional
 Section: fonts
-Filename: pool/main/f/fonts-dot-os/fonts-dot-os_0.1.0_all.deb
-Size: 248008
-SHA256: e13c7a124b5b6c6a7f43fb12cc2383ab0083889b3123d3b61a49bc16a053a8ee
-SHA1: 676c1733b54d28bd7a3d5d9190f87017f71d2503
-MD5sum: 37cb46c415975f61a27b2a3758bdeba1
+Filename: pool/main/f/fonts-dot-os/fonts-dot-os_0.1.1_all.deb
+Size: 247952
+SHA256: 6115380665f086618194a62eba7b316bc04d38cfd597553c8879b8ab4bfff83d
+SHA1: c7570895e5a6596aa810cbf149bbce8fe40779f0
+MD5sum: cb661dc93a1823ef127700651e6fa9fb
 Description: DOT OS typefaces: Doto, Space Grotesk, Space Mono
  The three SIL Open Font License families the DOT OS interface is set in,
  with a fontconfig file that makes them the default sans and monospace.
@@ -341,10 +342,10 @@ Homepage: https://apps.kde.org/dolphin/
 Priority: optional
 Section: libs
 Filename: pool/main/d/dolphin/libdolphinvcs6_25.04.3-1+deb13u1+dotos1_arm64.deb
-Size: 13688
-SHA256: d4966b80eb954df0972f43bff946159718ad6dfd205941701710fdcfefa208f9
-SHA1: d3e26e08d8ba844afd1478b8a81247fd53f70956
-MD5sum: d4c58d686c37bcaf80357f0b597ee5ac
+Size: 13680
+SHA256: 824087815de0574b62d5469b65633ea55f5de12482d13e03a89a0828fdaf3530
+SHA1: ca70fbd4639b37a7acaa4e930263c3f5a0ec46a1
+MD5sum: 9a7b7669e6c9a76054d596ac8175f0a0
 Description: library to show version control in Dolphin
  This library enables developers to expand Dolphin with the ability to show
  version control status in directories that are version controlled.
@@ -361,10 +362,10 @@ Homepage: https://invent.kde.org/frameworks/kio
 Priority: optional
 Section: libs
 Filename: pool/main/k/kf6-kio/libkf6kiofilewidgets6_6.13.0-6+dotos1_arm64.deb
-Size: 333512
-SHA256: 11f618d7b3ded71e862216322446eb6cf71b982611df8be29ae850f80e7e829e
-SHA1: ab9bbbe1c0b052eb0b0be546e6e26587887bfdeb
-MD5sum: 3294d2c05222aa801b1e9a57893abb35
+Size: 333460
+SHA256: eed0a2d60e00047ecc6438daea10bc579db14e72248b17f84f05393d110b02d4
+SHA1: 27c7ba4bad3fbf2485c631923aa309f893894f85
+MD5sum: fccf251569d4ae869405060a58b1a173
 Description: resource and network access abstraction (KIO file widgets library)
  KDE Input/Output framework provides a single API for
  operating on files, whether local or on a remote server.
@@ -386,10 +387,10 @@ Homepage: https://invent.kde.org/plasma/systemsettings
 Priority: optional
 Section: kde
 Filename: pool/main/s/systemsettings/systemsettings_6.3.4-2+dotos1_arm64.deb
-Size: 342256
-SHA256: 17d08c897e281025586faa2a5c7bd2c582fbc343f0a2b9b9ce237ebbb4636b60
-SHA1: 2b286e55115d158f8d490a9422081312945768ff
-MD5sum: b503b70b15bae4f68ea6e9ce881e8182
+Size: 342444
+SHA256: dfea15858acb25a917b6eac39d4bd39e444b840c093be602355cfbc4d1652a09
+SHA1: d3a4b878e47c0e51222023cc941380b08bc43c91
+MD5sum: 03109b17fe7326dac83bbc143744f62e
 Description: System Settings interface
  Desktop configuration application.
  .

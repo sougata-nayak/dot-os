@@ -2,28 +2,28 @@ Origin: DOT OS
 Label: DOT OS
 Suite: stable
 Codename: trixie
-Date: Tue, 17 Nov 2026 01:45:51 UTC
+Date: Wed, 18 Nov 2026 19:31:02 UTC
 Architectures: arm64 amd64
 Components: main
 Description: DOT OS desktop packages, built on Debian 13
 MD5Sum:
- 6c9a6086011cd1b82efbabf32a300c5e 20063 main/binary-arm64/Packages
- 9e3ac759c457e088ded0d798eaf7b7ac 6616 main/binary-arm64/Packages.gz
+ b40e2c4a3152b16e8ee2199ff4bef525 20114 main/binary-arm64/Packages
+ 9ee3f01c6c2a4a3ca95acaa570c36078 6610 main/binary-arm64/Packages.gz
  6415a15afd771bd74434ac98f88b5799 138 main/binary-arm64/Release
- c3c020db15bee6d92d11a31f90cb8fd2 11464 main/binary-amd64/Packages
- 5b408d712547a21122d3e5ff88012db4 4163 main/binary-amd64/Packages.gz
+ 706b055f572233db49dc8aba896580f3 11515 main/binary-amd64/Packages
+ 63fee416deb6c0cac2e86acf9dae6b05 4156 main/binary-amd64/Packages.gz
  02a4cd9ff017b672bd894844b5e52c9a 138 main/binary-amd64/Release
 SHA1:
- d1307849aa1a984df582fa35b354e49c7f711e91 20063 main/binary-arm64/Packages
- 28e3197e0731ecb05d70e8418a69289f036f2f2b 6616 main/binary-arm64/Packages.gz
+ bf85de986d9132aee0bb4a01e1981280e88b5240 20114 main/binary-arm64/Packages
+ 328aca0aef47d5ae58966170c46f0f688952ec5c 6610 main/binary-arm64/Packages.gz
  f608884439371d11e3eab1596432f063c74178d3 138 main/binary-arm64/Release
- b7393dd533920a8711968d13192236b1ea55114d 11464 main/binary-amd64/Packages
- 8b4f8be8c0320599d1d5a13b0f50b8ff48de65c5 4163 main/binary-amd64/Packages.gz
+ 6fe374ebd3ea3a2fe2d05f09ee47f53ed9e37d95 11515 main/binary-amd64/Packages
+ 4204e67b1876400b83d1c94f6f116d0fd3b4ec9d 4156 main/binary-amd64/Packages.gz
  90c48b5347603f623ad39773efded045bef11db9 138 main/binary-amd64/Release
 SHA256:
- acbef50f92c8b9b8ad08486441e6058f93f25ba0a776664e66137bb12945cbdd 20063 main/binary-arm64/Packages
- d2cd8d264be56facc52b8c6dc07c1bc331f214d09ebfe2be56fadda12e2430b5 6616 main/binary-arm64/Packages.gz
+ e93d5d3abfd31ecba0c6bf378f209d48c90145c2ec20137de1b938c17aea5cb3 20114 main/binary-arm64/Packages
+ b6431159269f3ee769b3fdac33199938bbe3bb13d8924e84130ff095d0c45094 6610 main/binary-arm64/Packages.gz
  e178660b0b4b08aed62f16b89cfd369d64a692f70f72ba77ce222d72e837c8fe 138 main/binary-arm64/Release
- 761905b0a2ffc13a920e9a5ba025133939377b466d3811eb6c21a140dd3bc4fb 11464 main/binary-amd64/Packages
- d107d80f0e1cb12615431ff7f52ac3cc2906a75a4011da1187fee1795e6ab3c8 4163 main/binary-amd64/Packages.gz
+ 788c04cfa322b0a853185355399a40687b5d13bd1f7a2068cae7c688730ae33d 11515 main/binary-amd64/Packages
+ d1979778c05070e02f090cd9dfa7cafa01db5827b0a5bb762aa55f348d5dd66a 4156 main/binary-amd64/Packages.gz
  c7f99521758e2233b0a2f309443230f9a4ab200cf91fdc72a127cb943fac816f 138 main/binary-amd64/Release
