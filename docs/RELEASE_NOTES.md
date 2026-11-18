@@ -15,10 +15,11 @@ OLED black or warm paper, dot-matrix display type, instrument-panel labels, and 
 - A DOT OS Calamares installer, and DOT OS builds of Dolphin, System Settings, the KDE file widgets and Calamares (Debian's source plus patches in `packages/`).
 - Dark and Light, switched in System Settings → Quick Settings. Other theme settings are locked.
 - A lightweight image: no Konqueror, KDE Connect, Welcome Center and similar extras.
+- Updates: the signed DOT OS package archive (https://sougata-nayak.github.io/dot-os/apt) is on by default, so `sudo apt update && sudo apt upgrade` brings DOT OS updates. It is pinned above Debian: the DOT OS builds of Dolphin, System Settings, the KDE file widgets and Calamares always win, even when Debian has a newer version number. Debian's fixes for those four arrive when DOT OS rebuilds them. To stop using the archive, set `Enabled: no` in `/etc/apt/sources.list.d/dot-os.sources`.
 
 ### Known gaps
 
-- The signed APT archive is built but not published yet, so installed systems do not get DOT OS updates. Debian updates to Dolphin, System Settings, KIO or Calamares replace the DOT OS builds with stock ones.
+- Because the archive is pinned, security fixes for Dolphin, System Settings, the KDE file widgets and Calamares reach DOT OS only after a rebuild.
 - Settings pages keep KDE's form layout; the Disk step of the installer keeps Calamares' own layout.
 - Dolphin's status bar does not show the free-space label.
 - Not tested yet: GTK and libadwaita apps, multi-monitor, the X11 session, fractional scaling.

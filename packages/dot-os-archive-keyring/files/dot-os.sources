@@ -1,9 +1,10 @@
-# DOT OS package archive: theme and desktop updates.
-# Switched off until the archive is published. To use it, set
-# Enabled: yes and run: sudo apt update
+# DOT OS package archive: the DOT OS builds of Dolphin, System Settings, the
+# KDE file widgets and Calamares, and updates to the DOT OS theme packages.
+# Pinned above Debian's own packages (see /etc/apt/preferences.d/dot-os.pref).
+# To stop using it, set "Enabled: no" and run: sudo apt update
 Types: deb
 URIs: https://sougata-nayak.github.io/dot-os/apt
 Suites: trixie
 Components: main
 Signed-By: /usr/share/keyrings/dot-os-archive-keyring.gpg
-Enabled: no
+Enabled: yes

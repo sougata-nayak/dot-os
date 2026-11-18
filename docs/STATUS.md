@@ -138,6 +138,13 @@ DOT OS keeps one look. `/etc/xdg/kdeglobals` switches off the System Settings pa
 - The lock covers System Settings only; command-line tools such as `plasma-apply-colorscheme` still work.
 - Plasma's Dark/Light switch does not reach the Kvantum widget theme or GTK, so `/usr/share/dot-os/follow-theme.sh` (autostarted) watches for colour changes and switches both, plus libadwaita's stylesheet. Apps already open get the new widget theme when they are next started.
 
+### Package archive
+
+The signed archive is served from GitHub Pages at `https://sougata-nayak.github.io/dot-os/apt` (published by the "Publish APT archive" workflow). `dot-os-archive-keyring` (0.1.1) turns it on and pins it: `/etc/apt/preferences.d/dot-os.pref` gives the DOT OS archive priority 990 against Debian's 500, so DOT OS's builds win even when Debian's version number is higher.
+
+- Checked against the live archive in a clean Debian 13 container: `apt update` with the published key, installing a package from it, refusal with a different key, and a fake newer Debian `dolphin` losing to the DOT OS build (and winning when the pin file is removed).
+- The cost: Debian security updates for the four patched packages do not reach DOT OS until they are rebuilt and the archive is republished.
+
 ### Lightweight image
 
 Plasma recommends apps DOT OS does not ship. `live-build/config/hooks/normal/9000-dot-os-trim.hook.chroot` removes them from the image, with whatever only they pulled in (about 60 packages, including `git`); installed systems are copied from the image, so they leave too. Users can still `apt install` any of them.
@@ -149,5 +156,5 @@ Plasma recommends apps DOT OS does not ship. `live-build/config/hooks/normal/900
 
 ## Next
 
-1. Publish the signed APT archive on GitHub Pages (set `DOTOS_PUBLISH_REPO=true`) so installed systems get updates, and rebuild the patched packages when Debian updates them.
+1. Rebuild and republish the patched packages (Dolphin, System Settings, KIO file widgets, Calamares) when Debian updates them: the archive is pinned above Debian, so their fixes only arrive that way. Run "Publish APT archive".
 2. Optional: Raspberry Pi 5 image.

@@ -1,0 +1,8 @@
+Explanation: DOT OS ships its own builds of Dolphin, System Settings, the KDE
+Explanation: file widgets (libkf6kiofilewidgets6) and Calamares, and keeps them
+Explanation: patched. Packages from the DOT OS archive always win over Debian's,
+Explanation: even when Debian has a newer version number. Debian's fixes for
+Explanation: those packages arrive when DOT OS rebuilds them.
+Package: *
+Pin: release o=DOT OS
+Pin-Priority: 990

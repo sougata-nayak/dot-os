@@ -10,10 +10,10 @@ DOT OS is a Debian 13 "trixie" spin for arm64. It is three things in one repo:
 2. **A live-build recipe** — assembles Debian, Plasma, the theme packages and the Calamares installer into a bootable ISO.
 3. **A design system** — the tokens and component designs every package is generated from.
 
-> Status: v0.1.0, the first release. The ISO boots with the DOT OS boot menu, splash and login screen,
+> Status: v0.1.1. The ISO boots with the DOT OS boot menu, splash and login screen,
 > installs with the DOT OS-branded Calamares installer, and new users log in to the DOT OS desktop.
-> Download it from [Releases](../../releases). The signed APT archive is built but not published yet.
-> See [docs/STATUS.md](docs/STATUS.md).
+> Download it from [Releases](../../releases). Installed systems get updates from the signed
+> DOT OS APT archive, which is on by default. See [docs/STATUS.md](docs/STATUS.md).
 
 ## Layout
 
@@ -68,7 +68,7 @@ and the UTM settings.
 | `dot-os-sddm-theme` | login screen | builds, tested on installed system |
 | `dot-os-plasma-lookandfeel` | global theme: bar, dock, panels, windows, wallpaper, splash, power screen, defaults | builds, tested as a new user at 1x and 2x |
 | `dot-os-desktop` | meta-package: Plasma plus every DOT OS package | builds, installed by the ISO |
-| `dot-os-archive-keyring` | archive key and source entry (off until published) | builds |
+| `dot-os-archive-keyring` | archive key, source entry (on) and the pin that puts the DOT OS archive above Debian | builds, tested against the live archive |
 | `dot-os-installer` | Calamares branding and pages, "Install DOT OS" launcher (live ISO only) | builds, full install tested in QEMU |
 | `calamares` (`+dotos1`) | Debian's Calamares with three DOT OS patches: Disk, Install and Finish steps | builds, full install tested |
 | `dolphin` (`+dotos1`) | Debian's Dolphin patched to the Files board: text-only list, mono capital headers, DOT OS toolbar and status bar | builds, tested in QEMU |

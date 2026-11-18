@@ -10,7 +10,8 @@ Package: dot-os-archive-keyring
 Architecture: all
 Depends: ${misc:Depends}
 Description: signing key and source entry for the DOT OS package archive
- Installs the public key that DOT OS packages are signed with and an APT
- source entry for the DOT OS archive, so theme updates arrive with
- apt upgrade. The entry ships switched off until the archive is published;
- set "Enabled: yes" in /etc/apt/sources.list.d/dot-os.sources to use it.
+ Installs the public key that DOT OS packages are signed with, an APT source
+ entry for the DOT OS archive (on by default), and an APT preference that
+ pins the archive above Debian's own packages, so the DOT OS builds of
+ Dolphin, System Settings, the KDE file widgets and Calamares always win and
+ theme updates arrive with apt upgrade.

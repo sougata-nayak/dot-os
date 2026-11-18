@@ -1,3 +1,6 @@
-# The archive entry is this distribution's own package source, shipped
-# switched off until the archive is published.
+# The archive entry is this distribution's own package source, on by default.
 dot-os-archive-keyring: package-installs-apt-sources [etc/apt/sources.list.d/dot-os.sources]
+# The preference is the point of the package: it pins the DOT OS archive above
+# Debian's, so DOT OS's builds of Dolphin, System Settings, the KDE file
+# widgets and Calamares are not replaced by stock ones.
+dot-os-archive-keyring: package-installs-apt-preferences [etc/apt/preferences.d/dot-os.pref]

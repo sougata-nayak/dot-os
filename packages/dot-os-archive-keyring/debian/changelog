@@ -1,3 +1,11 @@
+dot-os-archive-keyring (0.1.1) unstable; urgency=medium
+
+  * The archive entry is on by default, and a new apt preference pins the
+    DOT OS archive above Debian's packages, so the DOT OS builds of Dolphin,
+    System Settings, the KDE file widgets and Calamares always win.
+
+ -- DOT OS project <maintainers@dot-os.invalid>  Wed, 18 Nov 2026 12:00:00 +0000
+
 dot-os-archive-keyring (0.1.0) unstable; urgency=medium
 
   * First release.

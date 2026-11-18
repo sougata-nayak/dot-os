@@ -26,7 +26,7 @@ scripts/build-iso.sh       # -> out/dot-os-arm64.hybrid.iso
 ## Cutting a release
 
 1. Bump the version in each changed package's `debian/changelog`.
-2. Commit, then tag: `git tag v0.1.0 && git push origin v0.1.0`.
+2. Commit, then tag: `git tag v0.1.1 && git push origin v0.1.1`.
 3. The Release workflow builds the packages, signs the archive, builds the
    ISO and attaches the ISO and `SHA256SUMS` to a GitHub Release.
 
@@ -44,8 +44,11 @@ The archive is served from GitHub Pages at
    Actions → Variables).
 3. Settings → Pages: deploy from the `gh-pages` branch, folder `/` (the branch
    exists after step 2).
-4. In `packages/dot-os-archive-keyring/files/dot-os.sources`, change
-   `Enabled: no` to `Enabled: yes`, bump that package's version, and release.
+4. The archive entry is on by default (`Enabled: yes` in
+   `packages/dot-os-archive-keyring/files/dot-os.sources`), and
+   `files/dot-os.pref` pins it above Debian (priority 990), so the DOT OS
+   builds of Dolphin, System Settings, KIO and Calamares always win.
 
-Until step 4, installed systems carry the entry switched off, so `apt update`
-never fails on an archive that does not exist yet.
+Run "Publish APT archive" again whenever packages change, and after Debian
+updates one of the four patched packages once they have been rebuilt.
+Tag `apt-<version>` to do it from the command line.
